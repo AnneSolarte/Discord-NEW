@@ -1,0 +1,550 @@
+body{
+    background-color:rgb(30, 33, 40);
+    margin: 1.5%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Section1{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 4.5%;
+    height: 94%;
+    background-color: rgb(88, 101, 242);
+    border-radius: 1.5em;
+    z-index: 10;
+    text-align: center;
+}
+
+.ServerSection{
+    position: absolute;
+    left: 2.1%;
+    top: 5%;
+    z-index: 12;
+    align-items: center;
+}
+.section1Div{
+    position: relative;
+    margin-top: 20%;
+}
+.serverImg{
+    margin-bottom: 10%;
+}
+
+.Section2{
+    position: absolute;
+    width: 20%;
+    height: 94%;
+    background-color: rgb(17, 21, 24);
+    z-index: 1;
+    border-radius: 1.5em;
+
+}
+
+.Section4{
+    top: 87.2%;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: aliceblue;
+    z-index: 1;
+    border-radius: 1.5em;
+    background-color: rgb(46, 50, 56);
+}
+
+.sectionUser{
+    display: flex;
+    flex-direction: row;
+    margin-left: 26%;
+    margin-top: 5%;
+    align-items: center;
+}
+
+.sectionUserData{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: aliceblue;
+
+}
+#userImg{
+    width: 20%;
+    height: 20%;
+    margin-right: 2%;
+}
+
+#configImg{
+    width: 8%;
+    height: 8%;
+    margin-left: 30%;
+}
+.userText{
+    margin: 0;
+
+}
+
+.friendsOnImg{
+    width: 40px;
+    height: 40px;
+    margin-right: 3%;
+}
+
+.section2Div{
+    position: relative;
+    margin-left: 26%;
+    color:  rgb(170, 171, 171);
+    display: flex;
+    flex-direction: column;
+}
+
+.FriendsDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: aliceblue;
+    margin-bottom: 10%;
+
+}
+.friendsImg{
+    /**aspect-ratio: 4/3;
+    object-fit: cover;**/
+    width: 40px;
+    height: 40px;
+    margin-right: 3%;
+}
+
+.FriendSection{
+    position: absolute;
+    left: 7%;
+    top: 30%;
+    z-index: 15;
+}
+
+.friendsBar{
+    width: 75%;
+    height: 7%;
+}
+
+.onlineFriends{
+    width: 75%;
+    height: 80%;
+}
+
+
+
+.Section3{
+    position: relative;
+    width: 79%;
+    height: 94%;
+    top: 0;
+    left: 20.5%;
+    color: aliceblue;
+
+}
+
+.FriendOnSection{
+    position: absolute;
+    top: 25%;
+    left: 23%;
+    z-index: 10;
+}
+
+.section3Bar{
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    align-items: center;
+}
+
+.FriendsOnlineDiv{
+    color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10%;
+    align-items: center;
+
+}
+
+.Section3Div{
+    color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+
+}
+
+.SectionList{
+    margin-left: 2%;
+}
+
+#textBlock1{
+    background-color: rgb(30, 33, 40);
+    width: 90%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-radius: 0.5em;
+    font-size:medium;
+}
+
+.textBlock2{
+    background-color: rgb(30, 33, 40);
+    width: 86%;
+    padding-left: 4%;
+    margin-top: 6%;
+    margin-bottom: 6%;
+    padding: 4%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 0.5em;
+}
+
+.section2Div2{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+#masIcon{
+    position: absolute;
+    width: 5%;
+    height: 6%;
+    right: 5%;
+}
+
+#blockBlue{
+    background-color: rgb(46, 188, 197);
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-radius: 0.5em;
+}
+
+#blockGray{
+    background-color: rgb(97, 100, 104);
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-radius: 0.5em;
+    align-items: center;
+}
+.block{
+    margin-left: 4%;
+}
+
+.searchBar{
+    background-color: rgb(17, 21, 24);
+    padding: 0.8%;
+    border-radius: 0.6em;
+    margin-top: 1%;
+}
+.FriendsName{
+    margin: 0;
+}
+.FriendsOnName{
+    margin: 0;
+}
+
+#lineVertImg{
+    width: 0.25%;
+    margin-left: 5%;
+}
+
+#imgLine{
+    width: 95%;
+}
+
+.friendsIcon1{
+    width: 12%;
+    margin-right: 4%;
+}
+
+.friendsIcon2{
+    width: 25px;
+    height: 20px;
+    margin-right: 2%;
+}
+
+
+
+@media(max-width: 480px) {
+    .appcontainer{
+        background-color:rgb(30, 33, 40);
+        margin: 2%;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .Section1{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        height: 98%;
+        background-color: rgb(88, 101, 242);
+        border-radius: 1.5em;
+        z-index: 10;
+        text-align: center;
+    }
+
+    .ServerSection{
+        position: absolute;
+        left: 4%;
+        top: 3%;
+        z-index: 10;
+        align-items: center;
+    }
+    .section1Div{
+        position: relative;
+        margin-top: 20%;
+    }
+    .serverImg{
+        margin-bottom: 10%;
+    }
+
+    .Section2{
+        position: absolute;
+        width: 97%;
+        height: 98%;
+        background-color: rgb(17, 21, 24);
+        border-radius: 1.5em;
+
+    }
+
+
+.Section4{
+    top: 88.6%;
+    position: absolute;
+    width: 97%;
+    height: 10%;
+    background-color: aliceblue;
+    z-index: 9;
+    border-radius: 1.5em;
+    background-color: rgb(46, 50, 56);
+}
+
+.sectionUser{
+    display: flex;
+    flex-direction: row;
+    margin-left: 26%;
+    margin-top: 5%;
+    align-items: center;
+    z-index: 9;
+}
+
+.sectionUserData{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: aliceblue;
+
+}
+#userImg{
+    width: 20%;
+    height: 20%;
+    margin-right: 2%;
+}
+
+#configImg{
+    width: 8%;
+    height: 8%;
+    margin-left: 30%;
+}
+.userText{
+    margin: 0;
+
+}
+
+    .friendsOnImg{
+        width: 40px;
+        height: 40px;
+        margin-right: 3%;
+    }
+
+    .section2Div{
+        position: relative;
+        margin-left: 26%;
+        color:  rgb(170, 171, 171);
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+    }
+
+    .FriendsDiv{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: aliceblue;
+        margin-bottom: 10%;
+        z-index: 10;
+    }
+    .friendsImg{
+        /**aspect-ratio: 4/3;
+        object-fit: cover;**/
+        width: 40px;
+        height: 40px;
+        margin-right: 3%;
+    }
+
+    .FriendSection{
+        position: absolute;
+        left: 25%;
+        top: 25%;
+        z-index: 10;
+    }
+
+    .friendsBar{
+        width: 75%;
+        height: 7%;
+    }
+
+    .onlineFriends{
+        width: 75%;
+        height: 80%;
+    }
+
+    .FriendOnSection{
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        z-index: 0;
+    }
+
+    #masIcon{
+        position: absolute;
+        width: 5%;
+        height: 6%;
+        right: 5%;
+    }
+
+
+
+    .Section3{
+        position: relative;
+        width: 72%;
+        height: 94%;
+        top: 0;
+        left: 24%;
+        color: aliceblue;
+        z-index: 0;
+
+    }
+
+    .section3Bar{
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        align-items: center;
+    }
+
+    .FriendsOnlineDiv{
+        color: aliceblue;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10%;
+        align-items: center;
+        z-index: 0;
+
+    }
+
+    .Section3Div{
+        color: aliceblue;
+        display: flex;
+        flex-direction: row;
+        margin-left: 2%;
+
+    }
+
+    .SectionList{
+        margin-left: 2%;
+    }
+
+    #textBlock1{
+        background-color: rgb(30, 33, 40);
+        width: 90%;
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        border-radius: 0.5em;
+        font-size:medium;
+    }
+
+    .textBlock2{
+        background-color: rgb(30, 33, 40);
+        width: 86%;
+        padding-left: 4%;
+        margin-top: 6%;
+        margin-bottom: 6%;
+        padding: 4%;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        border-radius: 0.5em;
+    }
+
+    .section2Div2{
+        display: flex;
+        flex-direction: row;
+        align-items:center;
+    }
+
+
+    #blockBlue{
+        background-color: rgb(46, 188, 197);
+        padding-left: 1%;
+        padding-right: 1%;
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+        border-radius: 0.5em;
+    }
+
+    #blockGray{
+        background-color: rgb(97, 100, 104);
+        padding-left: 1%;
+        padding-right: 1%;
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+        border-radius: 0.5em;
+        align-items: center;
+    }
+    .block{
+        margin-left: 6%;
+
+    }
+
+    .searchBar{
+        background-color: rgb(17, 21, 24);
+        padding: 0.8%;
+        border-radius: 0.6em;
+        margin-top: 1%;
+    }
+
+    .FriendsName{
+        margin: 0;
+    }
+    .FriendsOnName{
+        margin: 0;
+    }
+
+    #lineVertImg{
+        width: 0.25%;
+        margin-left: 5%;
+    }
+
+    #imgLine{
+        width: 95%;
+    }
+
+    .friendsIcon1{
+        width: 12%;
+        margin-right: 4%;
+    }
+
+    .friendsIcon2{
+        width: 25px;
+        height: 20px;
+        margin-right: 2%;
+    }
+}

@@ -19,13 +19,13 @@ export enum AuthActions {
 }
 
 export enum FriendsActions {
-    "ADD" = "ADD",
-    "GET" = "GET",
+    "AddFriend" = "AddFriend",
+    "GetFriend" = "GetFriend",
 }
 
 export enum ServersActions {
-    "ADD2" = "ADD2",
-    "GET2" = "GET2",
+    "AddServer" = "AddServer",
+    "GetServer" = "GetServer",
 }
 
 export interface LogInAction {
@@ -39,23 +39,25 @@ export interface LogOutAction {
 }
 
 export interface AddFriendAction {
-    action: FriendsActions.ADD,
+    action: FriendsActions.AddFriend,
     payload: InterFriends
 }
 
 export interface AddServerAction {
-    action: ServersActions.ADD2,
+    action: ServersActions.AddServer,
     payload: InterServers
 }
 
 
 export interface GetFriendsAction {
-    action: FriendsActions.GET,
+    action: FriendsActions.GetFriend,
     payload: InterFriends[]
 }
 
 export interface GetServersAction {
-    action: ServersActions.GET2,
+    action: ServersActions.GetServer,
     payload: InterServers[]
 }
+
+
 export type Actions = LogInAction | LogOutAction | AddFriendAction | GetFriendsAction | AddServerAction | GetServersAction;

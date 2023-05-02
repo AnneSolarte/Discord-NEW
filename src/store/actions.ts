@@ -21,7 +21,7 @@ export const getFriends = async (): Promise<GetFriendsAction> => {
     const friends = await Friends.get();
     console.log('friends',friends);
     return {
-        action: FriendsActions.GET,
+        action: FriendsActions.GetFriend,
         payload: friends
     }
 }
@@ -30,21 +30,21 @@ export const getServers = async (): Promise<GetServersAction> => {
     const servers = await Servers.get();
     console.log('servers',servers);
     return {
-        action: ServersActions.GET2,
+        action: ServersActions.GetServer,
         payload: servers
     }
 }
 
 export const addNewFriend = ({payload}: Pick<AddFriendAction, "payload">): AddFriendAction => {
     return {
-        action: FriendsActions.ADD,
+        action: FriendsActions.AddFriend,
         payload
     }
 }
 
 export const addNewServer = ({payload}: Pick<AddServerAction, "payload">): AddServerAction => {
     return {
-        action: ServersActions.ADD2,
+        action: ServersActions.AddServer,
         payload
     }
 }

@@ -19,7 +19,7 @@ export const reducer = (currentAction: Actions, currentState: AppState): AppStat
                 }
             }
             
-        case FriendsActions.ADD:
+        case FriendsActions.AddFriend:
             return {
                 ...currentState,
                 friends: [
@@ -28,7 +28,7 @@ export const reducer = (currentAction: Actions, currentState: AppState): AppStat
                 ]
             }
 
-        case ServersActions.ADD2:
+        case ServersActions.AddServer:
             return {
                 ...currentState,
                 servers: [
@@ -37,13 +37,13 @@ export const reducer = (currentAction: Actions, currentState: AppState): AppStat
                 ]
             }
         
-        case FriendsActions.GET:
+        case FriendsActions.GetFriend:
             return {
                 ...currentState,
                 friends: payload
             }
 
-        case ServersActions.GET2:
+        case ServersActions.GetServer:
             return {
                 ...currentState,
                 servers: payload

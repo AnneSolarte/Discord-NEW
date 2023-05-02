@@ -1,3 +1,6 @@
+
+import FriendStyle from "./FriendStyle.css"
+
 export enum FriendsAtt {
     "img" = "img",
     "name" = "name",
@@ -51,6 +54,10 @@ class Friends extends HTMLElement {
                 </div>
                 `;
             }
+
+            const css = this.ownerDocument.createElement("style");
+            css.innerHTML = FriendStyle;
+            this.shadowRoot?.appendChild(css);
         }
 }
 
