@@ -1,15 +1,9 @@
-body{
-    background-color:rgb(30, 33, 40);
-    margin: 1.5%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
 .Section1{
     position: absolute;
     display: flex;
     flex-direction: column;
     width: 4.5%;
-    height: 94%;
+    height: 95%;
     background-color: rgb(88, 101, 242);
     border-radius: 1.5em;
     z-index: 10;
@@ -17,23 +11,25 @@ body{
     align-content: center;
 }
 
+.ServerSection{
+    position: absolute;
+    left: 11%;
+    top: 5%;
+    z-index: 10;
+    align-items: center;
+}
+
+
 .Section2{
     position: absolute;
     width: 20%;
-    height: 94%;
+    height: 95%;
     background-color: rgb(17, 21, 24);
     z-index: 1;
     border-radius: 1.5em;
 
 }
 
-.ServerSection{
-    position: absolute;
-    left: 2.1%;
-    top: 5%;
-    z-index: 10;
-    align-items: center;
-}
 
 .FriendSection{
     position: absolute;
@@ -51,10 +47,11 @@ body{
 
 .Section3{
     position: relative;
-    width: 79%;
+    width: 78%;
     height: 94%;
     top: 0;
-    left: 20.5%;
+    margin-right: 0%;
+    left: 20%;
     color: aliceblue;
 
 }

@@ -40,25 +40,25 @@ class Home extends HTMLElement {
         const css = this.ownerDocument.createElement("style");
         css.innerHTML = HomeStyle;
         this.shadowRoot?.appendChild(css);
+
+        
+
     }
 
-    
-    
     appState.servers.forEach((data) => {
         const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
         ServersCard.setAttribute(ServerAtt.img, data.img);
         this.ServersList.push(ServersCard);
     });
 
-    const section1 = this.ownerDocument.createElement("section")
-    section1.className = 'Section1'
-
-    
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
     const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
     section2.appendChild(FriendsDiv)
     this.shadowRoot?.appendChild(section2);
+
+    const section1 = this.ownerDocument.createElement("section")
+    section1.className = 'Section1'
 
     const ServersCards = this.ownerDocument.createElement("div")
     ServersCards.className = 'ServerSection'

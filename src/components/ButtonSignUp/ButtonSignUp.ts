@@ -17,7 +17,7 @@ class ButtonSignUp extends HTMLElement {
 
         this.button = this.ownerDocument.createElement('button');
         this.button.className = "ButtonSignUp"
-        this.button.textContent = 'Login';
+        this.button.textContent = 'SignUp';
         this.button.addEventListener("click",this.onButtonClicked);
     }
 
@@ -32,5 +32,5 @@ class ButtonSignUp extends HTMLElement {
     }
 }
 
-customElements.define("button-login", ButtonSignUp);
+customElements.define("button-signup", ButtonSignUp);
 export default ButtonSignUp;

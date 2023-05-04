@@ -7,7 +7,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["css-loader"],
+        use: ["css-loader"], 
       },
       {
         test: /\.tsx?$/,
@@ -22,5 +22,6 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: ''
   },
 };
