@@ -1,3 +1,4 @@
+import ServerStyle from "./Servers.css"
 export enum ServerAtt {
     "img" = "img",
 }
@@ -37,14 +38,20 @@ class Servers extends HTMLElement {
         }
 
         render() {
+
+            const css = this.ownerDocument.createElement("style");
+            css.innerHTML = ServerStyle;
+            this.shadowRoot?.appendChild(css);
+
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="./App/index.css">
                 <div class="serversDiv">
                     <img class="serverImg" src="${this.img}">
                 </div>
                 `;
             }
+
+            
         }
 }
 

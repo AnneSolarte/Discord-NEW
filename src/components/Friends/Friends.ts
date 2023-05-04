@@ -45,9 +45,9 @@ class Friends extends HTMLElement {
         }
 
         render() {
+ 
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="./App/index.css">
                 <div class="FriendsDiv">
                     <img class="friendsImg" src="${this.img}${this.mood}.png">
                     <p class="FriendsName">${this.name}</p>
@@ -58,6 +58,8 @@ class Friends extends HTMLElement {
             const css = this.ownerDocument.createElement("style");
             css.innerHTML = FriendStyle;
             this.shadowRoot?.appendChild(css);
+
+            
         }
 }
 

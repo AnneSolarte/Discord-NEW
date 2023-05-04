@@ -1,18 +1,18 @@
-.FriendsDiv{
+.FriendsOnlineDiv{
+    color: aliceblue;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    color: aliceblue;
     margin-bottom: 10%;
+    align-items: center;
+
 }
 
-.friendsImg{
+.friendsOnImg{
     width: 40px;
     height: 40px;
     margin-right: 3%;
 }
 
-.FriendsName{
+.FriendsOnName{
     margin: 0;
-    color: aliceblue;
 }

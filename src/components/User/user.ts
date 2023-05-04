@@ -1,3 +1,5 @@
+import UserStyle from "./user.css"
+
 export enum UserAtt {
     "img" = "img",
     "name" = "name",
@@ -42,19 +44,23 @@ class User extends HTMLElement {
         }
 
         render() {
+
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="./App/index.css">
                 <div class="sectionUser">
-                    <img id="userImg" src="${this.img}">
+                    <img id="userImg" src="/img/user.png">
                     <div class="sectionUserData">
-                        <p class="userText">${this.name}</p>
-                        <p class="userText">${this.uid}</p>
+                        <p class="userText">AnneSunart</p>
+                        <p class="userText">#1299</p>
                     </div>
-                    <img id="configImg" src="/src/img/config.png">
+                    <img id="configImg" src="/img/config.png">
                 </div>
                 `;
             }
+
+            const css = this.ownerDocument.createElement("style");
+            css.innerHTML = UserStyle;
+            this.shadowRoot?.appendChild(css);
         }
 }
 

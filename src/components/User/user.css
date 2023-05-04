@@ -1,0 +1,30 @@
+.sectionUser{
+    display: flex;
+    flex-direction: row;
+    margin-left: 26%;
+    margin-top: 5%;
+    align-items: center;
+}
+
+.sectionUserData{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: aliceblue;
+
+}
+#userImg{
+    width: 20%;
+    height: 20%;
+    margin-right: 2%;
+}
+
+#configImg{
+    width: 8%;
+    height: 8%;
+    margin-left: 30%;
+}
+.userText{
+    margin: 0;
+
+}

@@ -1,3 +1,5 @@
+import FriendsOnStyle from "./FriendsOnStyle.css"
+
 export enum FriendsOnAtt {
     "img" = "img",
     "name" = "name",
@@ -39,15 +41,19 @@ class FriendsOnline extends HTMLElement {
         }
 
         render() {
+
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                <link rel="stylesheet" href="./App/index.css">
                 <div class="FriendsOnlineDiv">
                     <img class="friendsOnImg" src="${this.img}online.png">
                     <p class="FriendsOnName">${this.name}</p>
                 </div>
                 `;
             }
+            
+            const css = this.ownerDocument.createElement("style");
+            css.innerHTML = FriendsOnStyle;
+            this.shadowRoot?.appendChild(css);
         }
 }
 

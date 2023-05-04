@@ -1,4 +1,5 @@
-import "./screens/Home"
+
+import "./screens/Home/Home"
 import "./components/export"
 
 class AppContainer extends HTMLElement {
@@ -12,6 +13,7 @@ class AppContainer extends HTMLElement {
     }
 
     render() {
+
         const dashboard = this.ownerDocument.createElement('my-home');
         this.shadowRoot?.appendChild(dashboard);
     }
