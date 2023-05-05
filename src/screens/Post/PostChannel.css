@@ -1,0 +1,79 @@
+.Section1{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 4.5%;
+    height: 95%;
+    background-color: rgb(88, 101, 242);
+    border-radius: 1.5em;
+    z-index: 10;
+    text-align: center;
+    align-content: center;
+}
+
+.ServerSection{
+    position: absolute;
+    left: 11%;
+    top: 5%;
+    z-index: 10;
+    align-items: center;
+}
+
+
+.Section2{
+    position: absolute;
+    width: 20%;
+    height: 95%;
+    background-color: rgb(17, 21, 24);
+    z-index: 1;
+    border-radius: 1.5em;
+
+}
+
+
+.FriendSection{
+    position: absolute;
+    left: 7%;
+    top: 30%;
+    z-index: 10;
+}
+
+.PostSection{
+    position: relative;
+    flex-direction: row;
+    margin: 0%;
+    width: 77%;
+    height: 94%;
+    top: 0;
+    left: 21%;
+    color: aliceblue;
+
+}
+
+.Posts{
+    display: flex;
+    flex-direction: row;
+    margin-right: 2%;
+    margin-top: 1%;
+    width: 70%;
+}
+
+.Section4{
+    top: 87.2%;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: aliceblue;
+    z-index: 1;
+    border-radius: 1.5em;
+    background-color: rgb(46, 50, 56);
+}
+
+.PostsSection{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+
+}
+
+

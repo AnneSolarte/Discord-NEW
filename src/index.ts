@@ -1,6 +1,5 @@
 
-import "./screens/Home/Home"
-import "./screens/Landing/Landing"
+import "./screens/export"
 import "./components/export"
 
 class AppContainer extends HTMLElement {
@@ -15,7 +14,7 @@ class AppContainer extends HTMLElement {
 
     render() {
 
-        const window = this.ownerDocument.createElement('my-landing');
+        const window = this.ownerDocument.createElement('post-channel');
         this.shadowRoot?.appendChild(window);
     }
 }

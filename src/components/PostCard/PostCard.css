@@ -1,0 +1,41 @@
+.Post{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 3%;
+    padding-left: 3%;
+    padding-bottom: 3%;
+    background-color: rgb(17, 21, 24);
+    border-radius: 0.8em;
+
+}
+
+.dataPost{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    align-items: center;
+    height: fit-content;
+}
+
+.PostName{
+    font-size:medium;
+    margin-top:0% ;
+    margin-right: 2%;
+    margin-bottom: 0%;
+}
+.PostTime{
+    font-size: smaller;
+    margin-top:0% ;
+    margin-bottom: 0%;
+}
+
+.title{
+    font-size:large;
+}
+
+.PostImg{
+    width: 400px;
+    border-radius: 0.5em;
+}

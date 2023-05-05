@@ -1,0 +1,85 @@
+.PostBar{
+    background-color: rgb(17, 21, 24);
+    padding: 0.5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    top: 1%;
+    border-radius: 0.6em;
+    height: 5%;
+}
+.block1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:24%;
+    margin-left: 1%;
+}
+
+.text{
+    display: flex;
+    width: max-content;
+}
+.searchBar{
+    position: relative;
+    padding: 2%;
+    padding-right: 4%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0.4em;
+    padding: 1%;
+    border-radius: 0.5em;
+    margin-right: 5%;
+
+
+}
+
+#inputSearch{
+    color: aliceblue;
+    border: none;
+    background-color: rgb(30, 33, 40);
+    margin-right: 5%;
+    padding: 2%;
+    border-radius: 0.5em;
+}
+
+::placeholder {
+    color: rgb(246, 246, 246);
+    font-size: 1.5em;
+  }
+
+.block2{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 70%;
+}
+
+.Icon{
+    width: 5%;
+    padding: 2%;
+    margin-right: 1%;
+
+}
+
+.Icon2{
+    width:25%;
+    padding: 1%;
+    margin-right: 5%;
+
+}
+
+
+#IconSearchBar{
+    position: absolute;
+    width: 10%;
+    padding: 2%;
+    left: 88%;
+}
+
+::placeholder {
+    color: rgb(120, 120, 120);
+    font-size:small;
+  }

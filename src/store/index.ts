@@ -9,6 +9,7 @@ const emptyState: AppState = {
   },
   friends: [],
   servers: [],
+  post: []
 };
 
 export let appState = Storage.get<AppState>({

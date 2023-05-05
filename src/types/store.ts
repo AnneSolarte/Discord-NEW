@@ -1,6 +1,7 @@
 
 import { InterFriends} from "./friends"
 import { InterServers} from "./servers"
+import { InterPost} from "./post"
 
 export type Observer = ({ render: () => void } & HTMLElement);
 
@@ -11,6 +12,7 @@ export type AppState = {
     },
     friends: InterFriends[]
     servers: InterServers[]
+    post: InterPost[]
 }
 
 export enum AuthActions {
@@ -28,6 +30,10 @@ export enum ServersActions {
     "GetServer" = "GetServer",
 }
 
+export enum PostActions {
+    "AddPost" = "AddPost",
+    "GetPost" = "GetPost",
+}
 export interface LogInAction {
     action: AuthActions.LOGIN,
     payload: Pick<AppState, "user">
@@ -48,6 +54,11 @@ export interface AddServerAction {
     payload: InterServers
 }
 
+export interface AddPostAction {
+    action: PostActions.AddPost,
+    payload: InterPost
+}
+
 
 export interface GetFriendsAction {
     action: FriendsActions.GetFriend,
@@ -59,5 +70,10 @@ export interface GetServersAction {
     payload: InterServers[]
 }
 
+export interface GetPostAction {
+    action: PostActions.GetPost,
+    payload: InterPost[]
+}
 
-export type Actions = LogInAction | LogOutAction | AddFriendAction | GetFriendsAction | AddServerAction | GetServersAction;
+
+export type Actions = LogInAction | LogOutAction | AddFriendAction | GetFriendsAction | AddServerAction | GetServersAction | AddPostAction | GetPostAction;

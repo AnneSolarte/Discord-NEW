@@ -5,7 +5,7 @@ class Friends {
   async get(): Promise<InterFriends[]> {
     console.log("starting friends...");
     const value: InterFriends[] = await new Promise((resolve) => {
-      setTimeout(() => resolve(friends), 3000);
+      setTimeout(() => resolve(friends), 2000);
     });
     return value;
   }

@@ -1,6 +1,7 @@
 import Friends from '../services/friends'
 import Servers from '../services/servers'
-import { AddFriendAction, AuthActions, GetFriendsAction, LogInAction, LogOutAction, FriendsActions, AddServerAction, GetServersAction, ServersActions } from "../types/store"
+import Post from '../services/post'
+import { AddFriendAction, AuthActions, GetFriendsAction, LogInAction, LogOutAction, FriendsActions, AddPostAction, GetPostAction, PostActions, AddServerAction, GetServersAction, ServersActions  } from "../types/store"
 
 
 export const logOut = (): LogOutAction => {
@@ -35,6 +36,15 @@ export const getServers = async (): Promise<GetServersAction> => {
     }
 }
 
+export const getPosts = async (): Promise<GetPostAction> => {
+    const post = await Post.get();
+    console.log('posts',post);
+    return {
+        action: PostActions.GetPost,
+        payload: post
+    }
+}
+
 export const addNewFriend = ({payload}: Pick<AddFriendAction, "payload">): AddFriendAction => {
     return {
         action: FriendsActions.AddFriend,
@@ -45,6 +55,13 @@ export const addNewFriend = ({payload}: Pick<AddFriendAction, "payload">): AddFr
 export const addNewServer = ({payload}: Pick<AddServerAction, "payload">): AddServerAction => {
     return {
         action: ServersActions.AddServer,
+        payload
+    }
+}
+
+export const addNewPost = ({payload}: Pick<AddPostAction, "payload">): AddPostAction => {
+    return {
+        action: PostActions.AddPost,
         payload
     }
 }

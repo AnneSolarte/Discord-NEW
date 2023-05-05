@@ -1,0 +1,84 @@
+.Section1{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 4.5%;
+    height: 95%;
+    background-color: rgb(88, 101, 242);
+    border-radius: 1.5em;
+    z-index: 10;
+    text-align: center;
+    align-content: center;
+}
+
+.ServerSection{
+    position: absolute;
+    left: 11%;
+    top: 5%;
+    z-index: 10;
+    align-items: center;
+}
+
+
+.Section2{
+    position: absolute;
+    width: 20%;
+    height: 95%;
+    background-color: rgb(17, 21, 24);
+    z-index: 1;
+    border-radius: 1.5em;
+
+}
+
+
+.FriendSection{
+    position: absolute;
+    left: 7%;
+    top: 30%;
+    z-index: 10;
+}
+
+
+
+.ChatSection{
+    position: relative;
+    margin: 0%;
+    width: 56%;
+    height: 94%;
+    top: 0;
+    left: 21%;
+    color: aliceblue;
+
+}
+
+.Section4{
+    top: 87.2%;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: aliceblue;
+    z-index: 1;
+    border-radius: 1.5em;
+    background-color: rgb(46, 50, 56);
+}
+
+.membersSection{
+    position: absolute;
+    width: 18%;
+    height: 91%;
+    top: 2%;
+    left: 79%;
+    z-index: 10;
+    padding: 1%;
+    background-color: rgb(17, 21, 24);
+    border-radius: 1.5em;
+    color: aliceblue;
+
+}
+
+.members{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    z-index: 10;
+}

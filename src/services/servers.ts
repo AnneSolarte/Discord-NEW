@@ -5,7 +5,7 @@ class Servers {
   async get(): Promise<InterServers[]> {
     console.log("starting servers...");
     const value: InterServers[] = await new Promise((resolve) => {
-      setTimeout(() => resolve(servers), 3000);
+      setTimeout(() => resolve(servers), 2000);
     });
     return value;
   }

@@ -1,0 +1,24 @@
+.WriteBar{
+    position: absolute;
+    top: 105%;
+    width: 98.5%;
+    background-color: rgb(17, 21, 24);
+    padding-left: 1.5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0.6em;
+    margin-top: 7%;
+}
+
+.blockIcons{
+    display: flex;
+    margin-left: 82%;
+    align-items: center;
+}
+
+.Icons{
+    width: 100%;
+}

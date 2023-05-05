@@ -1,0 +1,14 @@
+.ButtonPost{
+    position: absolute;
+    top: 20%;
+    left: 93%;
+    display: flex;
+    background-color: rgb(88, 101, 242);
+    color: aliceblue;
+    border: 0;
+    margin: 0%;
+    border-radius: 0.5em;
+    font-size: small;
+    padding: 0.5%;
+    
+}

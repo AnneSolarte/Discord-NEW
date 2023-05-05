@@ -1,4 +1,4 @@
-import { Actions, AppState, AuthActions, FriendsActions, ServersActions } from "../types/store";
+import { Actions, AppState, AuthActions, FriendsActions, ServersActions, PostActions } from "../types/store";
 
 export const reducer = (currentAction: Actions, currentState: AppState): AppState => {
     const { action, payload } = currentAction; 
@@ -36,6 +36,15 @@ export const reducer = (currentAction: Actions, currentState: AppState): AppStat
                     ...currentState.servers,
                 ]
             }
+
+        case PostActions.AddPost:
+            return {
+                ...currentState,
+                post: [
+                    payload,
+                    ...currentState.post,
+                ]
+            }
         
         case FriendsActions.GetFriend:
             return {
@@ -47,6 +56,12 @@ export const reducer = (currentAction: Actions, currentState: AppState): AppStat
             return {
                 ...currentState,
                 servers: payload
+            }
+
+         case PostActions.GetPost:
+            return {
+                ...currentState,
+                post: payload
             }
     
         default:

@@ -1,18 +1,19 @@
-import HomeStyle from "./Home.css";
+import ServersChannelStyle from "./ServersChannel.css";
 import Servers, { ServerAtt } from "../../components/Servers/Servers";
 import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
-import Friends, { FriendsAtt } from "../../components/Friends/Friends";
-import User from "../../components/User/user"
-import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
-import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
+import User, { UserAtt } from "../../components/User/user";
+import WriteBar from "../../components/WriteBar/WriteBar";
+import ServerBar from "../../components/ServerBar/ServerBar";
+import ServerDiv from "../../components/ServerDiv/ServersDiv";
+import ChatDiv from "../../components/ChatDiv/ChatDiv";
 import { getPosts } from "../../store/actions";
 import { getFriends } from "../../store/actions";
 import { getServers} from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
 
-export default class Home extends HTMLElement {
+
+export default class ServersChannel extends HTMLElement {
   ServersList: Servers[] = [];
-  FriendsList: Friends[] = [];
   FriendsOnList: FriendsOnline[] = [];
 
   constructor() {
@@ -42,10 +43,8 @@ export default class Home extends HTMLElement {
         this.shadowRoot.innerHTML = ``;
       
         const css = this.ownerDocument.createElement("style");
-        css.innerHTML = HomeStyle;
+        css.innerHTML = ServersChannelStyle;
         this.shadowRoot?.appendChild(css);
-
-        
 
     }
 
@@ -55,11 +54,6 @@ export default class Home extends HTMLElement {
         this.ServersList.push(ServersCard);
     });
 
-    const section2 = this.ownerDocument.createElement("section")
-    section2.className = 'Section2'
-    const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
-    section2.appendChild(FriendsDiv)
-    this.shadowRoot?.appendChild(section2);
 
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
@@ -72,20 +66,28 @@ export default class Home extends HTMLElement {
     section1.appendChild(ServersCards)
     this.shadowRoot?.appendChild(section1);
 
-    appState.friends.forEach((data) => {
-        const FriendsCard = this.ownerDocument.createElement("my-friends") as Friends;
-        FriendsCard.setAttribute(FriendsAtt.img, data.img);
-        FriendsCard.setAttribute(FriendsAtt.name, data.name);
-        FriendsCard.setAttribute(FriendsAtt.mood, data.mood);
-        this.FriendsList.push(FriendsCard);
-    });
+    const section2 = this.ownerDocument.createElement("section")
+    section2.className = 'Section2'
+    const serverDiv = this.ownerDocument.createElement("server-div") as ServerDiv;
+    section2.appendChild(serverDiv)
+    this.shadowRoot?.appendChild(section2);
 
-    const FriendsCards = this.ownerDocument.createElement("div")
-    FriendsCards.className = 'FriendSection'
-    this.FriendsList.forEach((FriendsCard) => {
-        FriendsCards.appendChild(FriendsCard)
-    });
-    this.shadowRoot?.appendChild(FriendsCards);
+    const section3 = this.ownerDocument.createElement("section")
+    section3.className = 'ChatSection'
+
+    const serverBar = this.ownerDocument.createElement("server-bar") as ServerBar;
+    section3.appendChild(serverBar)
+
+    const chatDiv = this.ownerDocument.createElement("chat-div") as ChatDiv;
+    section3.appendChild(chatDiv);
+
+    const writeBar = this.ownerDocument.createElement("write-bar") as WriteBar;
+    section3.appendChild(writeBar)
+    this.shadowRoot?.appendChild(section3);
+
+
+    
+    
 
     const DataFriendsOnline = appState.friends.filter((user)=>{
         return user.mood === "online"
@@ -98,29 +100,30 @@ export default class Home extends HTMLElement {
           this.FriendsOnList.push(FriendsOnCard);
     });
 
-    const FriendsOnCards = this.ownerDocument.createElement("div")
-    FriendsOnCards.className = 'FriendOnSection'
-    this.FriendsOnList.forEach((FriendsOnCard) => {
-        FriendsOnCards.appendChild(FriendsOnCard)
+    const membersSection = this.ownerDocument.createElement("section")
+    membersSection.className = 'membersSection'
+
+    const membersDiv = this.ownerDocument.createElement("members-div")
+    membersSection.appendChild(membersDiv)
+
+    const members = this.ownerDocument.createElement("div")
+    members.className = 'members'
+    this.FriendsOnList.forEach((Card) => {
+      members.appendChild(Card)
     });
-    this.shadowRoot?.appendChild(FriendsOnCards);
-
-    const section3 = this.ownerDocument.createElement("section")
-    section3.className = 'Section3'
-    const friendsOnDiv = this.ownerDocument.createElement("friends-ondiv") as FriendsOnDiv;
-    section3.appendChild(friendsOnDiv)
-    this.shadowRoot?.appendChild(section3);
-
-
+    membersSection.appendChild(members)
+    this.shadowRoot?.appendChild(membersSection);
+    
     const section4 = this.ownerDocument.createElement("section")
     section4.className = 'Section4'
     const user = this.ownerDocument.createElement("my-user") as User;
     section4.appendChild(user)
     this.shadowRoot?.appendChild(section4);
 
+
     
   
   }
 }
 
-customElements.define("my-home", Home);
+customElements.define("servers-channel", ServersChannel);
