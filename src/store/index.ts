@@ -1,5 +1,5 @@
 import Storage, { PersistanceKeys } from "../utils/storage";
-import { Actions, AppState, Observer } from "../types/store";
+import { Actions, AppState, Observer, Screens } from "../types/store";
 import { reducer } from "./reducer";
 
 const emptyState: AppState = {
@@ -9,7 +9,8 @@ const emptyState: AppState = {
   },
   friends: [],
   servers: [],
-  post: []
+  post: [],
+  screen: Screens.DASHBOARD,
 };
 
 export let appState = Storage.get<AppState>({

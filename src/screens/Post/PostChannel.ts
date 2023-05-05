@@ -7,7 +7,6 @@ import PostBar from "../../components/PostBar/PostBar";
 import PostCard, { PostCardAtt} from "../../components/PostCard/PostCard";
 import CreatePostBar from "../../components/CreatePostBar/CreatePostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
-import ChatDiv from "../../components/ChatDiv/ChatDiv";
 import { getPosts } from "../../store/actions";
 import { getFriends } from "../../store/actions";
 import { getServers} from "../../store/actions";

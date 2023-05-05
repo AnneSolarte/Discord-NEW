@@ -1,4 +1,8 @@
 
+import { navigate } from "../../store/actions";
+import { addObserver, appState, dispatch } from "../../store/index";
+import { Screens } from "../../types/store";
+
 import ButtonLoginStyle from "./ButtonLogin.css"
 class ButtonLogin extends HTMLElement {
     button?: HTMLElement;
@@ -18,7 +22,9 @@ class ButtonLogin extends HTMLElement {
         this.button = this.ownerDocument.createElement('button');
         this.button.className = "buttonLogin"
         this.button.textContent = 'Login';
-        this.button.addEventListener("click",this.onButtonClicked);
+        this.button.addEventListener("click", () => {
+            dispatch(navigate(Screens.HOME));
+        });
     }
 
     render() {

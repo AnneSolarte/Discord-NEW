@@ -1,4 +1,4 @@
-import { Actions, AppState, AuthActions, FriendsActions, ServersActions, PostActions } from "../types/store";
+import { Actions, AppState, AuthActions, FriendsActions, ServersActions, PostActions, NavigationActions} from "../types/store";
 
 export const reducer = (currentAction: Actions, currentState: AppState): AppState => {
     const { action, payload } = currentAction; 
@@ -63,6 +63,12 @@ export const reducer = (currentAction: Actions, currentState: AppState): AppStat
                 ...currentState,
                 post: payload
             }
+
+        case NavigationActions.NAVIGATE:
+            return {
+                ...currentState,
+                screen: payload,
+            };
     
         default:
             return currentState;

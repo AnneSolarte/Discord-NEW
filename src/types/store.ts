@@ -5,6 +5,23 @@ import { InterPost} from "./post"
 
 export type Observer = ({ render: () => void } & HTMLElement);
 
+export enum Screens {
+    LOGIN = "LOGIN",
+    SIGNUP = "SIGNUP",
+    DASHBOARD = "DASHBOARD",
+    HOME = "HOME"
+  }
+  
+  
+export enum NavigationActions {
+    "NAVIGATE" = "NAVIGATE",
+}
+  
+export interface NavigateAction {
+    action: NavigationActions.NAVIGATE;
+    payload: Screens;
+}
+  
 export type AppState = {
     user: {
         userName: string,
@@ -13,6 +30,7 @@ export type AppState = {
     friends: InterFriends[]
     servers: InterServers[]
     post: InterPost[]
+    screen: Screens;
 }
 
 export enum AuthActions {
@@ -76,4 +94,4 @@ export interface GetPostAction {
 }
 
 
-export type Actions = LogInAction | LogOutAction | AddFriendAction | GetFriendsAction | AddServerAction | GetServersAction | AddPostAction | GetPostAction;
+export type Actions = LogInAction | LogOutAction | AddFriendAction | GetFriendsAction | AddServerAction | GetServersAction | AddPostAction | GetPostAction | NavigateAction;

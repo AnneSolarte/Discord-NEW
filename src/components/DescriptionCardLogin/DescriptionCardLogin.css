@@ -1,0 +1,15 @@
+.DescriptionDiv{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.text{
+    color: aliceblue;
+    font-size: smaller;
+    margin-left: 5%;
+}
+
+.link{
+    color: rgb(46, 188, 197);
+}

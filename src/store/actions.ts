@@ -2,7 +2,14 @@ import Friends from '../services/friends'
 import Servers from '../services/servers'
 import Post from '../services/post'
 import { AddFriendAction, AuthActions, GetFriendsAction, LogInAction, LogOutAction, FriendsActions, AddPostAction, GetPostAction, PostActions, AddServerAction, GetServersAction, ServersActions  } from "../types/store"
+import { NavigateAction, NavigationActions, Screens } from "../types/store";
 
+export const navigate = (screen: Screens): NavigateAction => {
+  return {
+    action: NavigationActions.NAVIGATE,
+    payload: screen,
+  };
+};
 
 export const logOut = (): LogOutAction => {
     return {

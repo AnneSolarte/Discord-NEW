@@ -45,13 +45,15 @@ export default class Landing extends HTMLElement {
         this.shadowRoot?.appendChild(css);
     }
 
+    const container = this.ownerDocument.createElement("section")
+    container.className = 'container'
     
     const myBar = this.ownerDocument.createElement("my-bar") as MyBar;
-    this.shadowRoot?.appendChild(myBar);
+    container.appendChild(myBar);
 
 
     const landingText = this.ownerDocument.createElement("landing-text") as LandingText;
-    this.shadowRoot?.appendChild(landingText);
+    container.appendChild(landingText);
 
 
     const buttons = this.ownerDocument.createElement("section")
@@ -63,10 +65,12 @@ export default class Landing extends HTMLElement {
     const buttonSignUp = this.ownerDocument.createElement("button-signup") as ButtonSignUp;
     buttons.appendChild(buttonSignUp);
 
-    this.shadowRoot?.appendChild(buttons);
+    container.appendChild(buttons);
+
+    this.shadowRoot?.appendChild(container);
 
 
   }
 }
 
-customElements.define("my-landing", Landing);
+customElements.define("landing-channel", Landing);

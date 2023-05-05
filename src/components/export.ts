@@ -18,6 +18,11 @@ export {default as CreatePostBar } from './CreatePostBar/CreatePostBar'
 export {default as WriteBar } from './WriteBar/WriteBar'
 export {default as MembersDiv } from './MembersDiv/MembersDiv'
 export {default as ChatDiv } from './ChatDiv/ChatDiv'
+export {default as BigInputs } from './BigInputs/BigInputs'
+export {default as SmallInputs } from './SmallInputs/SmallInputs'
+export {default as DescriptionCardLogin } from './DescriptionCardLogin/DescriptionCardLogin'
+export {default as LoginDiv } from './LoginDiv/LoginDiv'
+export {default as CheckBoxLogin} from './CheckBoxLogin/CheckBoxLogin'
 
 
 

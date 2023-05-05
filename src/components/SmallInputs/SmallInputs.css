@@ -1,0 +1,24 @@
+.SmallInput{
+    position: relative;
+    width:60%;
+    background-color: rgb(17, 21, 24);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Input{
+    width: 30%;
+    color: aliceblue;
+    border: none;
+    background-color: rgb(17, 21, 24);
+    margin-right: 5%;
+    padding: 2%;
+    border-radius: 0.5em;
+
+}
+
+.arrowDown{
+    position: absolute;
+    left: 80%;
+}
