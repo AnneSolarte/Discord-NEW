@@ -1,7 +1,18 @@
 .landingText{
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
     align-items: center;
     justify-content: center;
+    color: aliceblue;
+    margin: 0%;
+    margin-left: 25%;
+    margin-bottom: 5%;
+    margin-top: 8%;
+    text-align: center;
+}
+.title{
+    font-size: 500%;
+    margin-bottom: 0%;
+    align-self: center;
 }

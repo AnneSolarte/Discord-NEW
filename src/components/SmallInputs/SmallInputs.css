@@ -1,19 +1,22 @@
 .SmallInput{
     position: relative;
-    width:60%;
+    width:85%;
+    height: 80%;
     background-color: rgb(17, 21, 24);
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 5%;
+    border-radius: 0.4em;
 }
 
 .Input{
     width: 30%;
     color: aliceblue;
     border: none;
-    background-color: rgb(17, 21, 24);
-    margin-right: 5%;
-    padding: 2%;
+    background-color: rgba(17, 21, 24, 0);
+    margin-right: 2%;
+    padding: 4%;
     border-radius: 0.5em;
 
 }

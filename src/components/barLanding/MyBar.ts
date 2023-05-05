@@ -17,8 +17,8 @@ class MyBar extends HTMLElement {
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
                 <div class="barra">
-                    <img src="/img/logo.png">
-                    <p>¡Welcome begginer!</p>
+                    <img class="img" src="/img/logo.png">
+                    <p id="text">¡Welcome begginer!</p>
                 </div>
                 `;
             }

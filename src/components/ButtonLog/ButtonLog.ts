@@ -3,8 +3,8 @@ import { navigate } from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
 import { Screens } from "../../types/store";
 
-import ButtonLoginStyle from "./ButtonLogin.css"
-class ButtonLogin extends HTMLElement {
+import ButtonLogStyle from "./ButtonLog.css"
+class ButtonLog extends HTMLElement {
     button?: HTMLElement;
 
     onButtonClicked() {
@@ -20,10 +20,10 @@ class ButtonLogin extends HTMLElement {
         this.attachShadow({ mode: "open" });
 
         this.button = this.ownerDocument.createElement('button');
-        this.button.className = "buttonLogin"
+        this.button.className = "ButtonLog"
         this.button.textContent = 'Login';
         this.button.addEventListener("click", () => {
-            dispatch(navigate(Screens.LOGIN));
+            dispatch(navigate(Screens.HOME));
         });
     }
 
@@ -32,11 +32,11 @@ class ButtonLogin extends HTMLElement {
         this.shadowRoot?.appendChild(this.button!);
 
         const css = this.ownerDocument.createElement("style");
-        css.innerHTML = ButtonLoginStyle;
+        css.innerHTML = ButtonLogStyle;
         this.shadowRoot?.appendChild(css);
         
     }
 }
 
-customElements.define("button-login", ButtonLogin);
-export default ButtonLogin;
+customElements.define("button-log", ButtonLog);
+export default ButtonLog;

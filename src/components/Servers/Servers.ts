@@ -1,3 +1,7 @@
+import { navigate } from "../../store/actions";
+import { addObserver, appState, dispatch } from "../../store/index";
+import { Screens } from "../../types/store";
+
 import ServerStyle from "./Servers.css"
 export enum ServerAtt {
     "img" = "img",
@@ -17,6 +21,7 @@ class Servers extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
+        addObserver(this);
     }
 
     connectedCallback() {
@@ -36,6 +41,8 @@ class Servers extends HTMLElement {
 
             this.render();
         }
+
+        
 
         render() {
 

@@ -1,7 +1,9 @@
 .DescriptionDiv{
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 95%;
+    align-items: center;
+    margin-left: 15%;
 }
 
 .text{
@@ -11,5 +13,7 @@
 }
 
 .link{
+    display: flex;
     color: rgb(46, 188, 197);
+    margin-left: 3%;
 }

@@ -9,7 +9,6 @@ export {default as LandingText } from './LandingText/LandingText'
 export {default as ButtonLogin } from './ButtonLogin/ButtonLogin'
 export {default as ButtonPost } from './ButtonPost/ButtonPost'
 export {default as ButtonSignUp } from './ButtonSignUp/ButtonSignUp'
-export {default as InputEmail } from './InputEmail/InputEmail'
 export {default as ServersDiv } from './ServerDiv/ServersDiv'
 export {default as ServerBar } from './ServerBar/ServerBar'
 export {default as PostBar } from './PostBar/PostBar'
@@ -23,6 +22,8 @@ export {default as SmallInputs } from './SmallInputs/SmallInputs'
 export {default as DescriptionCardLogin } from './DescriptionCardLogin/DescriptionCardLogin'
 export {default as LoginDiv } from './LoginDiv/LoginDiv'
 export {default as CheckBoxLogin} from './CheckBoxLogin/CheckBoxLogin'
+export {default as ButtonLog} from './ButtonLog/ButtonLog'
+export {default as ButtonSign} from './ButtonSign/ButtonSign'
 
 
 

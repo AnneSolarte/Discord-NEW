@@ -6,7 +6,7 @@ import BigInputs, {BigInputsAtt} from "../../components/BigInputs/BigInputs";
 import LoginDiv from "../../components/LoginDiv/LoginDiv";
 import DescriptionCardLogin  from "../../components/DescriptionCardLogin/DescriptionCardLogin";
 import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
-import ButtonSignUp from "../../components/ButtonSignUp/ButtonSignUp";
+import ButtonSign from "../../components/ButtonSign/ButtonSign";
 import { getPosts } from "../../store/actions";
 import { getFriends } from "../../store/actions";
 import { getServers} from "../../store/actions";
@@ -92,8 +92,8 @@ export default class SignUp extends HTMLElement {
     LoginCard.appendChild( checkBoxLogin)
     this.shadowRoot?.appendChild(LoginCard);
 
-    const buttonLogin = this.ownerDocument.createElement("button-signup") as ButtonSignUp;
-    LoginCard.appendChild(buttonLogin)
+    const buttonSign = this.ownerDocument.createElement("button-sign") as ButtonSign;
+    LoginCard.appendChild(buttonSign)
     this.shadowRoot?.appendChild(LoginCard);
 
     const descLogin = this.ownerDocument.createElement("description-login") as DescriptionCardLogin;

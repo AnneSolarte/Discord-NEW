@@ -1,4 +1,6 @@
 import HomeStyle from "./Home.css";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/store";
 import Servers, { ServerAtt } from "../../components/Servers/Servers";
 import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
 import Friends, { FriendsAtt } from "../../components/Friends/Friends";
@@ -52,6 +54,9 @@ export default class Home extends HTMLElement {
     appState.servers.forEach((data) => {
         const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
         ServersCard.setAttribute(ServerAtt.img, data.img);
+        ServersCard.addEventListener("click", () => {
+          dispatch(navigate(Screens.SERVERS));
+        });
         this.ServersList.push(ServersCard);
     });
 

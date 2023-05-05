@@ -22,26 +22,38 @@ class AppContainer extends HTMLElement {
         switch (appState.screen) {
           case Screens.LOGIN:
             const login = this.ownerDocument.createElement("login-channel");
-            login.innerText = "esta es la pantalla de login";
+            login.innerText = "My Login";
             this.shadowRoot?.appendChild(login);
             break;
     
           case Screens.SIGNUP:
             const signup = this.ownerDocument.createElement("signup-channel");
-            signup.innerText = "esta es la pantalla de signup";
+            signup.innerText = "My SignUp";
             this.shadowRoot?.appendChild(signup);
             break;
     
           case Screens.DASHBOARD:
             const dashboard = this.ownerDocument.createElement("landing-channel");
-            dashboard.innerText = "este es la pantalla de dashboard";
+            dashboard.innerText = "My Landing";
             this.shadowRoot?.appendChild(dashboard);
             break;
 
         case Screens.HOME:
             const home = this.ownerDocument.createElement("my-home");
-            home.innerText = "este es la pantalla de dashboard";
+            home.innerText = "My home";
             this.shadowRoot?.appendChild(home);
+            break;
+
+        case Screens.SERVERS:
+            const servers = this.ownerDocument.createElement("servers-channel");
+            servers.innerText = "My home";
+            this.shadowRoot?.appendChild(servers);
+            break;
+
+        case Screens.POST:
+            const post = this.ownerDocument.createElement("post-channel");
+            post.innerText = "My Posts";
+            this.shadowRoot?.appendChild(post);
             break;
     
           default:

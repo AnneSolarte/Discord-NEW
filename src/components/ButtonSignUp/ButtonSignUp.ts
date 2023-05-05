@@ -24,15 +24,13 @@ class ButtonSignUp extends HTMLElement {
         this.button.className = "ButtonSignUp"
         this.button.textContent = 'SignUp';
         this.button.addEventListener("click", () => {
-            dispatch(navigate(Screens.LOGIN));
+            dispatch(navigate(Screens.SIGNUP));
           });
     }
 
     render() {
         
         this.shadowRoot?.appendChild(this.button!);
-
-        
 
         const css = this.ownerDocument.createElement("style");
         css.innerHTML = ButtonSignUpStyle;

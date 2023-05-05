@@ -1,10 +1,15 @@
 .CheckBox{
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 88%;
+    align-self: center;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-bottom: 6%;
 }
 .text{
     color: aliceblue;
-    font-size: smaller;
+    font-size: 70%;
     margin-left: 5%;
+    
 }

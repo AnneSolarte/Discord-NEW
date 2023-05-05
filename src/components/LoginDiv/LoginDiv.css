@@ -1,6 +1,16 @@
 .LoginDiv{
+    display: flex;
+    flex-direction: column;
     width: 100%;
     color: aliceblue;
     margin: 2%;
     justify-content: center;
+    margin-bottom: 10%;
+    margin-left: 25%;
+}
+.text{
+    margin: 0%;
+}
+.title{
+    margin: 0%;
 }

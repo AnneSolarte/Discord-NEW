@@ -1,4 +1,6 @@
 import ServersChannelStyle from "./ServersChannel.css";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/store";
 import Servers, { ServerAtt } from "../../components/Servers/Servers";
 import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
 import User, { UserAtt } from "../../components/User/user";
@@ -68,6 +70,9 @@ export default class ServersChannel extends HTMLElement {
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
+    section2.addEventListener("click", () => {
+      dispatch(navigate(Screens.POST));
+    });
     const serverDiv = this.ownerDocument.createElement("server-div") as ServerDiv;
     section2.appendChild(serverDiv)
     this.shadowRoot?.appendChild(section2);
