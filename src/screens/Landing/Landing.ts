@@ -4,9 +4,6 @@ import LandingStyle from "./Landing.css";
 import MyBar from "../../components/barLanding/MyBar"
 import { addObserver, appState, dispatch } from "../../store/index";
 import LandingText from "../../components/LandingText/LandingText";
-import { getPosts } from "../../store/actions";
-import { getFriends } from "../../store/actions";
-import { getServers} from "../../store/actions";
 import ButtonSignUp from "../../components/ButtonSignUp/ButtonSignUp";
 import ButtonLogin from "../../components/ButtonLogin/ButtonLogin";
 
@@ -18,19 +15,8 @@ export default class Landing extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-    if (appState.friends.length === 0) {
-      const action = await getFriends();
-      dispatch(action);
-    } if (appState.servers.length === 0) {
-      const actions = await getServers();
-      dispatch(actions);
-    } if (appState.post.length === 0) {
-      const actions = await getPosts();
-      dispatch(actions);
-    } else {
-      this.render();
-    }
+  connectedCallback() {
+    this.render()
   }
 
   render() {

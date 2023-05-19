@@ -3,13 +3,13 @@ import { InterBigInputsLogin } from "../types/bigInputsLogin";
 
 export const BigInputsLogin: InterBigInputsLogin[] = [
     {
-        name: "Email"
+        name: "email"
         },
         {
         name: "User name"
         },
         {
-        name: "Password"
+        name: "password"
         },
         
 ];

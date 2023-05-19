@@ -1,7 +1,7 @@
 
 import { navigate } from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { Screens } from "../../types/store";
+import { Screens } from "../../types/navigation";
 
 import ButtonLoginStyle from "./ButtonLogin.css"
 class ButtonLogin extends HTMLElement {

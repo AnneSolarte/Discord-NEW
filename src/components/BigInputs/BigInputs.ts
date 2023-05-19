@@ -42,7 +42,7 @@ class BigInputs extends HTMLElement {
  
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                <input class="BigInput" type="" placeholder="${this.name}">
+                <input class="BigInput" type="${this.name}" placeholder="${this.name}">
                 `;
             }
 

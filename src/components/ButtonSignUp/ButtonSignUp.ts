@@ -1,6 +1,6 @@
 import { navigate } from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { Screens } from "../../types/store";
+import { Screens } from "../../types/navigation";
 
 import ButtonSignUpStyle from "./ButtonSignUp.css"
 class ButtonSignUp extends HTMLElement {

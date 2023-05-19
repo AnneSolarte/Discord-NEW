@@ -3,13 +3,16 @@ import { BigInputsSignUp } from "../../mocks/getBigInputsSignUp";
 import SmallInputs, {SmallInputsAtt} from "../../components/SmallInputs/SmallInputs";
 import BigInputs, {BigInputsAtt} from "../../components/BigInputs/BigInputs";
 import LoginDiv from "../../components/LoginDiv/LoginDiv";
-import DescriptionCardLogin  from "../../components/DescriptionCardLogin/DescriptionCardLogin";
 import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonLog from "../../components/ButtonLog/ButtonLog";
-import { getPosts } from "../../store/actions";
-import { getFriends } from "../../store/actions";
-import { getServers} from "../../store/actions";
+import { navigate } from "../../store/actions";
+import Firebase from "../../utils/firebase";
+import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
+import DescriptionCardSignUp from "../../components/DescriptionCardSignUp/DescriptionCardSignUp";
+
+
+const credentials = { email: "", password: "" };
 
 export default class Login extends HTMLElement {
     BigInputsList: BigInputs[] = [];
@@ -21,19 +24,14 @@ export default class Login extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-    if (appState.friends.length === 0) {
-      const action = await getFriends();
-      dispatch(action);
-    } if (appState.servers.length === 0) {
-      const actions = await getServers();
-      dispatch(actions);
-    } if (appState.post.length === 0) {
-      const actions = await getPosts();
-      dispatch(actions);
-    } else {
-      this.render();
-    }
+  connectedCallback() {
+    this.render();
+  }
+
+  async handleLoginButton() {
+    Firebase.loginUser(credentials);
+    dispatch(navigate(Screens.DASHBOARD));
+
   }
 
   render() {
@@ -44,8 +42,6 @@ export default class Login extends HTMLElement {
         const css = this.ownerDocument.createElement("style");
         css.innerHTML = LoginStyle;
         this.shadowRoot?.appendChild(css);
-
-        
 
     }
 
@@ -76,15 +72,13 @@ export default class Login extends HTMLElement {
     LoginCard.appendChild(buttonLog)
     this.shadowRoot?.appendChild(LoginCard);
 
-    const descLogin = this.ownerDocument.createElement("description-login") as DescriptionCardLogin;
+    const descLogin = this.ownerDocument.createElement("description-signup") as DescriptionCardSignUp;
     LoginCard.appendChild(descLogin)
     this.shadowRoot?.appendChild(LoginCard);
 
     container.appendChild(LoginCard);
     this.shadowRoot?.appendChild(container);
 
-    
-  
   }
 }
 

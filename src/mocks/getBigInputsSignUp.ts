@@ -3,10 +3,10 @@ import { InterBigInputsSignUp } from "../types/bigInputsSignUp";
 
 export const BigInputsSignUp: InterBigInputsSignUp[] = [
     {
-        name: "Email"
+        name: "email"
         },
         {
-        name: "Password"
+        name: "password"
         },
         
 ];

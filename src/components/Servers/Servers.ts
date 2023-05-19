@@ -1,6 +1,5 @@
 import { navigate } from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { Screens } from "../../types/store";
 
 import ServerStyle from "./Servers.css"
 export enum ServerAtt {

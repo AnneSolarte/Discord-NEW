@@ -1,6 +1,5 @@
 import ServersChannelStyle from "./ServersChannel.css";
 import { navigate } from "../../store/actions";
-import { Screens } from "../../types/store";
 import Servers, { ServerAtt } from "../../components/Servers/Servers";
 import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
 import User, { UserAtt } from "../../components/User/user";
@@ -8,9 +7,7 @@ import WriteBar from "../../components/WriteBar/WriteBar";
 import ServerBar from "../../components/ServerBar/ServerBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
 import ChatDiv from "../../components/ChatDiv/ChatDiv";
-import { getPosts } from "../../store/actions";
-import { getFriends } from "../../store/actions";
-import { getServers} from "../../store/actions";
+import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
 
 
@@ -24,19 +21,8 @@ export default class ServersChannel extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-    if (appState.friends.length === 0) {
-      const action = await getFriends();
-      dispatch(action);
-    } if (appState.servers.length === 0) {
-      const actions = await getServers();
-      dispatch(actions);
-    } if (appState.post.length === 0) {
-      const actions = await getPosts();
-      dispatch(actions);
-    } else {
-      this.render();
-    }
+  connectedCallback() {
+    this.render();
   }
 
   render() {
@@ -50,11 +36,11 @@ export default class ServersChannel extends HTMLElement {
 
     }
 
-    appState.servers.forEach((data) => {
-        const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
-        ServersCard.setAttribute(ServerAtt.img, data.img);
-        this.ServersList.push(ServersCard);
-    });
+    //appState.servers.forEach((data) => {
+        //const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
+        //ServersCard.setAttribute(ServerAtt.img, data.img);
+        //this.ServersList.push(ServersCard);
+    //});
 
 
     const section1 = this.ownerDocument.createElement("section")
@@ -94,16 +80,16 @@ export default class ServersChannel extends HTMLElement {
     
     
 
-    const DataFriendsOnline = appState.friends.filter((user)=>{
-        return user.mood === "online"
-    })
+    //const DataFriendsOnline = appState.friends.filter((user)=>{
+        //return user.mood === "online"
+    //})
 
-    DataFriendsOnline.forEach((data) => {
-      const FriendsOnCard = this.ownerDocument.createElement("friends-online") as FriendsOnline;
-          FriendsOnCard.setAttribute(FriendsOnAtt.img, data.img);
-          FriendsOnCard.setAttribute(FriendsOnAtt.name, data.name);
-          this.FriendsOnList.push(FriendsOnCard);
-    });
+    //DataFriendsOnline.forEach((data) => {
+      //const FriendsOnCard = this.ownerDocument.createElement("friends-online") as FriendsOnline;
+          //FriendsOnCard.setAttribute(FriendsOnAtt.img, data.img);
+          //FriendsOnCard.setAttribute(FriendsOnAtt.name, data.name);
+          //this.FriendsOnList.push(FriendsOnCard);
+    //});
 
     const membersSection = this.ownerDocument.createElement("section")
     membersSection.className = 'membersSection'

@@ -4,12 +4,9 @@ import { SmallInputsLogin} from "../../mocks/getSmallInputsLogin"
 import SmallInputs, {SmallInputsAtt} from "../../components/SmallInputs/SmallInputs";
 import BigInputs, {BigInputsAtt} from "../../components/BigInputs/BigInputs";
 import LoginDiv from "../../components/LoginDiv/LoginDiv";
-import DescriptionCardLogin  from "../../components/DescriptionCardLogin/DescriptionCardLogin";
+import DescriptionCardLogin  from "../../components/DescriptionCardSignUp/DescriptionCardSignUp";
 import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonSign from "../../components/ButtonSign/ButtonSign";
-import { getPosts } from "../../store/actions";
-import { getFriends } from "../../store/actions";
-import { getServers} from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
 
 export default class SignUp extends HTMLElement {
@@ -22,19 +19,8 @@ export default class SignUp extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-    if (appState.friends.length === 0) {
-      const action = await getFriends();
-      dispatch(action);
-    } if (appState.servers.length === 0) {
-      const actions = await getServers();
-      dispatch(actions);
-    } if (appState.post.length === 0) {
-      const actions = await getPosts();
-      dispatch(actions);
-    } else {
-      this.render();
-    }
+  connectedCallback() {
+    this.render();
   }
 
   render() {

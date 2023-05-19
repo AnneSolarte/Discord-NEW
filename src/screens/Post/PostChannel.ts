@@ -1,6 +1,6 @@
 import PostChannelStyle from "./PostChannel.css";
 import { navigate } from "../../store/actions";
-import { Screens } from "../../types/store";
+import { Screens } from "../../types/navigation";
 import Servers, { ServerAtt } from "../../components/Servers/Servers";
 import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
 import User, { UserAtt } from "../../components/User/user";
@@ -9,9 +9,6 @@ import PostBar from "../../components/PostBar/PostBar";
 import PostCard, { PostCardAtt} from "../../components/PostCard/PostCard";
 import CreatePostBar from "../../components/CreatePostBar/CreatePostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
-import { getPosts } from "../../store/actions";
-import { getFriends } from "../../store/actions";
-import { getServers} from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
 
 
@@ -26,19 +23,8 @@ export default class PostChannel extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-    if (appState.friends.length === 0) {
-      const action = await getFriends();
-      dispatch(action);
-    } if (appState.servers.length === 0) {
-      const actions = await getServers();
-      dispatch(actions);
-    } if (appState.post.length === 0) {
-      const actions = await getPosts();
-      dispatch(actions);
-    } else {
-      this.render();
-    }
+  connectedCallback() {
+    this.render();
   }
 
   render() {
@@ -52,11 +38,11 @@ export default class PostChannel extends HTMLElement {
 
     }
 
-    appState.servers.forEach((data) => {
-        const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
-        ServersCard.setAttribute(ServerAtt.img, data.img);
-        this.ServersList.push(ServersCard);
-    });
+    //appState.servers.forEach((data) => {
+        //const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
+        //ServersCard.setAttribute(ServerAtt.img, data.img);
+        //this.ServersList.push(ServersCard);
+    //});
 
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
@@ -88,14 +74,14 @@ export default class PostChannel extends HTMLElement {
     const createPostBar = this.ownerDocument.createElement("create-post") as CreatePostBar;
     section3.appendChild(createPostBar)
 
-    appState.post.forEach((data) => {
-      const postCard = this.ownerDocument.createElement("post-card") as PostCard;
-      postCard.setAttribute(PostCardAtt.img, data.img);
-      postCard.setAttribute(PostCardAtt.info, data.info);
-      postCard.setAttribute(PostCardAtt.name, data.name);
-      postCard.setAttribute(PostCardAtt.time, data.time);
-      this.PostList.push(postCard);
-    });
+    //appState.post.forEach((data) => {
+      //const postCard = this.ownerDocument.createElement("post-card") as PostCard;
+      //postCard.setAttribute(PostCardAtt.img, data.img);
+      //postCard.setAttribute(PostCardAtt.info, data.info);
+      //postCard.setAttribute(PostCardAtt.name, data.name);
+      //postCard.setAttribute(PostCardAtt.time, data.time);
+      //this.PostList.push(postCard);
+    //});
 
     const PostCards = this.ownerDocument.createElement("div")
     PostCards.className = 'Posts'
