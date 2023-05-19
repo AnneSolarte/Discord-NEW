@@ -69,6 +69,7 @@ export default class Login extends HTMLElement {
     LoginCard.appendChild(BigInputSection);
 
     const buttonLog = this.ownerDocument.createElement("button-log") as ButtonLog;
+    buttonLog.addEventListener("click", this.handleLoginButton);
     LoginCard.appendChild(buttonLog)
     this.shadowRoot?.appendChild(LoginCard);
 
