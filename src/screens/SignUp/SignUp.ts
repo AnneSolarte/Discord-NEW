@@ -9,6 +9,8 @@ import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonSign from "../../components/ButtonSign/ButtonSign";
 import { addObserver, appState, dispatch } from "../../store/index";
 
+const credentials = { email: "", password: "" };
+
 export default class SignUp extends HTMLElement {
     BigInputsList: BigInputs[] = [];
     SmallInputsList: SmallInputs[] = []
