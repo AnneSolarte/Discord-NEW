@@ -60,20 +60,18 @@ const loginUser = async ({
     return signInWithEmailAndPassword(auth, email, password);
   })
   .catch((error) => {
-    // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorCode, errorMessage);
   });
 };
 
-/////////////////////// DB
 
 
 const addProduct = async (product: Omit<Product, "id">) => {
   try {
     const where = collection(db, "products");
-    await addDoc(where, { ...product, createdAt: new Date() }); // add createdAt field
+    await addDoc(where, { ...product, createdAt: new Date() });
     console.log("se añadió con éxito");
   } catch (error) {
     console.error(error);
@@ -82,7 +80,7 @@ const addProduct = async (product: Omit<Product, "id">) => {
 
 
 const getProducts = async () => {
-  const q = query(collection(db, "products"), orderBy("createdAt")); // order by createdAt
+  const q = query(collection(db, "products"), orderBy("createdAt"));
   const querySnapshot = await getDocs(q);
   const transformed: Array<Product> = [];
 
@@ -95,7 +93,7 @@ const getProducts = async () => {
 };
 
 const getProductsListener = (cb: (docs: Product[]) => void) => {
-  const q = query(collection(db, "products"), orderBy("createdAt")); // order by createdAt
+  const q = query(collection(db, "products"), orderBy("createdAt")); 
   onSnapshot(q, (collection) => {
     const docs: Product[] = collection.docs.map((doc) => ({
       id: doc.id,

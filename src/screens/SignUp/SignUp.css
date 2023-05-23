@@ -9,7 +9,7 @@
     justify-content: center;
 }
 
-.LoginCard{
+.SignUpCard{
     display: flex;
     flex-direction: column;
     background-color: rgb(30, 33, 40);
@@ -27,4 +27,27 @@
 .SmallInputSection{
     display: flex;
     flex-direction: row;
+}
+
+
+.SmallInput{
+    width: 30%;
+    color: aliceblue;
+    border: none;
+    background-color: rgb(17, 21, 24);
+    margin-right: 2%;
+    padding: 4%;
+    border-radius: 0.5em;
+
+}
+
+.BigInput{
+    color: aliceblue;
+    border: none;
+    background-color: rgb(17, 21, 24);
+    padding: 4%;
+    border-radius: 0.5em;
+    width: 90%;
+    margin-bottom: 5%;
+
 }

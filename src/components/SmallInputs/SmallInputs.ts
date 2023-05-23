@@ -43,7 +43,7 @@ class SmallInputs extends HTMLElement {
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
                 <div class="SmallInput">
-                    <input class="Input" type="" placeholder="${this.name}">
+                    <input class="Input">
                     <img class="arrowDown" src="/img/arrow_down.png">
                 </div>
                 

@@ -1,7 +1,4 @@
 import LoginStyle from "./Login.css";
-import { BigInputsSignUp } from "../../mocks/getBigInputsSignUp";
-import SmallInputs, {SmallInputsAtt} from "../../components/SmallInputs/SmallInputs";
-import BigInputs, {BigInputsAtt} from "../../components/BigInputs/BigInputs";
 import LoginDiv from "../../components/LoginDiv/LoginDiv";
 import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonLog from "../../components/ButtonLog/ButtonLog";
@@ -15,8 +12,6 @@ import DescriptionCardSignUp from "../../components/DescriptionCardSignUp/Descri
 const credentials = { email: "", password: "" };
 
 export default class Login extends HTMLElement {
-    BigInputsList: BigInputs[] = [];
-    SmallInputsList: SmallInputs[] = []
 
   constructor() {
     super();
