@@ -8,8 +8,11 @@ import DescriptionCardLogin  from "../../components/DescriptionCardSignUp/Descri
 import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonSign from "../../components/ButtonSign/ButtonSign";
 import { addObserver, appState, dispatch } from "../../store/index";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/navigation";
+import Firebase from "../../utils/firebase";
 
-const credentials = { email: "", password: "" };
+const credentials = { email: "", password: "", día: "", mes: "", año: "" };
 
 export default class SignUp extends HTMLElement {
     BigInputsList: BigInputs[] = [];
@@ -23,6 +26,11 @@ export default class SignUp extends HTMLElement {
 
   connectedCallback() {
     this.render();
+  }
+
+  async handleLoginButton() {
+    Firebase.registerUser(credentials);
+    dispatch(navigate(Screens.LOGIN));
   }
 
   render() {
@@ -48,30 +56,68 @@ export default class SignUp extends HTMLElement {
     LoginCard.appendChild(loginDiv)
     this.shadowRoot?.appendChild(LoginCard);
 
-    BigInputsLogin.forEach((data) => {
-        const BigInputs = this.ownerDocument.createElement("big-input") as BigInputs;
-        BigInputs.setAttribute(BigInputsAtt.name, data.name);
-        this.BigInputsList.push(BigInputs);
-    });
+    const InputSection = this.ownerDocument.createElement("section")
+    InputSection.className = 'BigInputSection'
 
-    const BigInputSection = this.ownerDocument.createElement("section")
-    BigInputSection.className = 'BigInputSection'
-    this.BigInputsList.forEach((ServersCard) => {
-        BigInputSection.appendChild(ServersCard)
-    });
-    LoginCard.appendChild(BigInputSection);
+    const email = this.ownerDocument.createElement("input");
+    email.placeholder = "Email";
+    email.className = "BigInput"
+    email.type = "email";
+    email.addEventListener(
+      "change",
+      (e: any) => (credentials.email = e.target.value)
+    );
+    InputSection.appendChild(email);
 
-    SmallInputsLogin.forEach((data) => {
-        const SmallInputs = this.ownerDocument.createElement("small-input") as SmallInputs;
-        SmallInputs.setAttribute(SmallInputsAtt.name, data.name);
-        this.SmallInputsList.push(SmallInputs);
-    });
+    const password = this.ownerDocument.createElement("input");
+    password.placeholder = "Password";
+    password.className = "BigInput"
+    password.type = "password";
+    password.addEventListener(
+      "change",
+      (e: any) => (credentials.password = e.target.value)
+    );
+    InputSection.appendChild(password);
+    LoginCard.appendChild(InputSection)
+
 
     const SmallInputSection = this.ownerDocument.createElement("section")
     SmallInputSection.className = 'SmallInputSection'
-    this.SmallInputsList.forEach((ServersCard) => {
-        SmallInputSection.appendChild(ServersCard)
-    });
+
+    const día = this.ownerDocument.createElement("input");
+    día.placeholder = "día";
+    día.className = "SmallInput"
+    día.type = "día";
+    día.addEventListener(
+      "change",
+      (e: any) => (credentials.día = e.target.value)
+    );
+    SmallInputSection.appendChild(día);
+
+    const mes = this.ownerDocument.createElement("input");
+    mes.placeholder = "mes";
+    mes.className = "SmallInput"
+    mes.type = "mes";
+    mes.addEventListener(
+      "change",
+      (e: any) => (credentials.mes = e.target.value)
+    );
+    SmallInputSection.appendChild(mes);
+
+    const año = this.ownerDocument.createElement("input");
+    año.placeholder = "año";
+    año.className = "SmallInput"
+    año.type = "año";
+    año.addEventListener(
+      "change",
+      (e: any) => (credentials.año = e.target.value)
+    );
+    SmallInputSection.appendChild(año);
+
+    LoginCard.appendChild(SmallInputSection)
+
+
+
     LoginCard.appendChild(SmallInputSection);
 
     
@@ -81,6 +127,7 @@ export default class SignUp extends HTMLElement {
     this.shadowRoot?.appendChild(LoginCard);
 
     const buttonSign = this.ownerDocument.createElement("button-sign") as ButtonSign;
+    buttonSign.addEventListener("click", this.handleLoginButton);
     LoginCard.appendChild(buttonSign)
     this.shadowRoot?.appendChild(LoginCard);
 
