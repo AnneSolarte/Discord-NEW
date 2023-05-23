@@ -30,7 +30,7 @@ export default class Login extends HTMLElement {
 
   async handleLoginButton() {
     Firebase.loginUser(credentials);
-    dispatch(navigate(Screens.DASHBOARD));
+    dispatch(navigate(Screens.HOME));
 
   }
 
@@ -55,23 +55,33 @@ export default class Login extends HTMLElement {
     LoginCard.appendChild(loginDiv)
     this.shadowRoot?.appendChild(LoginCard);
 
-    BigInputsSignUp.forEach((data) => {
-        const BigInputs = this.ownerDocument.createElement("big-input") as BigInputs;
-        BigInputs.setAttribute(BigInputsAtt.name, data.name);
-        this.BigInputsList.push(BigInputs);
-    });
+    const InputSection = this.ownerDocument.createElement("section")
+    InputSection.className = 'BigInputSection'
 
-    const BigInputSection = this.ownerDocument.createElement("section")
-    BigInputSection.className = 'BigInputSection'
-    this.BigInputsList.forEach((ServersCard) => {
-        BigInputSection.appendChild(ServersCard)
-    });
-    LoginCard.appendChild(BigInputSection);
+    const email = this.ownerDocument.createElement("input");
+    email.placeholder = "Email";
+    email.className = "BigInput"
+    email.type = "email";
+    email.addEventListener(
+      "change",
+      (e: any) => (credentials.email = e.target.value)
+    );
+    InputSection.appendChild(email);
+
+    const password = this.ownerDocument.createElement("input");
+    password.placeholder = "Password";
+    password.className = "BigInput"
+    password.type = "password";
+    password.addEventListener(
+      "change",
+      (e: any) => (credentials.password = e.target.value)
+    );
+    InputSection.appendChild(password);
+    LoginCard.appendChild(InputSection)
 
     const buttonLog = this.ownerDocument.createElement("button-log") as ButtonLog;
     buttonLog.addEventListener("click", this.handleLoginButton);
     LoginCard.appendChild(buttonLog)
-    this.shadowRoot?.appendChild(LoginCard);
 
     const descLogin = this.ownerDocument.createElement("description-signup") as DescriptionCardSignUp;
     LoginCard.appendChild(descLogin)

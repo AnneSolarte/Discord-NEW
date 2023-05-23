@@ -1,9 +1,3 @@
-
-import { navigate } from "../../store/actions";
-import { addObserver, appState, dispatch } from "../../store/index";
-import { Screens } from "../../types/navigation";
-import Firebase from "../../utils/firebase";
-
 import ButtonLogStyle from "./ButtonLog.css"
 class ButtonLog extends HTMLElement {
     button?: HTMLElement;
