@@ -6,9 +6,13 @@ import { auth } from "../utils/firebase";
 import { navigate, setUserCredentials } from "./actions";
 
 onAuthStateChanged(auth, (user) => {
-  console.log(user)
+  console.log('Entra');
+  console.log('user',user)
   if (user) {
-    user.email !== null ? dispatch(setUserCredentials(user.email)) : ''
+    user.email !== null ? dispatch(setUserCredentials(user.email)) : '';
+    dispatch(navigate(Screens.DASHBOARD));
+  } else {
+    dispatch(navigate(Screens.LOGIN));
   }
 });
 
