@@ -1,3 +1,4 @@
+import { appState } from "../../store";
 import UserStyle from "./user.css"
 
 export enum UserAtt {
@@ -50,7 +51,7 @@ class User extends HTMLElement {
                 <div class="sectionUser">
                     <img id="userImg" src="/img/user.png">
                     <div class="sectionUserData">
-                        <p class="userText">AnneSunart</p>
+                        <p class="userText">${appState.user} </p>
                         <p class="userText">#1299</p>
                     </div>
                     <img id="configImg" src="/img/config.png">

@@ -24,12 +24,7 @@ export default class Login extends HTMLElement {
   }
 
   async handleLoginButton() {
-    const user = await Firebase.registerUser(credentials);
-    console.log(user);
-    if(user) {
-      dispatch(navigate(Screens.LOGIN)) 
-      sessionStorage.clear();
-    };
+    Firebase.loginUser(credentials);
   }
 
   render() {

@@ -10,9 +10,9 @@ onAuthStateChanged(auth, (user) => {
   console.log('user',user)
   if (user) {
     user.email !== null ? dispatch(setUserCredentials(user.email)) : '';
-    dispatch(navigate(Screens.DASHBOARD));
+    dispatch(navigate(Screens.HOME));
   } else {
-    dispatch(navigate(Screens.LOGIN));
+    dispatch(navigate(Screens.DASHBOARD));
   }
 });
 

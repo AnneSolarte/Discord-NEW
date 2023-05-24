@@ -1,6 +1,4 @@
 import HomeStyle from "./Home.css";
-import { navigate } from "../../store/actions";
-import { Screens } from "../../types/navigation";
 import Servers, { ServerAtt } from "../../components/Servers/Servers";
 import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
 import Friends, { FriendsAtt } from "../../components/Friends/Friends";
@@ -8,6 +6,9 @@ import User from "../../components/User/user"
 import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { addObserver, appState, dispatch } from "../../store/index";
+import { setUserCredentials } from "../../store/actions";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/navigation";
 
 export default class Home extends HTMLElement {
   ServersList: Servers[] = [];
@@ -22,6 +23,15 @@ export default class Home extends HTMLElement {
 
   connectedCallback() {
     this.render();
+  }
+
+  logOutUser(){
+    if(appState.user !== null || ''){
+      dispatch(setUserCredentials(''));
+      sessionStorage.clear();
+      dispatch(navigate(Screens.LOGIN));
+      location.reload();
+    }
   }
 
   render() {
@@ -100,6 +110,14 @@ export default class Home extends HTMLElement {
     section3.className = 'Section3'
     const friendsOnDiv = this.ownerDocument.createElement("friends-ondiv") as FriendsOnDiv;
     section3.appendChild(friendsOnDiv)
+
+    const logOut = this.ownerDocument.createElement("button");
+    logOut.innerText = "Log Out";
+    logOut.className = "ButtonLogOut"
+    logOut.addEventListener("click", this.logOutUser)
+    section3.appendChild(logOut);
+
+    
     this.shadowRoot?.appendChild(section3);
 
 

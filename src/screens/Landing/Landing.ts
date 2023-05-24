@@ -7,6 +7,7 @@ import LandingText from "../../components/LandingText/LandingText";
 import ButtonSignUp from "../../components/ButtonSignUp/ButtonSignUp";
 import ButtonLogin from "../../components/ButtonLogin/ButtonLogin";
 
+
 export default class Landing extends HTMLElement {
 
   constructor() {
@@ -19,6 +20,7 @@ export default class Landing extends HTMLElement {
     this.render()
   }
 
+  
   render() {
     
     if (this.shadowRoot) {
@@ -52,6 +54,9 @@ export default class Landing extends HTMLElement {
     buttons.appendChild(buttonSignUp);
 
     container.appendChild(buttons);
+
+    
+
 
     this.shadowRoot?.appendChild(container);
 

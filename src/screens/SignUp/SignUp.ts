@@ -23,8 +23,12 @@ export default class SignUp extends HTMLElement {
   }
 
   async handleSignUpButton() {
-    Firebase.registerUser(credentials);
-    dispatch(navigate(Screens.LOGIN));
+    const user = await Firebase.registerUser(credentials);
+    console.log(user);
+    if(user) {
+      dispatch(navigate(Screens.LOGIN)) 
+      sessionStorage.clear();
+    };
   }
 
   render() {

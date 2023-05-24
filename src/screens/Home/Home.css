@@ -67,3 +67,16 @@
     background-color: rgb(46, 50, 56);
 }
 
+.ButtonLogOut{
+    width: 6%;
+    display: flex;
+    align-self: center;
+    background-color: rgb(10, 176, 176);
+    color: aliceblue;
+    align-items: center;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5%;
+    margin: 2%;
+}
+
