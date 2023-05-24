@@ -47,14 +47,14 @@ export default class Home extends HTMLElement {
 
     }
 
-    //appState.servers.forEach((data) => {
-        //const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
-        //ServersCard.setAttribute(ServerAtt.img, data.img);
-        //ServersCard.addEventListener("click", () => {
-          //dispatch(navigate(Screens.SERVERS));
-        //});
-        //this.ServersList.push(ServersCard);
-    //});
+    const section1 = this.ownerDocument.createElement("section")
+    section1.className = 'Section1'
+
+    const iconHome = this.ownerDocument.createElement("img")
+    iconHome.className = "IconHome"
+    iconHome.src= "/img/Server0.png"
+
+    section1.appendChild(iconHome)
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
@@ -62,8 +62,7 @@ export default class Home extends HTMLElement {
     section2.appendChild(FriendsDiv)
     this.shadowRoot?.appendChild(section2);
 
-    const section1 = this.ownerDocument.createElement("section")
-    section1.className = 'Section1'
+    
 
     const ServersCards = this.ownerDocument.createElement("div")
     ServersCards.className = 'ServerSection'
