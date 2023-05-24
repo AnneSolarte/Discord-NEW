@@ -51,10 +51,24 @@ export default class Home extends HTMLElement {
     section1.className = 'Section1'
 
     const iconHome = this.ownerDocument.createElement("img")
-    iconHome.className = "IconHome"
+    iconHome.className = "Icon"
     iconHome.src= "/img/Server0.png"
-
     section1.appendChild(iconHome)
+
+    const servers = this.ownerDocument.createElement("section")
+    servers.className = 'servers'
+    section1.appendChild(servers)
+
+    const iconAdd = this.ownerDocument.createElement("img")
+    iconAdd.className = "Icon"
+    iconAdd.src= "/img/Server01.png"
+    section1.appendChild(iconAdd)
+
+    const iconSearch = this.ownerDocument.createElement("img")
+    iconSearch.className = "Icon"
+    iconSearch.src= "/img/Server02.png"
+    section1.appendChild(iconSearch)
+
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
