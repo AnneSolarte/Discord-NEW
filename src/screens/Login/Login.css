@@ -15,9 +15,8 @@
     background-color: rgb(30, 33, 40);
     border-radius: 1.5em;
     width: 30%;
-    height: 45%;
-
-    padding: 1%;
+    height: 48%;
+    padding: 2.2%;
 
 }
 
@@ -47,6 +46,7 @@
     width: 95%;
     justify-content: center;
     align-items: center;
+
 }
 
 .Link{
@@ -55,4 +55,9 @@
     display: flex;
     color: rgb(46, 188, 197);
     margin-left: 3%;
+}
+
+
+.iconArrow{
+    width: 5%;
 }

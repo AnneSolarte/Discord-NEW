@@ -36,6 +36,9 @@ export default class SignUp extends HTMLElement {
     dispatch(navigate(Screens.LOGIN))
   }
 
+  backWindow(){
+    dispatch(navigate(Screens.DASHBOARD))
+  }
 
   render() {
     
@@ -52,6 +55,12 @@ export default class SignUp extends HTMLElement {
 
     const SignUpCard = this.ownerDocument.createElement("section")
     SignUpCard.className = 'SignUpCard'
+
+    const icon = this.ownerDocument.createElement("img")
+    icon.src = "/img/arrow_left.png"
+    icon.className = "iconArrow"
+    icon.addEventListener("click", this.backWindow);
+    SignUpCard.appendChild(icon)
 
     const loginDiv = this.ownerDocument.createElement("login-div") as LoginDiv;
     SignUpCard.appendChild(loginDiv)

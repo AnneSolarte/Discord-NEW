@@ -1,6 +1,5 @@
 import LoginStyle from "./Login.css";
 import LoginDiv from "../../components/LoginDiv/LoginDiv";
-import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonLog from "../../components/ButtonLog/ButtonLog";
 import { navigate } from "../../store/actions";
 import Firebase from "../../utils/firebase";
@@ -34,6 +33,9 @@ export default class Login extends HTMLElement {
     dispatch(navigate(Screens.SIGNUP))
   }
 
+  backWindow(){
+    dispatch(navigate(Screens.DASHBOARD))
+  }
 
   render() {
     
@@ -51,6 +53,12 @@ export default class Login extends HTMLElement {
 
     const LoginCard = this.ownerDocument.createElement("section")
     LoginCard.className = 'LoginCard'
+
+    const icon = this.ownerDocument.createElement("img")
+    icon.src = "/img/arrow_left.png"
+    icon.className = "iconArrow"
+    icon.addEventListener("click", this.backWindow);
+    LoginCard.appendChild(icon)
 
     const loginDiv = this.ownerDocument.createElement("login-div") as LoginDiv;
     LoginCard.appendChild(loginDiv)
