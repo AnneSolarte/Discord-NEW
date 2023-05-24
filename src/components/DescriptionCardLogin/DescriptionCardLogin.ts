@@ -11,16 +11,14 @@ class DescriptionCardLogin extends HTMLElement {
     connectedCallback() {
         this.render();
     }
-    
+
     render() {
 
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                <div class="DescriptionDiv">
                     <p class="text">Do you already have an account?</p>
-                    <p><a class="link" href="https://example.com">Login</a></p>
-                </div>
                 `;
+                
             }
 
             const css = this.ownerDocument.createElement("style");

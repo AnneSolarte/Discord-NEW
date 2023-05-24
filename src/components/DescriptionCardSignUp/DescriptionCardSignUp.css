@@ -1,19 +1,8 @@
-.DescriptionDiv{
-    display: flex;
-    flex-direction: row;
-    width: 95%;
-    align-items: center;
-    justify-content: center;
-}
 
 .text{
+    width: 100%;
     color: aliceblue;
     font-size: smaller;
     margin-left: 5%;
 }
 
-.link{
-    display: flex;
-    color: rgb(46, 188, 197);
-    margin-left: 3%;
-}

@@ -17,15 +17,23 @@ export default class Login extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     addObserver(this);
+    
   }
 
   connectedCallback() {
     this.render();
+    console.log('AppState',appState.user);
   }
 
   async handleLoginButton() {
     Firebase.loginUser(credentials);
+    console.log(appState.user)
   }
+
+  changeWindow(){
+    dispatch(navigate(Screens.SIGNUP))
+  }
+
 
   render() {
     
@@ -76,9 +84,21 @@ export default class Login extends HTMLElement {
     buttonLog.addEventListener("click", this.handleLoginButton);
     LoginCard.appendChild(buttonLog)
 
+    const DescriptionDiv = this.ownerDocument.createElement("section")
+    DescriptionDiv.className = "DescriptionDiv"
+
     const descLogin = this.ownerDocument.createElement("description-signup") as DescriptionCardSignUp;
-    LoginCard.appendChild(descLogin)
+    DescriptionDiv.appendChild(descLogin)
+
+    const buttonSignUp = this.ownerDocument.createElement("button");
+    buttonSignUp.innerText = "SignUp"
+    buttonSignUp.className = "Link"
+    buttonSignUp.addEventListener("click", this.changeWindow);
+    DescriptionDiv.appendChild(buttonSignUp)
+
+    LoginCard.appendChild(DescriptionDiv)
     this.shadowRoot?.appendChild(LoginCard);
+
 
     container.appendChild(LoginCard);
     this.shadowRoot?.appendChild(container);

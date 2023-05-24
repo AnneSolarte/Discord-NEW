@@ -41,3 +41,18 @@
     margin-bottom: 5%;
 
 }
+.DescriptionDiv{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+}
+
+.Link{
+    background-color: rgba(240, 248, 255, 0);
+    border: none;
+    display: flex;
+    color: rgb(46, 188, 197);
+    margin-left: 3%;
+}

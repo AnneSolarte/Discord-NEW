@@ -27,11 +27,14 @@
 .SmallInputSection{
     display: flex;
     flex-direction: row;
+    align-items: center;
+
 }
 
 
 .SmallInput{
-    width: 30%;
+    width: 50%;
+    height: 20px;
     color: aliceblue;
     border: none;
     background-color: rgb(17, 21, 24);
@@ -42,12 +45,32 @@
 }
 
 .BigInput{
-    color: aliceblue;
     border: none;
+    color: aliceblue;
     background-color: rgb(17, 21, 24);
     padding: 4%;
     border-radius: 0.5em;
     width: 90%;
     margin-bottom: 5%;
 
+}
+.TextBirthday{
+    color: rgba(254, 254, 254, 0.277);
+    margin-left: 5%;
+    margin-right: 20%;
+}
+.DescriptionDiv{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+}
+
+.Link{
+    background-color: rgba(240, 248, 255, 0);
+    border: none;
+    display: flex;
+    color: rgb(46, 188, 197);
+    margin-left: 3%;
 }

@@ -16,10 +16,7 @@ class DescriptionCardSignUp extends HTMLElement {
 
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                <div class="DescriptionDiv">
                     <p class="text">You need an account?</p>
-                    <p><a class="link" href="">SignUp</a></p>
-                </div>
                 `;
             }
 

@@ -3,12 +3,13 @@ import LoginDiv from "../../components/LoginDiv/LoginDiv";
 import DescriptionCardLogin  from "../../components/DescriptionCardSignUp/DescriptionCardSignUp";
 import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonSign from "../../components/ButtonSign/ButtonSign";
+import { ButtonLog } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import Firebase from "../../utils/firebase";
 
-const credentials = { email: "", password: "", día: "", mes: "", año: "", CheckBox: false };
+const credentials = { email: "", password: "" };
 
 export default class SignUp extends HTMLElement {
 
@@ -30,6 +31,11 @@ export default class SignUp extends HTMLElement {
       sessionStorage.clear();
     };
   }
+
+  changeWindow(){
+    dispatch(navigate(Screens.LOGIN))
+  }
+
 
   render() {
     
@@ -73,42 +79,8 @@ export default class SignUp extends HTMLElement {
       (e: any) => (credentials.password = e.target.value)
     );
     InputSection.appendChild(password);
+
     SignUpCard.appendChild(InputSection)
-
-
-    // const SmallInputSection = this.ownerDocument.createElement("section")
-    // SmallInputSection.className = 'SmallInputSection'
-
-    // const día = this.ownerDocument.createElement("input");
-    // día.placeholder = "Día";
-    // día.className = "SmallInput"
-    // día.type = "number";
-    // día.addEventListener(
-    //   "change",
-    //   (e: any) => (credentials.día = e.target.value)
-    // );
-    // SmallInputSection.appendChild(día);
-
-    // const mes = this.ownerDocument.createElement("input");
-    // mes.placeholder = "Mes";
-    // mes.className = "SmallInput"
-    // mes.type = "number";
-    // mes.addEventListener(
-    //   "change",
-    //   (e: any) => (credentials.mes = e.target.value)
-    // );
-    // SmallInputSection.appendChild(mes);
-
-    // const año = this.ownerDocument.createElement("input");
-    // año.placeholder = "Año";
-    // año.className = "SmallInput"
-    // año.type = "number";
-    // año.addEventListener(
-    //   "change",
-    //   (e: any) => (credentials.año = e.target.value)
-    // );
-    // SmallInputSection.appendChild(año);
-    // SignUpCard.appendChild(SmallInputSection)
 
     const checkBoxLogin = this.ownerDocument.createElement("checkbox-login") as CheckBoxLogin;
 
@@ -120,8 +92,19 @@ export default class SignUp extends HTMLElement {
     SignUpCard.appendChild(buttonSign)
     this.shadowRoot?.appendChild(SignUpCard);
 
+    const DescriptionDiv = this.ownerDocument.createElement("section")
+    DescriptionDiv.className = "DescriptionDiv"
+
     const descLogin = this.ownerDocument.createElement("description-login") as DescriptionCardLogin;
-    SignUpCard.appendChild(descLogin)
+    DescriptionDiv.appendChild(descLogin)
+
+    const buttonLog = this.ownerDocument.createElement("button");
+    buttonLog.innerText = "Login"
+    buttonLog.className = "Link"
+    buttonLog.addEventListener("click", this.changeWindow);
+    DescriptionDiv.appendChild(buttonLog)
+
+    SignUpCard.appendChild(DescriptionDiv)
     this.shadowRoot?.appendChild(SignUpCard);
 
     container.appendChild(SignUpCard);

@@ -45,13 +45,16 @@ class User extends HTMLElement {
         }
 
         render() {
+            
+            const userName = String(appState.user).slice(0, -10)
+            
 
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
                 <div class="sectionUser">
                     <img id="userImg" src="/img/user.png">
                     <div class="sectionUserData">
-                        <p class="userText">${appState.user} </p>
+                        <p class="userText">${userName} </p>
                         <p class="userText">#1299</p>
                     </div>
                     <img id="configImg" src="/img/config.png">
