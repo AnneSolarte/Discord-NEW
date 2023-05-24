@@ -11,12 +11,13 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD_zIJkKWOgeTTH-h-Fg1N-XxN8nB1Njyc",
-  authDomain: "datanne-22e55.firebaseapp.com",
-  projectId: "datanne-22e55",
-  storageBucket: "datanne-22e55.appspot.com",
-  messagingSenderId: "1035883490519",
-  appId: "1:1035883490519:web:4eccde8a2e108c8a46d492"
+  apiKey: "AIzaSyCwvZQAdJoW9EkcIsAK1K3nb8oLFhYP4oE",
+  authDomain: "data-disc.firebaseapp.com",
+  projectId: "data-disc",
+  storageBucket: "data-disc.appspot.com",
+  messagingSenderId: "876012131135",
+  appId: "1:876012131135:web:6e5bfa12f0586c4a2a398a",
+  measurementId: "G-NS7YJQP8MY"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -44,6 +45,7 @@ const registerUser = async ({
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorCode, errorMessage);
+    console.log("ERROR AL REGISTRAR")
     return false;
   }
 };
