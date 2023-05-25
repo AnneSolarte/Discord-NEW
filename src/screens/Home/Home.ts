@@ -4,8 +4,9 @@ import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/Frie
 import Friends, { FriendsAtt } from "../../components/Friends/Friends";
 import User from "../../components/User/user"
 import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
+import {CheckBoxText} from "../../components/export";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
-import { CreateChannelPop, TextCanalDiv } from "../../components/export";
+import { TextCanalDiv } from "../../components/export";
 import {ForumCanalDiv} from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
 import { setUserCredentials } from "../../store/actions";
@@ -51,11 +52,13 @@ export default class Home extends HTMLElement {
       
         const css = this.ownerDocument.createElement("style");
         css.innerHTML = HomeStyle;
-        this.shadowRoot?.appendChild(css);
-
-        
+        this.shadowRoot?.appendChild(css);   
 
     }
+    const capa = this.ownerDocument.createElement("section")
+    capa.className = 'capa'
+
+    this.shadowRoot?.appendChild(capa);
 
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
@@ -72,10 +75,11 @@ export default class Home extends HTMLElement {
 
     const iconAdd = this.ownerDocument.createElement("img")
     iconAdd.className = "Icon"
-    iconAdd.src= "/img/Server01.png"
+    iconAdd.src = "/img/Server01.png"
     iconAdd.addEventListener("click", () =>{
       console.log("Mostrando")
       CreateChannelPop.style.display = 'flex';
+      capa.style.display = "flex"
     })
     section1.appendChild(iconAdd)
 
@@ -126,10 +130,67 @@ export default class Home extends HTMLElement {
     logOut.addEventListener("click", this.logOutUser)
     section3.appendChild(logOut);
 
-    const CreateChannelPop = this.ownerDocument.createElement("create-channel") as CreateChannelPop;
 
-    section3.appendChild(CreateChannelPop)
+    //CreateChannelPopUp
+    const CreateChannelPop = this.ownerDocument.createElement("section")
+    CreateChannelPop.className = 'CreateChannelPop'
+
+    const tittle = this.ownerDocument.createElement("h1")
+    tittle.textContent = "Create Channel"
+    CreateChannelPop.appendChild(tittle)
+
+    const text = this.ownerDocument.createElement("p")
+    text.textContent = "Select a type of channel to create and enjoy"
+    CreateChannelPop.appendChild(text)
+
+    const channels = this.ownerDocument.createElement("section")
+    channels.className = 'channels'
+
+    const channelText = this.ownerDocument.createElement("section")
+    channelText.className = 'channelText'
+  
+    const TextCanalDiv = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
+    channelText.appendChild(TextCanalDiv);
+
+    const checkboxText = this.ownerDocument.createElement("checkbox-text") as CheckBoxText;
+    channelText.appendChild(checkboxText);
+
+    channels.appendChild(channelText);
+
+    const ForumCanalDiv = this.ownerDocument.createElement("forum-canal") as ForumCanalDiv;
+    channels.appendChild(ForumCanalDiv);
+
+    CreateChannelPop.appendChild(channels)
+
+    const channelName = this.ownerDocument.createElement("input")
+    channelName.type = "text"
+    channelName.className = "ChannelNameInput"
+    channelName.placeholder = "Channel Name"
+    CreateChannelPop.appendChild(channelName);
+
+    const buttons = this.ownerDocument.createElement("section")
+    buttons.className = 'buttons'
+    
+    const CancelButton = this.ownerDocument.createElement("button");
+    CancelButton.innerText = "Cancel";
+    CancelButton.className = "CancelButton"
+    CancelButton.addEventListener("click", () =>{
+        CreateChannelPop.style.display = 'none';
+        capa.style.display = "none"
+    })
+    buttons.appendChild(CancelButton);
+
+    const DoneButton = this.ownerDocument.createElement("button");
+    DoneButton.innerText = "Done";
+    DoneButton.className = "DoneButton"
+    DoneButton.addEventListener("click", this.CreateChannel)
+    buttons.appendChild(DoneButton);
+    
+    CreateChannelPop.appendChild(buttons)
+
+    this.shadowRoot?.appendChild(CreateChannelPop);
     this.shadowRoot?.appendChild(section3);
+    
 
     const section4 = this.ownerDocument.createElement("section")
     section4.className = 'Section4'
