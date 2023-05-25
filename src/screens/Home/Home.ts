@@ -5,6 +5,8 @@ import Friends, { FriendsAtt } from "../../components/Friends/Friends";
 import User from "../../components/User/user"
 import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
+import { CreateChannelPop, TextCanalDiv } from "../../components/export";
+import {ForumCanalDiv} from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
 import { setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
@@ -34,6 +36,14 @@ export default class Home extends HTMLElement {
     }
   }
 
+  BackWindow(){
+
+  }
+
+  CreateChannel(){
+
+  }
+
   render() {
     
     if (this.shadowRoot) {
@@ -53,6 +63,7 @@ export default class Home extends HTMLElement {
     const iconHome = this.ownerDocument.createElement("img")
     iconHome.className = "Icon"
     iconHome.src= "/img/Server0.png"
+    
     section1.appendChild(iconHome)
 
     const servers = this.ownerDocument.createElement("section")
@@ -62,6 +73,10 @@ export default class Home extends HTMLElement {
     const iconAdd = this.ownerDocument.createElement("img")
     iconAdd.className = "Icon"
     iconAdd.src= "/img/Server01.png"
+    iconAdd.addEventListener("click", () =>{
+      console.log("Entrando")
+      CreateChannelPop.style.display = 'flex';
+    })
     section1.appendChild(iconAdd)
 
     const iconSearch = this.ownerDocument.createElement("img")
@@ -86,31 +101,12 @@ export default class Home extends HTMLElement {
     section1.appendChild(ServersCards)
     this.shadowRoot?.appendChild(section1);
 
-    //appState.friends.forEach((data) => {
-        //const FriendsCard = this.ownerDocument.createElement("my-friends") as Friends;
-        //FriendsCard.setAttribute(FriendsAtt.img, data.img);
-        //FriendsCard.setAttribute(FriendsAtt.name, data.name);
-        //FriendsCard.setAttribute(FriendsAtt.mood, data.mood);
-        //this.FriendsList.push(FriendsCard);
-    //});
-
     const FriendsCards = this.ownerDocument.createElement("div")
     FriendsCards.className = 'FriendSection'
     this.FriendsList.forEach((FriendsCard) => {
         FriendsCards.appendChild(FriendsCard)
     });
     this.shadowRoot?.appendChild(FriendsCards);
-
-    //const DataFriendsOnline = appState.friends.filter((user)=>{
-        //return user.mood === "online"
-    //})
-
-    //DataFriendsOnline.forEach((data) => {
-      //const FriendsOnCard = this.ownerDocument.createElement("friends-online") as FriendsOnline;
-          //FriendsOnCard.setAttribute(FriendsOnAtt.img, data.img);
-          //FriendsOnCard.setAttribute(FriendsOnAtt.name, data.name);
-          //this.FriendsOnList.push(FriendsOnCard);
-    //});
 
     const FriendsOnCards = this.ownerDocument.createElement("div")
     FriendsOnCards.className = 'FriendOnSection'
@@ -130,9 +126,10 @@ export default class Home extends HTMLElement {
     logOut.addEventListener("click", this.logOutUser)
     section3.appendChild(logOut);
 
-    
-    this.shadowRoot?.appendChild(section3);
+    const CreateChannelPop = this.ownerDocument.createElement("create-channel") as CreateChannelPop;
 
+    section3.appendChild(CreateChannelPop)
+    this.shadowRoot?.appendChild(section3);
 
     const section4 = this.ownerDocument.createElement("section")
     section4.className = 'Section4'
@@ -140,8 +137,7 @@ export default class Home extends HTMLElement {
     section4.appendChild(user)
     this.shadowRoot?.appendChild(section4);
 
-    
-  
+
   }
 }
 

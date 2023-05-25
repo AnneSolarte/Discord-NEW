@@ -16,14 +16,8 @@ class ForumCanalDiv extends HTMLElement {
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
                     <div class="ForumCanalDiv">
-                        <div class="ForumCanalDiv2">
                             <img class="Icon" src="/img/Forum_icon.png">
                             <p>General</p>
-                        </div>
-                        // <div class="ForumCanalDiv3">
-                        //     <img class="Icon" src="/img/config_icon.png">
-                        //     <img class="Icon" src="/img/user_icon.png">
-                        // </div>
                     </div>
                 `;
             }

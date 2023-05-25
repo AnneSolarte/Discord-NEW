@@ -1,6 +1,6 @@
-import CanalDivStyle from "./CanalDiv.css"
+import TextCanalDivStyle from "./TextCanalDiv.css"
 
-class CanalDiv extends HTMLElement {
+class TextCanalDiv extends HTMLElement {
 
     constructor() {
         super();
@@ -15,26 +15,20 @@ class CanalDiv extends HTMLElement {
 
             if (this.shadowRoot) {
                 this.shadowRoot.innerHTML = `
-                    <div class="CanalDiv">
-                        <div class="canalDiv2">
+                    <div class="TextCanalDiv">
                             <img class="Icon" src="/img/numeral.png">
                             <p>General</p>
-                        </div>
-                        // <div class="canalDiv3">
-                        //     <img class="Icon" src="/img/config_icon.png">
-                        //     <img class="Icon" src="/img/user_icon.png">
-                        // </div>
                     </div>
                 `;
             }
 
             const css = this.ownerDocument.createElement("style");
-            css.innerHTML = CanalDivStyle;
+            css.innerHTML = TextCanalDivStyle;
             this.shadowRoot?.appendChild(css);
 
             
         }
 }
 
-customElements.define("text-canal", CanalDiv);
-export default CanalDiv;
+customElements.define("text-canal", TextCanalDiv);
+export default TextCanalDiv;
