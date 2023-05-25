@@ -1,5 +1,5 @@
 import CreateChannelPopStyle from "./CreateChannelPop.css"
-import { TextCanalDiv } from "../export";
+import { CheckBoxText, TextCanalDiv } from "../export";
 import {ForumCanalDiv} from "../export";
 
 class CreateChannelPop extends HTMLElement {
@@ -28,8 +28,17 @@ class CreateChannelPop extends HTMLElement {
     const channels = this.ownerDocument.createElement("section")
     channels.className = 'channels'
 
+    
+    const channelText = this.ownerDocument.createElement("section")
+    channelText.className = 'channelText'
+  
     const TextCanalDiv = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
-    channels.appendChild(TextCanalDiv);
+    channelText.appendChild(TextCanalDiv);
+
+    const checkboxText = this.ownerDocument.createElement("checkbox-text") as CheckBoxText;
+    channelText.appendChild(checkboxText);
+
+    channels.appendChild(channelText);
 
     const ForumCanalDiv = this.ownerDocument.createElement("forum-canal") as ForumCanalDiv;
     channels.appendChild(ForumCanalDiv);

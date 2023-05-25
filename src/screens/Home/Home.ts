@@ -74,7 +74,7 @@ export default class Home extends HTMLElement {
     iconAdd.className = "Icon"
     iconAdd.src= "/img/Server01.png"
     iconAdd.addEventListener("click", () =>{
-      console.log("Entrando")
+      console.log("Mostrando")
       CreateChannelPop.style.display = 'flex';
     })
     section1.appendChild(iconAdd)
