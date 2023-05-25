@@ -38,12 +38,6 @@ export default class PostChannel extends HTMLElement {
 
     }
 
-    //appState.servers.forEach((data) => {
-        //const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
-        //ServersCard.setAttribute(ServerAtt.img, data.img);
-        //this.ServersList.push(ServersCard);
-    //});
-
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
 
@@ -73,15 +67,6 @@ export default class PostChannel extends HTMLElement {
 
     const createPostBar = this.ownerDocument.createElement("create-post") as CreatePostBar;
     section3.appendChild(createPostBar)
-
-    //appState.post.forEach((data) => {
-      //const postCard = this.ownerDocument.createElement("post-card") as PostCard;
-      //postCard.setAttribute(PostCardAtt.img, data.img);
-      //postCard.setAttribute(PostCardAtt.info, data.info);
-      //postCard.setAttribute(PostCardAtt.name, data.name);
-      //postCard.setAttribute(PostCardAtt.time, data.time);
-      //this.PostList.push(postCard);
-    //});
 
     const PostCards = this.ownerDocument.createElement("div")
     PostCards.className = 'Posts'

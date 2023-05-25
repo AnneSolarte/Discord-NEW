@@ -23,16 +23,6 @@ class ServerDiv extends HTMLElement {
                         <p>TEXT CHANNELS</p>
                         <img class="masIcon"src="/img/mas.png">
                     </div>
-                    <div class="CanalDiv">
-                        <div class="canalDiv2">
-                            <img class="Icon" src="/img/numeral.png">
-                            <p>General</p>
-                        </div>
-                        <div class="canalDiv3">
-                            <img class="Icon" src="/img/config_icon.png">
-                            <img class="Icon" src="/img/user_icon.png">
-                        </div>
-                    </div>
                 </div>
                 `;
             }

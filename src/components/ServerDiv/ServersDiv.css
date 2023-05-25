@@ -37,13 +37,7 @@
 }
 
 
-.CanalDiv{
-    display: flex;
-    flex-direction: row;
-    height:20px;
-    padding: 3%;
-    width: 94%;
-}
+
 
 .canalDiv2{
     width: 50%;
