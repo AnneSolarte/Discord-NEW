@@ -1,7 +1,5 @@
 import HomeStyle from "./Home.css";
-import Servers, { ServerAtt } from "../../components/Servers/Servers";
-import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
-import Friends, { FriendsAtt } from "../../components/Friends/Friends";
+
 import User from "../../components/User/user"
 import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import {CheckBoxText} from "../../components/export";
@@ -12,11 +10,15 @@ import { addObserver, appState, dispatch } from "../../store/index";
 import { setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
+import {Server} from "../../types/servers"
+
+const formData: Omit<Server, "id"> = {
+  name: "",
+  img: "",
+  createdAt: "",
+};
 
 export default class Home extends HTMLElement {
-  ServersList: Servers[] = [];
-  FriendsList: Friends[] = [];
-  FriendsOnList: FriendsOnline[] = [];
 
   constructor() {
     super();
@@ -95,29 +97,7 @@ export default class Home extends HTMLElement {
     section2.appendChild(FriendsDiv)
     this.shadowRoot?.appendChild(section2);
 
-    
-
-    const ServersCards = this.ownerDocument.createElement("div")
-    ServersCards.className = 'ServerSection'
-    this.ServersList.forEach((ServersCard) => {
-        ServersCards.appendChild(ServersCard)
-    });
-    section1.appendChild(ServersCards)
     this.shadowRoot?.appendChild(section1);
-
-    const FriendsCards = this.ownerDocument.createElement("div")
-    FriendsCards.className = 'FriendSection'
-    this.FriendsList.forEach((FriendsCard) => {
-        FriendsCards.appendChild(FriendsCard)
-    });
-    this.shadowRoot?.appendChild(FriendsCards);
-
-    const FriendsOnCards = this.ownerDocument.createElement("div")
-    FriendsOnCards.className = 'FriendOnSection'
-    this.FriendsOnList.forEach((FriendsOnCard) => {
-        FriendsOnCards.appendChild(FriendsOnCard)
-    });
-    this.shadowRoot?.appendChild(FriendsOnCards);
 
     const section3 = this.ownerDocument.createElement("section")
     section3.className = 'Section3'
@@ -136,11 +116,11 @@ export default class Home extends HTMLElement {
     CreateChannelPop.className = 'CreateChannelPop'
 
     const tittle = this.ownerDocument.createElement("h1")
-    tittle.textContent = "Create Channel"
+    tittle.textContent = "Create Server"
     CreateChannelPop.appendChild(tittle)
 
     const text = this.ownerDocument.createElement("p")
-    text.textContent = "Select a type of channel to create and enjoy"
+    text.textContent = "Choose a image and name"
     CreateChannelPop.appendChild(text)
 
     const channels = this.ownerDocument.createElement("section")
@@ -152,13 +132,10 @@ export default class Home extends HTMLElement {
     const TextCanalDiv = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
     channelText.appendChild(TextCanalDiv);
 
-    const checkboxText = this.ownerDocument.createElement("checkbox-text") as CheckBoxText;
-    channelText.appendChild(checkboxText);
-
-    channels.appendChild(channelText);
-
-    const ForumCanalDiv = this.ownerDocument.createElement("forum-canal") as ForumCanalDiv;
-    channels.appendChild(ForumCanalDiv);
+    const inputImg = this.ownerDocument.createElement("input")
+    inputImg.type = "file"
+    inputImg.placeholder = "Choose image"
+    CreateChannelPop.appendChild(inputImg)
 
     CreateChannelPop.appendChild(channels)
 
