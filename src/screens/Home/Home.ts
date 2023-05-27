@@ -11,6 +11,10 @@ import { setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
+import {Servers} from "../../components/export";
+import firebase from "../../utils/firebase";
+
+
 
 const formData: Omit<Server, "id"> = {
   name: "",
@@ -39,27 +43,21 @@ export default class Home extends HTMLElement {
     }
   }
 
-  BackWindow(){
-
-  }
-
-  CreateChannel(){
-
+  changeName(e: any) {
+    formData.name = e?.target?.value;
   }
 
   render() {
-    
     if (this.shadowRoot) {
         this.shadowRoot.innerHTML = ``;
       
         const css = this.ownerDocument.createElement("style");
         css.innerHTML = HomeStyle;
         this.shadowRoot?.appendChild(css);   
-
     }
+
     const capa = this.ownerDocument.createElement("section")
     capa.className = 'capa'
-
     this.shadowRoot?.appendChild(capa);
 
     const section1 = this.ownerDocument.createElement("section")
@@ -68,12 +66,24 @@ export default class Home extends HTMLElement {
     const iconHome = this.ownerDocument.createElement("img")
     iconHome.className = "Icon"
     iconHome.src= "/img/Server0.png"
-    
     section1.appendChild(iconHome)
 
-    const servers = this.ownerDocument.createElement("section")
-    servers.className = 'servers'
-    section1.appendChild(servers)
+    firebase.getServersListener((server) => {
+      const oldOnesIds: String[] = [];
+      section1.childNodes.forEach((i) => {
+        if (i instanceof HTMLElement) oldOnesIds.push(i.dataset.pid || "");
+      });
+      const newOnes = server.filter((prod) => !oldOnesIds.includes(prod.id));
+
+      newOnes.forEach((p: Server) => {
+        const container = this.ownerDocument.createElement("section");
+        container.setAttribute("data-pid", p.id);
+
+        console.log("image", p.img)
+       // const img = firebase.getFile('perrito');
+
+      });
+    });
 
     const iconAdd = this.ownerDocument.createElement("img")
     iconAdd.className = "Icon"
@@ -90,14 +100,14 @@ export default class Home extends HTMLElement {
     iconSearch.src= "/img/Server02.png"
     section1.appendChild(iconSearch)
 
+    this.shadowRoot?.appendChild(section1);
+
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
     const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
     section2.appendChild(FriendsDiv)
     this.shadowRoot?.appendChild(section2);
-
-    this.shadowRoot?.appendChild(section1);
 
     const section3 = this.ownerDocument.createElement("section")
     section3.className = 'Section3'
@@ -109,7 +119,6 @@ export default class Home extends HTMLElement {
     logOut.className = "ButtonLogOut"
     logOut.addEventListener("click", this.logOutUser)
     section3.appendChild(logOut);
-
 
     //CreateChannelPopUp
     const CreateChannelPop = this.ownerDocument.createElement("section")
@@ -135,6 +144,16 @@ export default class Home extends HTMLElement {
     const inputImg = this.ownerDocument.createElement("input")
     inputImg.type = "file"
     inputImg.placeholder = "Choose image"
+    inputImg.addEventListener("change", async () =>{
+      const file = inputImg.files?.[0];
+      if (file) await firebase.uploadFile(file);
+      console.log(file?.name);
+      /* if (file) {
+        await firebase.getFile(file.name).then((url) => {
+          console.log(url);
+        });
+      } */
+    });
     CreateChannelPop.appendChild(inputImg)
 
     CreateChannelPop.appendChild(channels)
@@ -143,6 +162,7 @@ export default class Home extends HTMLElement {
     channelName.type = "text"
     channelName.className = "ChannelNameInput"
     channelName.placeholder = "Channel Name"
+    channelName.addEventListener("change", this.changeName);
     CreateChannelPop.appendChild(channelName);
 
     const buttons = this.ownerDocument.createElement("section")
@@ -160,7 +180,11 @@ export default class Home extends HTMLElement {
     const DoneButton = this.ownerDocument.createElement("button");
     DoneButton.innerText = "Done";
     DoneButton.className = "DoneButton"
-    DoneButton.addEventListener("click", this.CreateChannel)
+    DoneButton.addEventListener("click", () => {
+      firebase.addServer(formData)
+      CreateChannelPop.style.display = 'none';
+      capa.style.display = "none"
+    })
     buttons.appendChild(DoneButton);
     
     CreateChannelPop.appendChild(buttons)
@@ -174,6 +198,12 @@ export default class Home extends HTMLElement {
     const user = this.ownerDocument.createElement("my-user") as User;
     section4.appendChild(user)
     this.shadowRoot?.appendChild(section4);
+
+
+    
+    
+
+    
 
 
   }

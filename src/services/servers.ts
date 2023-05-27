@@ -1,10 +1,10 @@
-import { InterServers } from "../types/servers";
+import { Server} from "../types/servers";
 import { servers } from "../mocks/getServers";
 
 class Servers {
-  async get(): Promise<InterServers[]> {
+  async get(): Promise<Server[]> {
     console.log("starting servers...");
-    const value: InterServers[] = await new Promise((resolve) => {
+    const value: Server[] = await new Promise((resolve) => {
       setTimeout(() => resolve(servers), 2000);
     });
     return value;

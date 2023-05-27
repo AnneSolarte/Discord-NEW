@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, onSnapshot, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
+
 import {  Product } from "../types/products";
 import {
   createUserWithEmailAndPassword,
@@ -9,6 +11,7 @@ import {
   browserSessionPersistence,
   onAuthStateChanged
 } from "firebase/auth";
+import { Server } from "../types/servers";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCwvZQAdJoW9EkcIsAK1K3nb8oLFhYP4oE",
@@ -24,6 +27,35 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+const storage = getStorage()
+
+const uploadFile = async (file: File) => {
+  const storageRef = ref(storage, file.name);
+  const res = await uploadBytes(storageRef, file);
+  console.log("file uploaded", res);
+};
+
+const getFile = async (name: string) => {
+  await getDownloadURL(ref(storage, name))
+  .then((url) => {
+    // `url` is the download URL for 'images/stars.jpg'
+
+    // This can be downloaded directly:
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+
+    console.log(url);
+    return url;
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
+}
 
 
 const registerUser = async ({
@@ -69,38 +101,37 @@ const loginUser = async ({
 };
 
 
-
-const addProduct = async (product: Omit<Product, "id">) => {
+const addServer = async (product: Omit<Server, "id">) => {
   try {
-    const where = collection(db, "products");
+    const where = collection(db, "servers");
     await addDoc(where, { ...product, createdAt: new Date() });
-    console.log("se añadió con éxito");
+    console.log("se añadió servidor con éxito");
   } catch (error) {
     console.error(error);
   }
 };
 
 
-const getProducts = async () => {
+const getServers = async () => {
   const q = query(collection(db, "products"), orderBy("createdAt"));
   const querySnapshot = await getDocs(q);
-  const transformed: Array<Product> = [];
+  const transformed: Array<Server> = [];
 
   querySnapshot.forEach((doc) => {
-    const data: Omit<Product, "id"> = doc.data() as any;
+    const data: Omit<Server, "id"> = doc.data() as any;
     transformed.push({ id: doc.id, ...data });
   });
 
   return transformed;
 };
 
-const getProductsListener = (cb: (docs: Product[]) => void) => {
-  const q = query(collection(db, "products"), orderBy("createdAt")); 
+const getServersListener = (cb: (docs: Server[]) => void) => {
+  const q = query(collection(db, "servers"), orderBy("createdAt")); 
   onSnapshot(q, (collection) => {
-    const docs: Product[] = collection.docs.map((doc) => ({
+    const docs: Server[] = collection.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    })) as Product[];
+    })) as Server[];
     cb(docs);
   });
 };
@@ -108,10 +139,12 @@ const getProductsListener = (cb: (docs: Product[]) => void) => {
 export {auth}
 export {db}
 export default {
-  addProduct,
-  getProducts,
-  getProductsListener,
+  addServer,
+  getServers,
+  getServersListener,
   registerUser,
   loginUser,
   onAuthStateChanged,
+  uploadFile,
+  getFile
 };

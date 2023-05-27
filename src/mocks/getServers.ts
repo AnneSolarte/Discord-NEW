@@ -1,28 +1,11 @@
 
-import { InterServers } from "../types/servers";
+import { Server} from "../types/servers";
 
-export const servers: InterServers[] = [
+export const servers: Server[] = [
     {
-        img: "/img/Server0.png"
-        },
-        {
-        img: "/img/server1.png"
-        },
-        {
-    
-        img: "/img/server2.png"
-        },
-        {
-    
-        img: "/img/server3.png"
-        },
-        {
-        img: "/img/server4.png"
-        },
-        {
-        img: "/img/Server01.png"
-        },
-        {
-        img: "/img/Server02.png"
-        }
+        img: "/img/Server0.png",
+        name: "",
+        createdAt: "",
+        id: "",
+    },
 ];
