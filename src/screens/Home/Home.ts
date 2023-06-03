@@ -2,21 +2,19 @@ import HomeStyle from "./Home.css";
 
 import User from "../../components/User/user"
 import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
-import {CheckBoxText} from "../../components/export";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { TextCanalDiv } from "../../components/export";
-import {ForumCanalDiv} from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { setUserCredentials } from "../../store/actions";
+import { SaveServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
-import {Servers} from "../../components/export";
 import firebase from "../../utils/firebase";
 
 
 
-const formData: Omit<Server, "id"> = {
+const formData: Server = {
+  id: "",
   name: "",
   img: "",
   createdAt: "",
@@ -68,22 +66,18 @@ export default class Home extends HTMLElement {
     iconHome.src= "/img/Server0.png"
     section1.appendChild(iconHome)
 
-    firebase.getServersListener((server) => {
-      const oldOnesIds: String[] = [];
-      section1.childNodes.forEach((i) => {
-        if (i instanceof HTMLElement) oldOnesIds.push(i.dataset.pid || "");
-      });
-      const newOnes = server.filter((prod) => !oldOnesIds.includes(prod.id));
 
-      newOnes.forEach((p: Server) => {
-        const container = this.ownerDocument.createElement("section");
-        container.setAttribute("data-pid", p.id);
+        // const file = inputImg.files?.[0];
+        // if (file) {
+        //   const img = await firebase.getFile(file.name);
+        //   console.log("img", img);
+        //   const imagen = this.ownerDocument.createElement("img")
+        //   imagen.className = "Icon"
+        //   imagen.src = String(img)
+        //   section1.appendChild(imagen)
+        // }
 
-        console.log("image", p.img)
-       // const img = firebase.getFile('perrito');
-
-      });
-    });
+   
 
     const iconAdd = this.ownerDocument.createElement("img")
     iconAdd.className = "Icon"
@@ -148,11 +142,6 @@ export default class Home extends HTMLElement {
       const file = inputImg.files?.[0];
       if (file) await firebase.uploadFile(file);
       console.log(file?.name);
-      /* if (file) {
-        await firebase.getFile(file.name).then((url) => {
-          console.log(url);
-        });
-      } */
     });
     CreateChannelPop.appendChild(inputImg)
 
@@ -180,8 +169,8 @@ export default class Home extends HTMLElement {
     const DoneButton = this.ownerDocument.createElement("button");
     DoneButton.innerText = "Done";
     DoneButton.className = "DoneButton"
-    DoneButton.addEventListener("click", () => {
-      firebase.addServer(formData)
+    DoneButton.addEventListener("click", async () => {
+      dispatch(await SaveServer(formData))
       CreateChannelPop.style.display = 'none';
       capa.style.display = "none"
     })
@@ -198,14 +187,6 @@ export default class Home extends HTMLElement {
     const user = this.ownerDocument.createElement("my-user") as User;
     section4.appendChild(user)
     this.shadowRoot?.appendChild(section4);
-
-
-    
-    
-
-    
-
-
   }
 }
 

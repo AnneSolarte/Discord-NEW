@@ -85,7 +85,9 @@
 
 .Icon{
     width: 80%;
+    height: 7.8%;
     margin-top: 10%;
+    border-radius: 50%;
 }
 
 .CreateChannelPop{

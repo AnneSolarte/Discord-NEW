@@ -1,14 +1,28 @@
-export const reducer = (action: any, prevState: any) => {
-    switch (action.type) {
-      case "NAVIGATE":
-        prevState.screen = action.payload;
-        break;
-  
-        case "SETUSER":
-        prevState.user = action.payload;
-        break;
+import { ServerActions, NavigateActions, UserActions } from "../types/store";
+import { AppState } from "../types/store";
+import { Actions } from "../types/store";
+
+export const reducer = (actions: Actions, appState: AppState) => {
+    const {action, payload} = actions;
+
+    switch (action) {
+        case ServerActions.SAVE_SERVER:
+            appState.Servers = [...appState.Servers, payload]
+            return appState
+
+        case ServerActions.GET_SERVERS:
+            appState.Servers = payload
+            return appState
+
+        case NavigateActions.NAVIGATE:
+            appState.screens = payload;
+            return appState
+
+        case UserActions.SET_USER:
+            appState.user = payload;
+            return appState
+
+        default:
+            return appState
     }
-  
-    return prevState;
-  };
-  
+}

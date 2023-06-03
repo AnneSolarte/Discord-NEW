@@ -18,7 +18,7 @@ class AppContainer extends HTMLElement {
     render() {
         if (this.shadowRoot) this.shadowRoot.innerHTML = "";
     
-        switch (appState.screen) {
+        switch (appState.screens) {
           case Screens.LOGIN:
             const login = this.ownerDocument.createElement("login-channel");
             login.innerText = "My Login";

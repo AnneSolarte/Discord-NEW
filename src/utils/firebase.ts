@@ -36,6 +36,8 @@ const uploadFile = async (file: File) => {
 };
 
 const getFile = async (name: string) => {
+  let urlimg = '';
+
   await getDownloadURL(ref(storage, name))
   .then((url) => {
     // `url` is the download URL for 'images/stars.jpg'
@@ -49,12 +51,15 @@ const getFile = async (name: string) => {
     xhr.open('GET', url);
     xhr.send();
 
-    console.log(url);
-    return url;
+    urlimg = url;
+  
   })
   .catch((error) => {
     // Handle any errors
   });
+
+  console.log(urlimg);
+  return urlimg;
 }
 
 
@@ -101,7 +106,7 @@ const loginUser = async ({
 };
 
 
-const addServer = async (product: Omit<Server, "id">) => {
+const SaveServerDB = async (product: Omit<Server, "id">) => {
   try {
     const where = collection(db, "servers");
     await addDoc(where, { ...product, createdAt: new Date() });
@@ -112,7 +117,7 @@ const addServer = async (product: Omit<Server, "id">) => {
 };
 
 
-const getServers = async () => {
+const GetServerDB = async () => {
   const q = query(collection(db, "products"), orderBy("createdAt"));
   const querySnapshot = await getDocs(q);
   const transformed: Array<Server> = [];
@@ -139,8 +144,8 @@ const getServersListener = (cb: (docs: Server[]) => void) => {
 export {auth}
 export {db}
 export default {
-  addServer,
-  getServers,
+  SaveServerDB,
+  GetServerDB,
   getServersListener,
   registerUser,
   loginUser,
