@@ -77,10 +77,7 @@ class CreatePostBarClick extends HTMLElement {
             if (file) {
               const img = await firebase.getFile(file.name);
               console.log("img", img);
-              const imagen = this.ownerDocument.createElement("img")
-              imagen.className = "Icon"
               const src = String(img)
-              imagen.src = src
               postForm.img = src
           }
           });

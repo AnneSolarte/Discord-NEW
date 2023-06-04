@@ -1,6 +1,6 @@
 .PostCards{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
 }
 
@@ -8,10 +8,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 95%;
-    padding: 2%;
-    padding-left: 2%;
-    padding-bottom: 2%;
+    width: 92%;
+    padding: 3%;
+    padding-left: 4%;
+    padding-bottom: 4%;
     background-color: rgb(17, 21, 24);
     border-radius: 0.8em;
     margin-right: 1%;
@@ -41,6 +41,8 @@
 
 .img{
     width: 98%;
+    height: 96%;
+    object-fit: none;
     border-radius: 0.5em;
 }
 .Upsection{
