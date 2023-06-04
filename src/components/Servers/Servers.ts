@@ -1,21 +1,9 @@
-import { navigate } from "../../store/actions";
 import { addObserver, appState, dispatch } from "../../store/index";
+import { getServer } from "../../store/actions";
 
 import ServerStyle from "./Servers.css"
-export enum ServerAtt {
-    "img" = "img",
-}
 
 class Servers extends HTMLElement {
-    img?: string;
-    description?: string;
-
-    static get observedAttributes() {
-        const attrs: Record<ServerAtt, null> = {
-            img: null,
-        };
-        return Object.keys(attrs);
-    }
 
     constructor() {
         super();
@@ -23,42 +11,37 @@ class Servers extends HTMLElement {
         addObserver(this);
     }
 
-    connectedCallback() {
-        this.render();
-    }
-
-    attributeChangedCallback(
-        propimg: ServerAtt,
-        _: string | undefined,
-        newValue: string | undefined
-        ) {
-            switch (propimg) {
-                default:
-                this[propimg] = newValue;
-                break;
-            }
-
+    async connectedCallback() {
+        if(appState.Servers.length === 0) {
+            dispatch( await getServer())
+            this.render();
+        } else {
             this.render();
         }
+      }
 
-        
-
-        render() {
-
-            const css = this.ownerDocument.createElement("style");
-            css.innerHTML = ServerStyle;
-            this.shadowRoot?.appendChild(css);
-
-            if (this.shadowRoot) {
-                this.shadowRoot.innerHTML = `
-                <div class="serversDiv">
-                    <img class="serverImg" src="${this.img}">
-                </div>
-                `;
-            }
-
-            
+    async render() {
+        if (this.shadowRoot) {
+                this.shadowRoot.innerHTML = ``;
         }
+
+        const css = this.ownerDocument.createElement("style");
+        css.innerHTML = ServerStyle;
+        this.shadowRoot?.appendChild(css);
+
+
+        const servers = this.ownerDocument.createElement("section")
+        servers.className = 'Servers'
+
+        appState.Servers.forEach(async (p)=>{
+            const serverImg = this.ownerDocument.createElement("img");
+            serverImg.src = p.img
+            serverImg.className = "Icon"
+            servers.appendChild(serverImg) 
+        }); 
+        
+        this.shadowRoot?.appendChild(servers);   
+    }
 }
 
 customElements.define("my-servers", Servers);

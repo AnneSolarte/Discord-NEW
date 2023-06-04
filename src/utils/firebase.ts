@@ -119,6 +119,7 @@ const SaveServerDB = async (product: Omit<Server, "id">) => {
 
 
 const GetServerDB = async () => {
+  console.log("Entrando en GETserverDB")
   const q = query(collection(db, "products"), orderBy("createdAt"));
   const querySnapshot = await getDocs(q);
   const transformed: Array<Server> = [];
@@ -143,6 +144,7 @@ const SavePostDB = async (post: Omit<Post, "id">) => {
 
 
 const GetPostDB = async () => {
+  console.log("Entrando en GETpostDB")
   const q = query(collection(db, "posts"), orderBy("createdAt"));
   const querySnapshot = await getDocs(q);
   const transformed: Array<Post> = [];
@@ -151,7 +153,7 @@ const GetPostDB = async () => {
     const data: Omit<Post, "id"> = doc.data() as any;
     transformed.push({ id: doc.id, ...data });
   });
-
+  console.log(transformed)
   return transformed;
 };
 

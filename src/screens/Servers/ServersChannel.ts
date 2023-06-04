@@ -1,6 +1,5 @@
 import ServersChannelStyle from "./ServersChannel.css";
 import { navigate, SaveServer } from "../../store/actions";
-import Servers, { ServerAtt } from "../../components/Servers/Servers";
 import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
 import User, { UserAtt } from "../../components/User/user";
 import WriteBar from "../../components/WriteBar/WriteBar";
@@ -21,8 +20,6 @@ const formData: Server = {
 };
 
 export default class ServersChannel extends HTMLElement {
-  ServersList: Servers[] = [];
-  FriendsOnList: FriendsOnline[] = [];
 
   constructor() {
     super();
@@ -48,12 +45,6 @@ export default class ServersChannel extends HTMLElement {
         this.shadowRoot?.appendChild(css);
 
     }
-
-    //appState.servers.forEach((data) => {
-        //const ServersCard = this.ownerDocument.createElement("my-servers") as Servers;
-        //ServersCard.setAttribute(ServerAtt.img, data.img);
-        //this.ServersList.push(ServersCard);
-    //});
 
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
@@ -82,12 +73,6 @@ export default class ServersChannel extends HTMLElement {
     iconSearch.src= "/img/Server02.png"
     section1.appendChild(iconSearch)
 
-    const ServersCards = this.ownerDocument.createElement("div")
-    ServersCards.className = 'ServerSection'
-    this.ServersList.forEach((ServersCard) => {
-        ServersCards.appendChild(ServersCard)
-    });
-    section1.appendChild(ServersCards)
     this.shadowRoot?.appendChild(section1);
 
     const section2 = this.ownerDocument.createElement("section")
@@ -118,12 +103,6 @@ export default class ServersChannel extends HTMLElement {
     const membersDiv = this.ownerDocument.createElement("members-div")
     membersSection.appendChild(membersDiv)
 
-    const members = this.ownerDocument.createElement("div")
-    members.className = 'members'
-    this.FriendsOnList.forEach((Card) => {
-      members.appendChild(Card)
-    });
-    membersSection.appendChild(members)
     this.shadowRoot?.appendChild(membersSection);
     
     const section4 = this.ownerDocument.createElement("section")

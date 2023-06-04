@@ -9,6 +9,7 @@ import { SaveServer, getServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
+import Servers from "../../components/Servers/Servers"
 import firebase from "../../utils/firebase";
 import storage from "../../utils/storage";
 
@@ -29,19 +30,16 @@ export default class Home extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-    if (appState.Servers === null){
-        appState.Servers = [];
-        dispatch( await getServer())
-        this.render();
-    } else{
-        this.render();
-    }  
-}
+  connectedCallback() {
+    this.render();
+  }
 
   logOutUser(){
     if(appState.user !== null || ''){
+      localStorage.clear()
       dispatch(setUserCredentials(''));
+      appState.Post = []
+      appState.Servers = []
       sessionStorage.clear();
       dispatch(navigate(Screens.LOGIN));
       location.reload();
@@ -52,7 +50,7 @@ export default class Home extends HTMLElement {
     formData.name = e?.target?.value;
   }
 
-  render() {
+  async render() {
     if (this.shadowRoot) {
         this.shadowRoot.innerHTML = ``;
       
@@ -82,12 +80,8 @@ export default class Home extends HTMLElement {
     })
     section1.appendChild(iconAdd)
 
-    appState.Servers.forEach(async (p)=>{
-        const serverImg = this.ownerDocument.createElement("img");
-        serverImg.src = p.img
-        serverImg.className = "Icon"
-        section1.appendChild(serverImg)
-    });
+    const servers = this.ownerDocument.createElement("my-servers") as Servers;
+    section1.appendChild(servers)
     
     const iconSearch = this.ownerDocument.createElement("img")
     iconSearch.className = "Icon"

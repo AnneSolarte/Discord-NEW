@@ -13,9 +13,7 @@ class PostCard extends HTMLElement {
     }
 
     async connectedCallback() {
-        if (appState.Post === null){
-            appState.Post = [];
-            console.log("Entrando a traer datos")
+        if (appState.Post.length === 0){
             dispatch( await getPosts())
             this.render();
         } else{
@@ -23,12 +21,12 @@ class PostCard extends HTMLElement {
         }  
     }
 
-    render() {
+    async render() {
         
             const container = this.ownerDocument.createElement('section');
             container.className = "PostCards"
 
-            appState.Post.forEach(async (p)=>{
+            appState.Post.forEach( (p) => {
                 const postCard = this.ownerDocument.createElement('section');
                 postCard.className = "Post"
             
@@ -49,7 +47,7 @@ class PostCard extends HTMLElement {
 
                 const Image = this.ownerDocument.createElement("img")
                 Image.className = "img"
-                await (Image.src = p.img)
+                Image.src = p.img
 
                 Upsection.appendChild(tittle)
                 Upsection.appendChild(CreatedAt)

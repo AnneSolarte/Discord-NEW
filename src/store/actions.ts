@@ -21,11 +21,13 @@ export const SaveServer = async (server: Server): Promise<Actions>=>{
 }
 
 export const getServer = async(): Promise<Actions>=>{
+  console.log("Entrando en getServer() actions")
     const Server = await firebase.GetServerDB();
     return{
         action: ServerActions.GET_SERVERS,
         payload: Server,
     }
+    console.log(Server)
 }
 
 export const SavePost = async (post: Post): Promise<Actions>=>{
@@ -37,6 +39,7 @@ export const SavePost = async (post: Post): Promise<Actions>=>{
 }
 
 export const getPosts = async(): Promise<Actions>=>{
+  console.log("Entrando en getPost() actions")
     const Posts = await firebase.GetPostDB();
     return{
         action: PostActions.GET_POST,
