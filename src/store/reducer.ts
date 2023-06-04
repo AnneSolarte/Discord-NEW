@@ -1,4 +1,4 @@
-import { ServerActions, NavigateActions, UserActions } from "../types/store";
+import { ServerActions, NavigateActions, UserActions, PostActions } from "../types/store";
 import { AppState } from "../types/store";
 import { Actions } from "../types/store";
 
@@ -12,6 +12,14 @@ export const reducer = (actions: Actions, appState: AppState) => {
 
         case ServerActions.GET_SERVERS:
             appState.Servers = payload
+            return appState
+
+        case PostActions.SAVE_POST:
+            appState.Post = [...appState.Post, payload]
+            return appState
+    
+        case PostActions.GET_POST:
+            appState.Post = payload
             return appState
 
         case NavigateActions.NAVIGATE:

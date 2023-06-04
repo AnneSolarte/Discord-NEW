@@ -19,7 +19,7 @@ class CreatePostBar extends HTMLElement {
                 this.shadowRoot.innerHTML = `
                 <div class="CreatePostBar">
                         <img class="Icon"src="/img/search_icon.png">
-                        <input id="inputSearch" type="" placeholder=" Create a new post...">
+                        <p id="inputSearch">Create a new post...</p>
                         <button-post></button-post>
                 </div>
                 `;

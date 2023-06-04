@@ -1,10 +1,14 @@
 
 import ButtonPostStyle from "./ButtonPost.css"
+import { dispatch } from "../../store";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/navigation";
+
 class ButtonPost extends HTMLElement {
     button?: HTMLElement;
 
     onButtonClicked() {
-        this.render();
+        dispatch(navigate(Screens.POSTCREATE));
     }
 
     connectedCallback(){

@@ -38,17 +38,24 @@
     z-index: 10;
 }
 
-
-
-.ChatSection{
+.PostSection{
     position: relative;
+    flex-direction: row;
     margin: 0%;
-    width: 56%;
+    width: 77%;
     height: 94%;
     top: 0;
     left: 21%;
     color: aliceblue;
 
+}
+
+.Posts{
+    display: flex;
+    flex-direction: row;
+    margin-right: 2%;
+    margin-top: 1%;
+    width: 70%;
 }
 
 .Section4{
@@ -62,29 +69,11 @@
     background-color: rgb(46, 50, 56);
 }
 
-.membersSection{
-    position: absolute;
-    width: 18%;
-    height: 91%;
-    top: 2%;
-    left: 79%;
-    z-index: 10;
-    padding: 1%;
-    background-color: rgb(17, 21, 24);
-    border-radius: 1.5em;
-    color: aliceblue;
+.PostsSection{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
 
 }
 
-.members{
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    z-index: 10;
-}
-.Icon{
-    width: 80%;
-    height: 7.8%;
-    margin-top: 10%;
-    border-radius: 50%;
-}
+

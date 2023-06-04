@@ -4,5 +4,6 @@ export enum Screens {
   SIGNUP = "SIGNUP",
   POST = "POST",
   SERVERS = "SERVERS",
-  HOME = "HOME"
+  HOME = "HOME",
+  POSTCREATE = "POSTCREATE"
 }

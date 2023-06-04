@@ -1,15 +1,9 @@
 import { Server } from "../types/servers";
-import { Actions, NavigateActions, ServerActions, UserActions } from "../types/store"
+import { Actions, NavigateActions, ServerActions, UserActions, PostActions } from "../types/store"
 import firebase  from "../utils/firebase";
 import { Screens } from "../types/navigation";
+import { Post } from "../types/post";
 
-export const SaveServer = async (server: Server): Promise<Actions>=>{
-    await firebase.SaveServerDB(server);
-    return{
-        action: ServerActions.SAVE_SERVER,
-        payload: server,
-    }
-}
 
 export const setUserCredentials = (user: string) => {
   return {
@@ -18,11 +12,35 @@ export const setUserCredentials = (user: string) => {
   };
 };
 
+export const SaveServer = async (server: Server): Promise<Actions>=>{
+  await firebase.SaveServerDB(server);
+  return{
+      action: ServerActions.SAVE_SERVER,
+      payload: server,
+  }
+}
+
 export const getServer = async(): Promise<Actions>=>{
     const Server = await firebase.GetServerDB();
     return{
         action: ServerActions.GET_SERVERS,
         payload: Server,
+    }
+}
+
+export const SavePost = async (post: Post): Promise<Actions>=>{
+  await firebase.SavePostDB(post);
+  return{
+      action: PostActions.SAVE_POST,
+      payload: post,
+  }
+}
+
+export const getPosts = async(): Promise<Actions>=>{
+    const Posts = await firebase.GetPostDB();
+    return{
+        action: PostActions.GET_POST,
+        payload: Posts,
     }
 }
 export const navigate = (screen: Screens) => {

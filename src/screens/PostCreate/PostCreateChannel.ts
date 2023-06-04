@@ -1,14 +1,14 @@
-import PostChannelStyle from "./PostChannel.css";
-import PostCard from "../../components/PostCard/PostCard";
+import PostCreateChannelStyle from "./PostCreateChannel.css";
 import User, { UserAtt } from "../../components/User/user";
+import PostCard from "../../components/PostCard/PostCard";
 import WriteBar from "../../components/WriteBar/WriteBar";
 import PostBar from "../../components/PostBar/PostBar";
-import CreatePostBar from "../../components/CreatePostBar/CreatePostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
 import { addObserver, appState, dispatch } from "../../store/index";
+import { CreatePostBarClick } from "../../components/export";
 
 
-export default class PostChannel extends HTMLElement {
+export default class PostCreateChannel extends HTMLElement {
 
   constructor() {
     super();
@@ -26,7 +26,7 @@ export default class PostChannel extends HTMLElement {
         this.shadowRoot.innerHTML = ``;
       
         const css = this.ownerDocument.createElement("style");
-        css.innerHTML = PostChannelStyle;
+        css.innerHTML = PostCreateChannelStyle;
         this.shadowRoot?.appendChild(css);
 
     }
@@ -37,7 +37,7 @@ export default class PostChannel extends HTMLElement {
     const capa = this.ownerDocument.createElement("section")
     capa.className = 'capa'
     this.shadowRoot?.appendChild(capa);
-
+    
     const ServersCards = this.ownerDocument.createElement("div")
     ServersCards.className = 'ServerSection'
     
@@ -45,8 +45,9 @@ export default class PostChannel extends HTMLElement {
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
-    
-
+    section2.addEventListener("click", () => {
+      
+    });
     const serverDiv = this.ownerDocument.createElement("server-div") as ServerDiv;
     section2.appendChild(serverDiv)
     this.shadowRoot?.appendChild(section2);
@@ -57,7 +58,7 @@ export default class PostChannel extends HTMLElement {
     const postBar = this.ownerDocument.createElement("post-bar") as PostBar;
     section3.appendChild(postBar)
 
-    const createPostBar = this.ownerDocument.createElement("create-post") as CreatePostBar;
+    const createPostBar = this.ownerDocument.createElement("create-postclick") as CreatePostBarClick;
     section3.appendChild(createPostBar)
 
     const PostCards = this.ownerDocument.createElement("post-card") as PostCard;
@@ -65,6 +66,7 @@ export default class PostChannel extends HTMLElement {
 
     this.shadowRoot?.appendChild(section3);
 
+    
     const section4 = this.ownerDocument.createElement("section")
     section4.className = 'Section4'
     const user = this.ownerDocument.createElement("my-user") as User;
@@ -74,4 +76,4 @@ export default class PostChannel extends HTMLElement {
   }
 }
 
-customElements.define("post-channel", PostChannel);
+customElements.define("postcreate-channel", PostCreateChannel);

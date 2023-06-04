@@ -12,6 +12,7 @@ import {
   onAuthStateChanged
 } from "firebase/auth";
 import { Server } from "../types/servers";
+import { Post } from "../types/post";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCwvZQAdJoW9EkcIsAK1K3nb8oLFhYP4oE",
@@ -130,6 +131,30 @@ const GetServerDB = async () => {
   return transformed;
 };
 
+const SavePostDB = async (post: Omit<Post, "id">) => {
+  try {
+    const where = collection(db, "posts");
+    await addDoc(where, { ...post, createdAt: new Date() });
+    console.log("se añadió servidor con éxito");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+const GetPostDB = async () => {
+  const q = query(collection(db, "posts"), orderBy("createdAt"));
+  const querySnapshot = await getDocs(q);
+  const transformed: Array<Post> = [];
+
+  querySnapshot.forEach((doc) => {
+    const data: Omit<Post, "id"> = doc.data() as any;
+    transformed.push({ id: doc.id, ...data });
+  });
+
+  return transformed;
+};
+
 const getServersListener = (cb: (docs: Server[]) => void) => {
   const q = query(collection(db, "servers"), orderBy("createdAt")); 
   onSnapshot(q, (collection) => {
@@ -146,6 +171,8 @@ export {db}
 export default {
   SaveServerDB,
   GetServerDB,
+  SavePostDB,
+  GetPostDB,
   getServersListener,
   registerUser,
   loginUser,

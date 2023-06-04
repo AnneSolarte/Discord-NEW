@@ -1,6 +1,7 @@
-export interface InterPost {
+export interface Post {
+    id: string;
     img: string;
-    name: string;
-    info: string;
-    time: string;
+    title: string;
+    message: string;
+    createdAt: string;
 }

@@ -20,6 +20,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 const emptyState: AppState = {
+  Post: [],
   Servers: [],
   screens: Screens.DASHBOARD,
   user: "",

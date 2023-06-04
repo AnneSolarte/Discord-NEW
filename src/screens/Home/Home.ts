@@ -35,6 +35,7 @@ export default class Home extends HTMLElement {
   logOutUser(){
     if(appState.user !== null || ''){
       dispatch(setUserCredentials(''));
+      localStorage.clear();
       sessionStorage.clear();
       dispatch(navigate(Screens.LOGIN));
       location.reload();
@@ -66,24 +67,10 @@ export default class Home extends HTMLElement {
     iconHome.src= "/img/Server0.png"
     section1.appendChild(iconHome)
 
-
-        // const file = inputImg.files?.[0];
-        // if (file) {
-        //   const img = await firebase.getFile(file.name);
-        //   console.log("img", img);
-        //   const imagen = this.ownerDocument.createElement("img")
-        //   imagen.className = "Icon"
-        //   imagen.src = String(img)
-        //   section1.appendChild(imagen)
-        // }
-
-   
-
     const iconAdd = this.ownerDocument.createElement("img")
     iconAdd.className = "Icon"
     iconAdd.src = "/img/Server01.png"
     iconAdd.addEventListener("click", () =>{
-      console.log("Mostrando")
       CreateChannelPop.style.display = 'flex';
       capa.style.display = "flex"
     })
@@ -92,10 +79,10 @@ export default class Home extends HTMLElement {
     const iconSearch = this.ownerDocument.createElement("img")
     iconSearch.className = "Icon"
     iconSearch.src= "/img/Server02.png"
+    iconSearch.addEventListener("click", () =>{
+      dispatch(navigate(Screens.POST))
+    })
     section1.appendChild(iconSearch)
-
-    this.shadowRoot?.appendChild(section1);
-
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
@@ -142,9 +129,19 @@ export default class Home extends HTMLElement {
       const file = inputImg.files?.[0];
       if (file) await firebase.uploadFile(file);
       console.log(file?.name);
+      if (file) {
+        const img = await firebase.getFile(file.name);
+        console.log("img", img);
+        const imagen = this.ownerDocument.createElement("img")
+        imagen.className = "Icon"
+        imagen.src = String(img)
+        section1.appendChild(imagen)
+    }
     });
     CreateChannelPop.appendChild(inputImg)
 
+
+    this.shadowRoot?.appendChild(section1);
     CreateChannelPop.appendChild(channels)
 
     const channelName = this.ownerDocument.createElement("input")
@@ -177,6 +174,8 @@ export default class Home extends HTMLElement {
     buttons.appendChild(DoneButton);
     
     CreateChannelPop.appendChild(buttons)
+
+    
 
     this.shadowRoot?.appendChild(CreateChannelPop);
     this.shadowRoot?.appendChild(section3);

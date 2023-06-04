@@ -1,0 +1,50 @@
+.FormSection{
+    height: 150px;
+    position: relative;
+    background-color: rgb(17, 21, 24);
+    padding: 0.4%;
+    padding-left: 0%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 0.6em;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1%;
+
+}
+
+.sectionInputs{
+    margin-top: 1%;
+    display:flex;
+    flex-direction: column;
+}
+
+.InputPost{
+    margin: 1%;
+    margin-bottom: 1%;
+    border: none;
+    background-color: rgba(240, 248, 255, 0);
+    color: aliceblue;
+}
+
+.ButtonPost{
+    position: absolute;
+    top: 75%;
+    left: 93%;
+    display: flex;
+    background-color: rgb(88, 101, 242);
+    color: aliceblue;
+    border: 0;
+    margin: 0%;
+    border-radius: 0.5em;
+    font-size: small;
+    padding: 0.5%;
+    
+}
+
+.IconX{
+    margin: 1%;
+    width: 20px;
+    height: 20px;
+}

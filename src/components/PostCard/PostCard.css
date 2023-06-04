@@ -1,17 +1,24 @@
+.PostCards{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
 .Post{
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding: 3%;
-    padding-left: 3%;
-    padding-bottom: 3%;
+    width: 95%;
+    padding: 2%;
+    padding-left: 2%;
+    padding-bottom: 2%;
     background-color: rgb(17, 21, 24);
     border-radius: 0.8em;
-    margin-right: 5%;
+    margin-right: 1%;
+    margin-bottom: 1%;
 }
 
-.dataPost{
+.message{
     display: flex;
     flex-direction: row;
     margin-top: 2%;
@@ -19,23 +26,24 @@
     height: fit-content;
 }
 
-.PostName{
+.tittle{
     font-size:medium;
     margin-top:0% ;
     margin-right: 2%;
     margin-bottom: 0%;
 }
-.PostTime{
+.time{
     font-size: smaller;
+    color:aliceblue;
     margin-top:0% ;
     margin-bottom: 0%;
 }
 
-.title{
-    font-size:large;
-}
-
-.PostImg{
-    width: 400px;
+.img{
+    width: 98%;
     border-radius: 0.5em;
+}
+.Upsection{
+    display: flex;
+    flex-direction: row;
 }

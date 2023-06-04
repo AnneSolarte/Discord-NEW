@@ -1,66 +1,67 @@
 
 import PostCardStyle from "./PostCard.css"
-
-export enum PostCardAtt {
-    "name" = "name",
-    "time" = "time",
-    "info" = "info",
-    "img" = "img",
-}
+import { appState, addObserver} from "../../store";
+import { dispatch } from "../../store";
+import { getPosts } from "../../store/actions";
 
 class PostCard extends HTMLElement {
-    img?: string;
-    name?: string;
-    time?: string;
-    info?: string;
-
-    static get observedAttributes() {
-        const attrs: Record<PostCardAtt, null> = {
-            img: null,
-            name: null,
-            info: null,
-            time: null,
-        };
-        return Object.keys(attrs);
-    }
 
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
+        addObserver(this)
     }
 
-    connectedCallback() {
-        this.render();
-    }
-
-    attributeChangedCallback(
-        propimg: PostCardAtt,
-        _: string | undefined,
-        newValue: string | undefined
-        ) {
-            switch (propimg) {
-                default:
-                this[propimg] = newValue;
-                break;
-            }
-
+    async connectedCallback() {
+        if (appState.Post !== null){
+            
+            this.render();
+        } else{
+            dispatch(await getPosts())
             this.render();
         }
+        
+    }
 
-        render() {
- 
-            if (this.shadowRoot) {
-                this.shadowRoot.innerHTML = `
-                <div class="Post">
-                    <div class="dataPost">
-                        <p class="PostName">${this.name}</p>
-                        <p class="PostTime">Posted ${this.time}min ago</p>
-                    </div>
-                <h2 class="title">${this.info}</h2>
-                <img class="PostImg" src="${this.img}">
-                </div>
-                `;
-            }
+    render() {
+        
+            const container = this.ownerDocument.createElement('section');
+            container.className = "PostCards"
+
+            appState.Post.forEach((p)=>{
+            const postCard = this.ownerDocument.createElement('section');
+            postCard.className = "Post"
+            
+            const Upsection = this.ownerDocument.createElement('section');
+            Upsection.className = "Upsection"
+
+            const tittle = this.ownerDocument.createElement("h2")
+            tittle.className = "tittle"
+            tittle.innerText = p.title
+            
+            const CreatedAt = this.ownerDocument.createElement("p")
+            CreatedAt.className = "time"
+            CreatedAt.innerText = String(new Date(p.createdAt));
+
+            const Message = this.ownerDocument.createElement("p")
+            Message.className = "message"
+            Message.innerText = p.message
+
+            const Image = this.ownerDocument.createElement("img")
+            Image.className = "img"
+            Image.src = p.img
+
+            Upsection.appendChild(tittle)
+            Upsection.appendChild(CreatedAt)
+            postCard.appendChild(Upsection)
+            postCard.appendChild(Message)
+            postCard.appendChild(Image)
+
+            container.appendChild(postCard)
+            })
+        
+            this.shadowRoot?.appendChild(container);
+    
 
             const css = this.ownerDocument.createElement("style");
             css.innerHTML = PostCardStyle;
