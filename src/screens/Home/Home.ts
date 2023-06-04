@@ -5,11 +5,12 @@ import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { SaveServer, setUserCredentials } from "../../store/actions";
+import { SaveServer, getServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
 import firebase from "../../utils/firebase";
+import storage from "../../utils/storage";
 
 
 
@@ -28,14 +29,19 @@ export default class Home extends HTMLElement {
     addObserver(this);
   }
 
-  connectedCallback() {
-    this.render();
-  }
+  async connectedCallback() {
+    if (appState.Servers === null){
+        appState.Servers = [];
+        dispatch( await getServer())
+        this.render();
+    } else{
+        this.render();
+    }  
+}
 
   logOutUser(){
     if(appState.user !== null || ''){
       dispatch(setUserCredentials(''));
-      localStorage.clear();
       sessionStorage.clear();
       dispatch(navigate(Screens.LOGIN));
       location.reload();
@@ -76,6 +82,13 @@ export default class Home extends HTMLElement {
     })
     section1.appendChild(iconAdd)
 
+    appState.Servers.forEach(async (p)=>{
+        const serverImg = this.ownerDocument.createElement("img");
+        serverImg.src = p.img
+        serverImg.className = "Icon"
+        section1.appendChild(serverImg)
+    });
+    
     const iconSearch = this.ownerDocument.createElement("img")
     iconSearch.className = "Icon"
     iconSearch.src= "/img/Server02.png"
@@ -132,12 +145,12 @@ export default class Home extends HTMLElement {
       if (file) {
         const img = await firebase.getFile(file.name);
         console.log("img", img);
-        const imagen = this.ownerDocument.createElement("img")
-        imagen.className = "Icon"
-        imagen.src = String(img)
-        section1.appendChild(imagen)
+        const src = String(img)
+        formData.img = src
     }
     });
+
+
     CreateChannelPop.appendChild(inputImg)
 
 

@@ -15,6 +15,7 @@ class PostCard extends HTMLElement {
     async connectedCallback() {
         if (appState.Post === null){
             appState.Post = [];
+            console.log("Entrando a traer datos")
             dispatch( await getPosts())
             this.render();
         } else{
@@ -57,7 +58,7 @@ class PostCard extends HTMLElement {
                 postCard.appendChild(Image)
 
                 container.appendChild(postCard)
-            })
+            });
         
             this.shadowRoot?.appendChild(container);
     
