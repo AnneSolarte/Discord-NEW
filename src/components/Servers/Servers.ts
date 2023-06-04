@@ -21,10 +21,6 @@ class Servers extends HTMLElement {
       }
 
     async render() {
-        if (this.shadowRoot) {
-                this.shadowRoot.innerHTML = ``;
-        }
-
         const css = this.ownerDocument.createElement("style");
         css.innerHTML = ServerStyle;
         this.shadowRoot?.appendChild(css);
@@ -33,13 +29,13 @@ class Servers extends HTMLElement {
         const servers = this.ownerDocument.createElement("section")
         servers.className = 'Servers'
 
-        appState.Servers.forEach(async (p)=>{
+        appState.Servers.forEach((p)=>{
             const serverImg = this.ownerDocument.createElement("img");
             serverImg.src = p.img
             serverImg.className = "Icon"
             servers.appendChild(serverImg) 
         }); 
-        
+
         this.shadowRoot?.appendChild(servers);   
     }
 }

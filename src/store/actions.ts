@@ -27,7 +27,6 @@ export const getServer = async(): Promise<Actions>=>{
         action: ServerActions.GET_SERVERS,
         payload: Server,
     }
-    console.log(Server)
 }
 
 export const SavePost = async (post: Post): Promise<Actions>=>{

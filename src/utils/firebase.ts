@@ -120,7 +120,7 @@ const SaveServerDB = async (product: Omit<Server, "id">) => {
 
 const GetServerDB = async () => {
   console.log("Entrando en GETserverDB")
-  const q = query(collection(db, "products"), orderBy("createdAt"));
+  const q = query(collection(db, "servers"), orderBy("createdAt"));
   const querySnapshot = await getDocs(q);
   const transformed: Array<Server> = [];
 
