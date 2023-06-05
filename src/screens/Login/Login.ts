@@ -2,13 +2,19 @@ import LoginStyle from "./Login.css";
 import LoginDiv from "../../components/LoginDiv/LoginDiv";
 import ButtonLog from "../../components/ButtonLog/ButtonLog";
 import { navigate } from "../../store/actions";
-import Firebase from "../../utils/firebase";
 import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
 import DescriptionCardSignUp from "../../components/DescriptionCardSignUp/DescriptionCardSignUp";
+import firebase from "../../utils/firebase";
 
 
-const credentials = { email: "", password: "" };
+const credentials = { 
+  uid: appState.userInfo.uid,
+  userName: appState.userInfo.userName,
+  email: "",
+  password: "",
+  img: appState.userInfo.img,
+};
 
 export default class Login extends HTMLElement {
 
@@ -25,7 +31,8 @@ export default class Login extends HTMLElement {
   }
 
   async handleLoginButton() {
-    Firebase.loginUser(credentials);
+    await firebase.loginUser(credentials);
+
     console.log(appState.user)
   }
 

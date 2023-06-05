@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, onSnapshot, addDoc, getDocs, query, orderBy } from "firebase/firestore";
+import { getFirestore, collection, doc, onSnapshot, addDoc, getDocs, query, orderBy, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
+import { appState } from "../store";
 
 import {  Product } from "../types/products";
 import {
@@ -13,6 +14,7 @@ import {
 } from "firebase/auth";
 import { Server } from "../types/servers";
 import { Post } from "../types/post";
+import { User } from "../types/user";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCwvZQAdJoW9EkcIsAK1K3nb8oLFhYP4oE",
@@ -104,33 +106,44 @@ const loginUser = async ({
     const errorMessage = error.message;
     console.log(errorCode, errorMessage);
   });
+  
 };
 
-
-const SaveServerDB = async (product: Omit<Server, "id">) => {
+const AddUserDB = async (user: User) =>{
   try {
-    const where = collection(db, "servers");
-    await addDoc(where, { ...product, createdAt: new Date() });
-    console.log("se añadió servidor con éxito");
-  } catch (error) {
-    console.error(error);
+    await setDoc(doc(db, "users", user.uid), user)
+    return true
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return false
   }
-};
+}
 
+const SaveServerDB = async (servers: Server) =>{
+  try {
+    const main = collection(db, `users/${appState.userInfo.uid}/servers`) 
+    await addDoc(main,{...servers, createdAt: new Date()});
+    return true
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return false
+  }
+}
 
-const GetServerDB = async () => {
-  console.log("Entrando en GETserverDB")
-  const q = query(collection(db, "servers"), orderBy("createdAt"));
+const GetServerDB = async(): Promise<Server[]> =>{
+  const resp: Server[] = [];
+
+  const q=query(collection(db,`users/${appState.userInfo.uid}/servers`), orderBy("createdAt"))
   const querySnapshot = await getDocs(q);
-  const transformed: Array<Server> = [];
-
   querySnapshot.forEach((doc) => {
-    const data: Omit<Server, "id"> = doc.data() as any;
-    transformed.push({ id: doc.id, ...data });
+    console.log(`${doc.id} => ${doc.data()}`);
+    resp.push({
+      ...doc.data()
+    }as Server)
   });
+  return resp
+}
 
-  return transformed;
-};
 
 const SavePostDB = async (post: Omit<Post, "id">) => {
   try {
@@ -180,5 +193,6 @@ export default {
   loginUser,
   onAuthStateChanged,
   uploadFile,
-  getFile
+  getFile,
+  AddUserDB
 };

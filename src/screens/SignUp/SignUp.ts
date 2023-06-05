@@ -7,6 +7,7 @@ import { addObserver, appState, dispatch } from "../../store/index";
 import { navigate, addUser } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import Firebase from "../../utils/firebase";
+import firebase from "../../utils/firebase";
 
 const credentials = { 
   uid: "",
@@ -30,7 +31,7 @@ export default class SignUp extends HTMLElement {
 
   async handleSignUpButton() {
     const user = await Firebase.registerUser(credentials);
-    dispatch(addUser(credentials))
+    dispatch(await addUser(credentials))
     console.log(user);
     if(user) {
       dispatch(navigate(Screens.LOGIN)) 
@@ -74,16 +75,6 @@ export default class SignUp extends HTMLElement {
 
     const InputSection = this.ownerDocument.createElement("section")
     InputSection.className = 'BigInputSection'
-
-    const userName = this.ownerDocument.createElement("input");
-    userName.placeholder = "User Name";
-    userName.className = "BigInput"
-    userName.type = "text";
-    userName.addEventListener(
-      "change",
-      (e: any) => (credentials.userName = e.target.value)
-    );
-    InputSection.appendChild(userName);
 
     const email = this.ownerDocument.createElement("input");
     email.placeholder = "Email";

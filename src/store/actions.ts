@@ -14,6 +14,7 @@ export const setUserCredentials =  (user: string): SetUser=>{
 }
 
 export const addUser = (user: User): AddUser =>{
+  
   return{
       action: UserActions.ADD_USER,
       payload: user,

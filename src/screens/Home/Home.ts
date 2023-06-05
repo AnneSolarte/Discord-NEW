@@ -30,14 +30,16 @@ export default class Home extends HTMLElement {
     addObserver(this);
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     this.render();
+    await firebase.AddUserDB(appState.userInfo)
   }
 
   logOutUser(){
     if(appState.user !== null || ''){
       localStorage.clear()
       dispatch(setUserCredentials(''));
+      appState.user = ""
       appState.Post = []
       appState.Servers = []
       appState.userInfo = {
