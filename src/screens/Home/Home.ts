@@ -40,6 +40,13 @@ export default class Home extends HTMLElement {
       dispatch(setUserCredentials(''));
       appState.Post = []
       appState.Servers = []
+      appState.userInfo = {
+        uid: "",
+        userName: "",
+        email: "",
+        password: "",
+        img: "/img/user.png",
+      },
       sessionStorage.clear();
       dispatch(navigate(Screens.LOGIN));
       location.reload();

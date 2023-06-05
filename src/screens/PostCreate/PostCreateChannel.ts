@@ -1,5 +1,5 @@
 import PostCreateChannelStyle from "./PostCreateChannel.css";
-import User, { UserAtt } from "../../components/User/user";
+import User from "../../components/User/user";
 import PostCard from "../../components/PostCard/PostCard";
 import WriteBar from "../../components/WriteBar/WriteBar";
 import PostBar from "../../components/PostBar/PostBar";

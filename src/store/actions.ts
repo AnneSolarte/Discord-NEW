@@ -1,16 +1,24 @@
 import { Server } from "../types/servers";
-import { Actions, NavigateActions, ServerActions, UserActions, PostActions } from "../types/store"
+import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, AddUser } from "../types/store"
 import firebase  from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { Post } from "../types/post";
+import { User } from "../types/user";
 
 
-export const setUserCredentials = (user: string) => {
-  return {
-    action: UserActions.SET_USER,
-    payload: user,
-  };
-};
+export const setUserCredentials =  (user: string): SetUser=>{
+  return{
+      action: UserActions.SET_USER,
+      payload: user,
+  }
+}
+
+export const addUser = (user: User): AddUser =>{
+  return{
+      action: UserActions.ADD_USER,
+      payload: user,
+  }
+}
 
 export const SaveServer = async (server: Server): Promise<Actions>=>{
   await firebase.SaveServerDB(server);

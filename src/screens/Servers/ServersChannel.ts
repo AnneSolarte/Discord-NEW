@@ -1,25 +1,18 @@
 import ServersChannelStyle from "./ServersChannel.css";
 import { navigate, SaveServer } from "../../store/actions";
-import FriendsOnline, { FriendsOnAtt } from "../../components/FriendsOnline/FriendsOnline";
-import User, { UserAtt } from "../../components/User/user";
+import User from "../../components/User/user";
 import WriteBar from "../../components/WriteBar/WriteBar";
 import ServerBar from "../../components/ServerBar/ServerBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
 import ChatDiv from "../../components/ChatDiv/ChatDiv";
 import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { TextCanalDiv } from "../../components/export";
+import TextCanalDiv, { Serve } from "../../components/TextCanalDiv/TextCanalDiv";
 import { Server } from "../../types/servers";
 import firebase from "../../utils/firebase";
 
-const formData: Server = {
-  id: "",
-  name: "",
-  img: "",
-  createdAt: "",
-};
-
 export default class ServersChannel extends HTMLElement {
+  canalList: any[] = [];
 
   constructor() {
     super();
@@ -31,9 +24,6 @@ export default class ServersChannel extends HTMLElement {
     this.render();
   }
 
-  changeName(e: any) {
-    formData.name = e?.target?.value;
-  }
 
   render() {
     
@@ -58,15 +48,6 @@ export default class ServersChannel extends HTMLElement {
     iconHome.src= "/img/Server0.png"
     section1.appendChild(iconHome)
 
-    const iconAdd = this.ownerDocument.createElement("img")
-    iconAdd.className = "Icon"
-    iconAdd.src = "/img/Server01.png"
-    iconAdd.addEventListener("click", () =>{
-      console.log("Mostrando")
-      CreateChannelPop.style.display = 'flex';
-      capa.style.display = "flex"
-    })
-    section1.appendChild(iconAdd)
 
     const iconSearch = this.ownerDocument.createElement("img")
     iconSearch.className = "Icon"
@@ -80,8 +61,17 @@ export default class ServersChannel extends HTMLElement {
     section2.addEventListener("click", () => {
       dispatch(navigate(Screens.POST));
     });
-    const serverDiv = this.ownerDocument.createElement("server-div") as ServerDiv;
-    section2.appendChild(serverDiv)
+
+    appState.Servers.forEach((data) => {
+      const serverName = this.ownerDocument.createElement("server-div") as ServerDiv;
+        serverName.setAttribute(Serve.name, data.name);
+        this.canalList.push(serverName);
+        section2.appendChild(serverName)
+    });
+
+    const canal = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
+    section2.appendChild(canal)
+
     this.shadowRoot?.appendChild(section2);
 
     const section3 = this.ownerDocument.createElement("section")
@@ -112,79 +102,7 @@ export default class ServersChannel extends HTMLElement {
     this.shadowRoot?.appendChild(section4);
 
 
-    const CreateChannelPop = this.ownerDocument.createElement("section")
-    CreateChannelPop.className = 'CreateChannelPop'
-
-    const tittle = this.ownerDocument.createElement("h1")
-    tittle.textContent = "Create Server"
-    CreateChannelPop.appendChild(tittle)
-
-    const text = this.ownerDocument.createElement("p")
-    text.textContent = "Choose a image and name"
-    CreateChannelPop.appendChild(text)
-
-    const channels = this.ownerDocument.createElement("section")
-    channels.className = 'channels'
-
-    const channelText = this.ownerDocument.createElement("section")
-    channelText.className = 'channelText'
   
-    const TextCanalDiv = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
-    channelText.appendChild(TextCanalDiv);
-
-    const inputImg = this.ownerDocument.createElement("input")
-    inputImg.type = "file"
-    inputImg.placeholder = "Choose image"
-    inputImg.addEventListener("change", async () =>{
-      const file = inputImg.files?.[0];
-      if (file) await firebase.uploadFile(file);
-      console.log(file?.name);
-    });
-    CreateChannelPop.appendChild(inputImg)
-
-    CreateChannelPop.appendChild(channels)
-
-    const channelName = this.ownerDocument.createElement("input")
-    channelName.type = "text"
-    channelName.className = "ChannelNameInput"
-    channelName.placeholder = "Channel Name"
-    channelName.addEventListener("change", this.changeName);
-    CreateChannelPop.appendChild(channelName);
-
-    const buttons = this.ownerDocument.createElement("section")
-    buttons.className = 'buttons'
-    
-    const CancelButton = this.ownerDocument.createElement("button");
-    CancelButton.innerText = "Cancel";
-    CancelButton.className = "CancelButton"
-    CancelButton.addEventListener("click", () =>{
-        CreateChannelPop.style.display = 'none';
-        capa.style.display = "none"
-    })
-    buttons.appendChild(CancelButton);
-
-    const DoneButton = this.ownerDocument.createElement("button");
-    DoneButton.innerText = "Done";
-    DoneButton.className = "DoneButton"
-    DoneButton.addEventListener("click", async () => {
-      dispatch(await SaveServer(formData))
-      CreateChannelPop.style.display = 'none';
-      capa.style.display = "none"
-      dispatch(navigate(Screens.SERVERS))
-    })
-    buttons.appendChild(DoneButton);
-    
-    CreateChannelPop.appendChild(buttons)
-
-    appState.Servers.forEach((p)=>{
-      const card = this.ownerDocument.createElement('section');
-
-      const image = this.ownerDocument.createElement("h2")
-      image.innerText = p.img
-      section1.appendChild(image)
-  })
-
-    this.shadowRoot?.appendChild(CreateChannelPop);
     
   
   }

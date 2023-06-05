@@ -13,16 +13,16 @@
     color: aliceblue;
 
 }
-#userImg{
+.userImg{
     width: 20%;
     height: 20%;
     margin-right: 2%;
 }
 
-#configImg{
+.configImg{
     width: 8%;
     height: 8%;
-    margin-left: 18%;
+    margin-left: 32%;
 }
 .userText{
     margin: 0;

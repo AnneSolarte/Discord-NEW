@@ -2,17 +2,20 @@ export type Observer = { render: () => void } & HTMLElement;
 import { Server } from "./servers";
 import { Screens } from "./navigation";
 import { Post } from "./post";
+import { User } from "./user";
 
 export type AppState = {
   Post: Post[];
   Servers: Server[];
+  Friends: User[]
   screens: Screens;
   user: string;
-  
+  userInfo: User
 };
  
 export enum UserActions {
   "SET_USER" = "SET_USER",
+  "ADD_USER" = "ADD_USER",
 }
 
 
@@ -59,4 +62,9 @@ export interface SetUser{
     payload: string
 }
 
-export type Actions = SaveServer | GetServers | SetUser |Navigate | SavePost | GetPost;
+export interface AddUser {
+  action: UserActions.ADD_USER,
+  payload: User
+}
+
+export type Actions = SaveServer | GetServers | SetUser | Navigate | SavePost | GetPost | AddUser;

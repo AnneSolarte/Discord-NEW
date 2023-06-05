@@ -3,13 +3,18 @@ import LoginDiv from "../../components/LoginDiv/LoginDiv";
 import DescriptionCardLogin  from "../../components/DescriptionCardSignUp/DescriptionCardSignUp";
 import CheckBoxLogin from "../../components/CheckBoxLogin/CheckBoxLogin";
 import ButtonSign from "../../components/ButtonSign/ButtonSign";
-import { ButtonLog } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { navigate } from "../../store/actions";
+import { navigate, addUser } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import Firebase from "../../utils/firebase";
 
-const credentials = { email: "", password: "" };
+const credentials = { 
+  uid: "",
+  userName: "",
+  email: "",
+  password: "",
+  img: "",
+};
 
 export default class SignUp extends HTMLElement {
 
@@ -25,6 +30,7 @@ export default class SignUp extends HTMLElement {
 
   async handleSignUpButton() {
     const user = await Firebase.registerUser(credentials);
+    dispatch(addUser(credentials))
     console.log(user);
     if(user) {
       dispatch(navigate(Screens.LOGIN)) 
@@ -68,6 +74,16 @@ export default class SignUp extends HTMLElement {
 
     const InputSection = this.ownerDocument.createElement("section")
     InputSection.className = 'BigInputSection'
+
+    const userName = this.ownerDocument.createElement("input");
+    userName.placeholder = "User Name";
+    userName.className = "BigInput"
+    userName.type = "text";
+    userName.addEventListener(
+      "change",
+      (e: any) => (credentials.userName = e.target.value)
+    );
+    InputSection.appendChild(userName);
 
     const email = this.ownerDocument.createElement("input");
     email.placeholder = "Email";

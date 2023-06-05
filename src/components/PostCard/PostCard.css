@@ -41,7 +41,7 @@
 
 .img{
     width: 98%;
-    height: 96%;
+    height: 200px;
     object-fit: none;
     border-radius: 0.5em;
 }

@@ -1,16 +1,41 @@
 
 import ServerBarStyle from "./ServerBar.css"
 
+export enum Server {
+    "name" = "name",
+}
+    
 class ServerBar extends HTMLElement {
-
-    constructor() {
-        super();
-        this.attachShadow({ mode: "open" });
-    }
-
-    connectedCallback() {
-        this.render();
-    }
+        name?: string;
+    
+        static get observedAttributes() {
+            const attrs: Record<Server, null> = {
+                name: null,
+            };
+            return Object.keys(attrs);
+        }
+    
+        constructor() {
+            super();
+            this.attachShadow({ mode: "open" });
+        }
+    
+        connectedCallback() {
+            this.render();
+        }
+        attributeChangedCallback(
+            propimg: Server,
+            _: string | undefined,
+            newValue: string | undefined
+            ) {
+                switch (propimg) {
+                    default:
+                    this[propimg] = newValue;
+                    break;
+                }
+    
+                this.render();
+            }
     
     render() {
 
@@ -19,7 +44,7 @@ class ServerBar extends HTMLElement {
                 <div class="serverBar">
                     <div class="block1">
                         <img class="Icon"src="/img/numeral_violet.png"
-                        <p>General</p>
+                        <p>${this.name}</p>
                     </div>
                     <div class="block2">
                         <img class="Icon"src="/img/user_icon.png">

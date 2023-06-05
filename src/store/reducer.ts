@@ -30,6 +30,10 @@ export const reducer = (actions: Actions, appState: AppState) => {
             appState.user = payload;
             return appState
 
+        case UserActions.ADD_USER:
+            appState.userInfo = payload
+            return appState
+
         default:
             return appState
     }

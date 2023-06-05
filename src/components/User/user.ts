@@ -1,25 +1,7 @@
 import { appState } from "../../store";
 import UserStyle from "./user.css"
 
-export enum UserAtt {
-    "img" = "img",
-    "name" = "name",
-    "uid" = "uid"
-}
-
 class User extends HTMLElement {
-    img?: string;
-    name?: string;
-    uid?: string;
-
-    static get observedAttributes() {
-        const attrs: Record<UserAtt, null> = {
-            img: null,
-            name: null,
-            uid: null
-        };
-        return Object.keys(attrs);
-    }
 
     constructor() {
         super();
@@ -30,41 +12,41 @@ class User extends HTMLElement {
         this.render();
     }
 
-    attributeChangedCallback(
-        propimg: UserAtt,
-        _: string | undefined,
-        newValue: string | undefined
-        ) {
-            switch (propimg) {
-                default:
-                this[propimg] = newValue;
-                break;
-            }
-
-            this.render();
-        }
-
-        render() {
-            
-            const userName = String(appState.user).slice(0, -10)
-            
-
-            if (this.shadowRoot) {
-                this.shadowRoot.innerHTML = `
-                <div class="sectionUser">
-                    <img id="userImg" src="/img/user.png">
-                    <div class="sectionUserData">
-                        <p class="userText">${userName} </p>
-                        <p class="userText">#1299</p>
-                    </div>
-                    <img id="configImg" src="/img/config.png">
-                </div>
-                `;
-            }
-
+    render() {
             const css = this.ownerDocument.createElement("style");
             css.innerHTML = UserStyle;
             this.shadowRoot?.appendChild(css);
+
+            const sectionUser = this.ownerDocument.createElement("section");
+            sectionUser.className = "sectionUser"
+
+            const userImg =  this.ownerDocument.createElement("img");
+            userImg.className = "userImg"
+            userImg.src = appState.userInfo.img
+            sectionUser.appendChild(userImg)
+
+            const sectionUserData = this.ownerDocument.createElement("section");
+            sectionUserData.className = "sectionUserData"
+
+            const UserName = this.ownerDocument.createElement("p");
+            UserName.textContent = appState.userInfo.userName
+            UserName.className = "userText"
+            sectionUserData.appendChild(UserName)
+            sectionUser.appendChild(sectionUserData)
+
+            const uid = String(appState.userInfo.uid).slice(0, -23)
+
+            const UserId = this.ownerDocument.createElement("p");
+            UserId.textContent = "#"+ uid
+            UserId.className = "userText"
+            sectionUserData.appendChild(UserId)
+
+            const iconConfig =  this.ownerDocument.createElement("img");
+            iconConfig.className = "configImg"
+            iconConfig.src= "/img/config.png"
+            sectionUser.appendChild(iconConfig)
+
+            this.shadowRoot?.appendChild(sectionUser);
         }
 }
 

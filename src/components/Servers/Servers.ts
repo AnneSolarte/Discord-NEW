@@ -1,5 +1,6 @@
 import { addObserver, appState, dispatch } from "../../store/index";
-import { getServer } from "../../store/actions";
+import { getServer, navigate } from "../../store/actions";
+import { Screens } from "../../types/navigation";
 
 import ServerStyle from "./Servers.css"
 
@@ -33,6 +34,11 @@ class Servers extends HTMLElement {
             const serverImg = this.ownerDocument.createElement("img");
             serverImg.src = p.img
             serverImg.className = "Icon"
+            serverImg.addEventListener("click", (e:any)=>{
+                const serverName = p.name
+                dispatch(navigate(Screens.SERVERS))
+                return serverName
+            })
             servers.appendChild(serverImg) 
         }); 
 
