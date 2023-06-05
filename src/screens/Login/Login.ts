@@ -1,12 +1,12 @@
 import LoginStyle from "./Login.css";
 import LoginDiv from "../../components/LoginDiv/LoginDiv";
 import ButtonLog from "../../components/ButtonLog/ButtonLog";
-import { navigate } from "../../store/actions";
+import { SaveServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
 import DescriptionCardSignUp from "../../components/DescriptionCardSignUp/DescriptionCardSignUp";
 import firebase from "../../utils/firebase";
-
+import { Server } from "../../types/servers";
 
 const credentials = { 
   uid: appState.userInfo.uid,
@@ -15,6 +15,9 @@ const credentials = {
   password: "",
   img: appState.userInfo.img,
 };
+
+
+
 
 export default class Login extends HTMLElement {
 
@@ -32,7 +35,6 @@ export default class Login extends HTMLElement {
 
   async handleLoginButton() {
     await firebase.loginUser(credentials);
-
     console.log(appState.user)
   }
 
@@ -42,6 +44,7 @@ export default class Login extends HTMLElement {
 
   backWindow(){
     dispatch(navigate(Screens.DASHBOARD))
+    
   }
 
   render() {

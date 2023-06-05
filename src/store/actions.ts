@@ -13,8 +13,8 @@ export const setUserCredentials =  (user: string): SetUser=>{
   }
 }
 
-export const addUser = (user: User): AddUser =>{
-  
+export const addUser = async (user: User): Promise<Actions> =>{
+  await firebase.AddUserDB(user)
   return{
       action: UserActions.ADD_USER,
       payload: user,

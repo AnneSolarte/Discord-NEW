@@ -1,8 +1,18 @@
 import { addObserver, appState, dispatch } from "../../store/index";
-import { getServer, navigate } from "../../store/actions";
+import { SaveServer, getServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
+import { Server } from "../../types/servers";
 
 import ServerStyle from "./Servers.css"
+import firebase from "../../utils/firebase";
+
+
+const serverData: Server = {
+    id: "",
+    name: "Search",
+    img: "/img/Server02.png",
+    createdAt: "",
+  };
 
 class Servers extends HTMLElement {
 
@@ -10,11 +20,15 @@ class Servers extends HTMLElement {
         super();
         this.attachShadow({ mode: "open" });
         addObserver(this);
+        
     }
 
     async connectedCallback() {
         if(appState.Servers.length === 0) {
             dispatch( await getServer())
+            if(appState.Servers.length === 0){
+                dispatch(await SaveServer(serverData))
+            }
             this.render();
         } else {
             this.render();
@@ -22,6 +36,7 @@ class Servers extends HTMLElement {
       }
 
     async render() {
+
         const css = this.ownerDocument.createElement("style");
         css.innerHTML = ServerStyle;
         this.shadowRoot?.appendChild(css);

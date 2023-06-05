@@ -2,8 +2,16 @@
 import PostCardStyle from "./PostCard.css"
 import { appState, addObserver} from "../../store";
 import { dispatch } from "../../store";
-import { getPosts } from "../../store/actions";
+import { SavePost, getPosts } from "../../store/actions";
+import { Post } from "../../types/post";
 
+const postForm: Post = {
+    id: "",
+    img: "",
+    title: "Bienvenido a Discord",
+    message: "Inicia creando post",
+    createdAt: ""
+}
 class PostCard extends HTMLElement {
 
     constructor() {
@@ -13,13 +21,16 @@ class PostCard extends HTMLElement {
     }
 
     async connectedCallback() {
-        if (appState.Post.length === 0){
+        if(appState.Servers.length === 0) {
             dispatch( await getPosts())
+            if(appState.Servers.length === 0){
+                dispatch(await SavePost(postForm))
+            }
             this.render();
-        } else{
+        } else {
             this.render();
-        }  
-    }
+        }
+      }
 
     async render() {
         

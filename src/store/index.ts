@@ -6,6 +6,9 @@ import { auth } from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { navigate } from "./actions";
 import { setUserCredentials } from "./actions";
+import { SaveServer } from "./actions";
+import { Server } from "../types/servers";
+
 
 
 onAuthStateChanged(auth, async (u: any) => {
@@ -17,6 +20,8 @@ onAuthStateChanged(auth, async (u: any) => {
     appState.userInfo.email = u.email
     const userNameXD = String(u.email).slice(0, -10)
     appState.userInfo.userName = userNameXD
+
+
     dispatch(navigate(Screens.HOME));
   } else {
     dispatch(navigate(Screens.DASHBOARD));
@@ -25,7 +30,10 @@ onAuthStateChanged(auth, async (u: any) => {
 
 const emptyState: AppState = {
   Post: [],
-  Servers: [],
+  Servers: [ {id: "",
+  name: "",
+  img: "",
+  createdAt: ""} ],
   Friends: [],
   screens: Screens.DASHBOARD,
   user: "",

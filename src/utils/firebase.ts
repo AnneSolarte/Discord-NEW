@@ -145,30 +145,32 @@ const GetServerDB = async(): Promise<Server[]> =>{
 }
 
 
-const SavePostDB = async (post: Omit<Post, "id">) => {
+const SavePostDB = async (post: Post) =>{
   try {
-    const where = collection(db, "posts");
-    await addDoc(where, { ...post, createdAt: new Date() });
-    console.log("se añadió servidor con éxito");
-  } catch (error) {
-    console.error(error);
+    const main = collection(db, `users/${appState.userInfo.uid}/${appState.Servers}/posts`) 
+    await addDoc(main,{...post, createdAt: new Date()});
+    console.log("Server agregado en FB")
+    return true
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return false
   }
-};
+}
 
 
-const GetPostDB = async () => {
-  console.log("Entrando en GETpostDB")
-  const q = query(collection(db, "posts"), orderBy("createdAt"));
+const GetPostDB = async(): Promise<Post[]> =>{
+  const resp: Post[] = [];
+
+  const q=query(collection(db,`users/${appState.userInfo.uid}/servers`), orderBy("createdAt"))
   const querySnapshot = await getDocs(q);
-  const transformed: Array<Post> = [];
-
   querySnapshot.forEach((doc) => {
-    const data: Omit<Post, "id"> = doc.data() as any;
-    transformed.push({ id: doc.id, ...data });
+    console.log(`${doc.id} => ${doc.data()}`);
+    resp.push({
+      ...doc.data()
+    }as Post)
   });
-  console.log(transformed)
-  return transformed;
-};
+  return resp
+}
 
 const getServersListener = (cb: (docs: Server[]) => void) => {
   const q = query(collection(db, "servers"), orderBy("createdAt")); 
