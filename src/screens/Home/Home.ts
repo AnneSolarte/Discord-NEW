@@ -39,9 +39,7 @@ export default class Home extends HTMLElement {
   async connectedCallback() {
     this.render();
     await firebase.AddUserDB(appState.userInfo)
-    if (appState.Servers.length === 0) {
-      dispatch(await getServer());
-    }
+    
   }
 
   logOutUser(){
@@ -204,7 +202,6 @@ export default class Home extends HTMLElement {
     DoneButton.innerText = "Done";
     DoneButton.className = "DoneButton"
     DoneButton.addEventListener("click", async () => {
-      dispatch(await SaveServer(formData))
       CreateChannelPop.style.display = 'none';
       capa.style.display = "none"
     })
