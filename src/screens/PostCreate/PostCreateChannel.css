@@ -21,7 +21,7 @@
 
 
 .Section2{
-    position: absolute;
+    position: fixed;
     width: 20%;
     height: 95%;
     background-color: rgb(17, 21, 24);
@@ -60,7 +60,7 @@
 
 .Section4{
     top: 87.2%;
-    position: absolute;
+    position: fixed;
     width: 20%;
     height: 10%;
     background-color: aliceblue;

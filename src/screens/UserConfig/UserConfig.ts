@@ -43,10 +43,11 @@ export default class UserConfig extends HTMLElement {
     if(appState.user !== null || ''){
       localStorage.clear()
       dispatch(setUserCredentials(''));
-      appState.user = ""
-      appState.Post = []
-      appState.Friends = []
-      appState.Messages = []
+      appState.Users = [];
+      appState.user = "";
+      appState.Post = [];
+      appState.Friends = [];
+      appState.Messages = [];
       appState.serverState = {id: "",
       name: "",
       img: "",

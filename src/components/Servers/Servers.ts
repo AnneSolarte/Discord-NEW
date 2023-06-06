@@ -1,6 +1,6 @@
 
 import { addObserver, appState, dispatch } from "../../store/index";
-import { GetMessages, SaveServer, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
+import { GetMessages, GetUsers, SaveServer, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import { Server } from "../../types/servers";
 

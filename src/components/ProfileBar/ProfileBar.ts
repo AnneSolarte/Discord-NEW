@@ -1,5 +1,7 @@
 
-import { appState } from "../../store";
+import { appState, dispatch } from "../../store";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/navigation";
 import ProfileBarStyle from "./ProfileBar.css"
     
 class ProfileBar extends HTMLElement {
@@ -13,6 +15,10 @@ class ProfileBar extends HTMLElement {
             this.render();
         }
 
+        close(){
+            dispatch(navigate(Screens.HOME))
+        }
+
     render() {
 
             if (this.shadowRoot) {
@@ -21,7 +27,7 @@ class ProfileBar extends HTMLElement {
                     <div class="block1">
                         <p class="text">My acount</p>
                     </div>
-                    <img class="Icon"src="/img/x_icon.png"
+                    <img onclick="close()" class="Icon"src="/img/x_icon.png"
                 </div>
                 `;
             }

@@ -21,7 +21,7 @@ class ServerBar extends HTMLElement {
                 <div class="serverBar">
                     <div class="block1">
                         <img class="Icon"src="/img/numeral_violet.png"
-                        <p>${appState.serverState.name}</p>
+                        <p class="name">${appState.serverState.name}</p>
                     </div>
                     <div class="block2">
                         <img class="Icon"src="/img/user_icon.png">

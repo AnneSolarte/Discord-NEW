@@ -9,6 +9,7 @@
 }
 .block1{
     display: flex;
+    width: fit-content;
     flex-direction: row;
     align-items: center;
 }
@@ -46,4 +47,7 @@
     width: 100%;
     padding: 3%;
 
+}
+.name{
+    width: 10%;
 }

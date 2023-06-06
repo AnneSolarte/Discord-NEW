@@ -87,6 +87,7 @@ class ServersSection extends HTMLElement {
 
     const inputImg = this.ownerDocument.createElement("input")
     inputImg.type = "file"
+    inputImg.className = "input"
     inputImg.placeholder = "Choose image"
     inputImg.addEventListener("change", async () =>{
       const file = inputImg.files?.[0];

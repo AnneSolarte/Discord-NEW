@@ -77,7 +77,6 @@ export default class Home extends HTMLElement {
 
     this.shadowRoot?.appendChild(section3);
     
-
     const section4 = this.ownerDocument.createElement("section")
     section4.className = 'Section4'
     const user = this.ownerDocument.createElement("my-user") as User;

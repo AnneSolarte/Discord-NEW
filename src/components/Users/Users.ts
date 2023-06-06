@@ -1,5 +1,6 @@
 
-import { appState } from "../../store";
+import { appState, dispatch } from "../../store";
+import { GetUsers, getPosts } from "../../store/actions";
 import Userstyle from "./Userstyle.css"
 
 
@@ -9,15 +10,20 @@ class Users extends HTMLElement {
         this.attachShadow({ mode: "open" });
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        if (appState.Users.length === 0) {
+          console.log("Haciendo petición firebase");
+          dispatch(await GetUsers());
+        }
         this.render();
-      }
+    }
 
     render() {
 
             const css = this.ownerDocument.createElement("style");
             css.innerHTML = Userstyle;
             this.shadowRoot?.appendChild(css);
+            
             const container = this.ownerDocument.createElement("section");
             container.className = "container";
 
