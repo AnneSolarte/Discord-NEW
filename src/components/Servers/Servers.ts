@@ -1,6 +1,6 @@
 
 import { addObserver, appState, dispatch } from "../../store/index";
-import { GetMessages, GetUsers, SaveServer, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
+import { GetMessages, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import { Server } from "../../types/servers";
 
@@ -18,10 +18,9 @@ class Servers extends HTMLElement {
   async connectedCallback() {
     if(appState.Servers.length ===0){
     dispatch(await getServer())
-    this.render();
-    }else{
-    this.render()
-  }
+    return false
+    }
+  this.render()
   }
 
   render() {

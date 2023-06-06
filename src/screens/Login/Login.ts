@@ -16,7 +16,12 @@ const credentials = {
   img: appState.userInfo.img,
 };
 
-
+const formData: Server = {
+  id: "",
+  name: "Bienvenido a Discord",
+  img: "/img/Server4.png",
+  createdAt: "",
+};
 
 
 export default class Login extends HTMLElement {
@@ -35,6 +40,7 @@ export default class Login extends HTMLElement {
 
   async handleLoginButton() {
     await firebase.loginUser(credentials);
+    dispatch(await SaveServer(formData))
     console.log(appState.user)
   }
 

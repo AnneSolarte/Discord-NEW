@@ -1,6 +1,6 @@
 
 import { appState, dispatch } from "../../store";
-import { GetUsers, navigate } from "../../store/actions";
+import { GetUsers, SaveServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import firebase from "../../utils/firebase";
 import { Servers, TextCanalDiv } from "../export";
@@ -42,14 +42,6 @@ class ServersSection extends HTMLElement {
             })
             ServersSection.appendChild(iconHome)
         
-            const iconAdd = this.ownerDocument.createElement("img")
-            iconAdd.className = "Icon"
-            iconAdd.src = "/img/Server01.png"
-            iconAdd.addEventListener("click", () =>{
-              CreateChannelPop.style.display = 'flex';
-            })
-            ServersSection.appendChild(iconAdd)
-        
             const servers = this.ownerDocument.createElement("my-servers") as Servers;
             ServersSection.appendChild(servers)
             
@@ -71,10 +63,6 @@ class ServersSection extends HTMLElement {
     const tittle = this.ownerDocument.createElement("h5")
     tittle.textContent = "Create Server"
     CreateChannelPop.appendChild(tittle)
-
-    const text = this.ownerDocument.createElement("h6")
-    text.textContent = "Choose a image and name"
-    CreateChannelPop.appendChild(text)
 
     const channels = this.ownerDocument.createElement("section")
     channels.className = 'channels'
@@ -113,20 +101,12 @@ class ServersSection extends HTMLElement {
 
     const buttons = this.ownerDocument.createElement("section")
     buttons.className = 'buttons'
-    
-    const CancelButton = this.ownerDocument.createElement("button");
-    CancelButton.innerText = "Cancel";
-    CancelButton.className = "Button"
-    CancelButton.addEventListener("click", () =>{
-        CreateChannelPop.style.display = 'none';
-    })
-    buttons.appendChild(CancelButton);
 
     const DoneButton = this.ownerDocument.createElement("button");
     DoneButton.innerText = "Done";
     DoneButton.className = "Button"
     DoneButton.addEventListener("click", async () => {
-      CreateChannelPop.style.display = 'none';
+      dispatch(await SaveServer(formData))
     })
     buttons.appendChild(DoneButton);
     

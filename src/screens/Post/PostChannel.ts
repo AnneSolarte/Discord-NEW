@@ -5,11 +5,9 @@ import { TextCanalDiv, Servers, ServersSect } from "../../components/export";
 import PostBar from "../../components/PostBar/PostBar";
 import CreatePostBar from "../../components/CreatePostBar/CreatePostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
-import { addObserver, appState, dispatch } from "../../store/index";
+import { addObserver} from "../../store/index";
 import { Server } from "../../types/servers";
-import firebase from "../../utils/firebase";
-import { Screens } from "../../types/navigation";
-import { SaveServer, navigate } from "../../store/actions";
+
 
 const formData: Server = {
   id: "",

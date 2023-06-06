@@ -24,12 +24,20 @@ export const addUser = async (user: User): Promise<Actions> =>{
 }
 export const Edit = async (user:User): Promise<EditUser> =>{
   await firebase.EditUserDB(user)
-
   return{
       action: UserActions.EDIT,
       payload: user,
   }
 }
+
+export const getU = async (user: User): Promise<Actions> =>{
+  await firebase.GetUserDB()
+  return{
+      action: UserActions.GET_USER,
+      payload: user,
+  }
+}
+
 
 export const GetUsers = async (): Promise<Actions> => {
   const users = await firebase.getUsersDB();

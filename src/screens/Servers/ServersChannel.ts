@@ -1,14 +1,10 @@
 import ServersChannelStyle from "./ServersChannel.css";
-import { navigate, SaveServer } from "../../store/actions";
 import User from "../../components/User/user";
 import WriteBar from "../../components/WriteBar/WriteBar";
 import ServerBar from "../../components/ServerBar/ServerBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
-import ChatDiv from "../../components/ChatDiv/ChatDiv";
-import { Screens } from "../../types/navigation";
-import { addObserver, appState, dispatch } from "../../store/index";
+import { addObserver} from "../../store/index";
 import { MessageCard, ServersSect, TextCanalDiv } from "../../components/export";
-import {Servers} from "../../components/export";
 import { Server } from "../../types/servers";
 import firebase from "../../utils/firebase";
 

@@ -21,6 +21,7 @@ export enum UserActions {
   "SET_USER" = "SET_USER",
   "ADD_USER" = "ADD_USER",
   "GET_USERS" = "GET_USERS",
+  "GET_USER" = "GET_USER",
   "EDIT" = "EDIT",
 }
 
@@ -95,6 +96,11 @@ export interface SetUser{
     payload: string
 }
 
+export interface GetUser{
+  action: UserActions.GET_USER;
+  payload: User
+}
+
 export interface AddUser {
   action: UserActions.ADD_USER,
   payload: User
@@ -120,4 +126,4 @@ export interface GetFriendsAct {
   payload: User[],
 }
 
-export type Actions = SaveServer | EditUser | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser | AddFriendAct |GetFriendsAct | GetUsers ;
+export type Actions = SaveServer | EditUser | GetServers | GetUser | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser | AddFriendAct |GetFriendsAct | GetUsers ;

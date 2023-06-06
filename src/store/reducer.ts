@@ -7,7 +7,7 @@ export const reducer = (actions: Actions, appState: AppState) => {
 
     switch (action) {
         case ServerActions.SAVE_SERVER:
-            appState.Servers = [...appState.Servers, payload]
+            appState.Servers = [...appState.Servers]
             return appState
 
         case ServerActions.GET_SERVERS:
@@ -19,7 +19,7 @@ export const reducer = (actions: Actions, appState: AppState) => {
             return appState;
 
         case PostActions.SAVE_POST:
-            appState.Post = [...appState.Post, payload]
+            appState.Post = [...appState.Post]
             return appState
     
         case PostActions.GET_POST:
@@ -27,7 +27,7 @@ export const reducer = (actions: Actions, appState: AppState) => {
             return appState
 
         case MessageActions.SAVE_MESSAGE:
-            appState.Messages = [...appState.Messages, payload]
+            appState.Messages = [...appState.Messages]
             return appState
         
         case MessageActions.GET_MESSAGE:
@@ -43,6 +43,10 @@ export const reducer = (actions: Actions, appState: AppState) => {
             return appState
 
         case UserActions.ADD_USER:
+            appState.userInfo = payload
+            return appState
+
+        case UserActions.GET_USER:
             appState.userInfo = payload
             return appState
 

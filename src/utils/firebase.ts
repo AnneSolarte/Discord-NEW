@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, onSnapshot, addDoc, getDocs, query, orderBy, setDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, onSnapshot, addDoc, getDocs, query, orderBy, setDoc, getDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
 import { appState } from "../store";
 
@@ -128,6 +128,26 @@ const EditUserDB = async (user: any) =>{
     console.error("Error editing document: ", e);
     return false
   }
+}
+
+const GetUserDB = async(): Promise<User> =>{
+  let resp: User ={
+    uid: "",
+    userName: "",
+    email: "",
+    img: "",
+    password: "",
+  };
+  const docRef = doc(db, "users", appState.userInfo.uid);
+
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    resp = (docSnap.data() as User);
+  } else {
+    console.log("No such document!");
+  }
+  return  resp
 }
 
 const SaveServerDB = async (server: Server) => {
@@ -345,5 +365,6 @@ export default {
   getFile,
   AddUserDB,
   getUsersDB,
-  EditUserDB
+  EditUserDB,
+  GetUserDB
 };

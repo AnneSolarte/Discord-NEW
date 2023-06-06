@@ -2,10 +2,9 @@ import HomeStyle from "./UserConfig.css";
 
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { Edit, GetUsers, SaveServer, getServer, setUserCredentials } from "../../store/actions";
+import { Edit, getU, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
-import {Server} from "../../types/servers"
 import firebase from "../../utils/firebase";
 import { ConfigDiv, ProfileBar } from "../../components/export";
 import EditProfile from "../../components/EditProfile/EditProfile";
@@ -117,20 +116,14 @@ export default class UserConfig extends HTMLElement {
             EditProfileName.className = "EditProfileText"
             EditProfileName.addEventListener("change", (e:any)=>
             formUser.userName = e.target.value);
+
             sectionEditProfileData.appendChild(EditProfileName)
-            
-
-            const uid = String(appState.userInfo.uid).slice(0, -23)
-
-            const EditProfileId = this.ownerDocument.createElement("p");
-            EditProfileId.textContent = "#" + uid
-            EditProfileId.className = "userId"
-            sectionEditProfileData.appendChild(EditProfileId)
 
             const btnEdit = this.ownerDocument.createElement("button")
             btnEdit.innerText = "Edit"
             btnEdit.addEventListener("click", async()=>{
                 dispatch(await Edit(formUser))
+                dispatch(await getU(formUser))
             })
             sectionEditProfileData.appendChild(btnEdit)
 

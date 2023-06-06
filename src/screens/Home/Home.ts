@@ -7,6 +7,7 @@ import { Friends, ServersSect, TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
 import {Server} from "../../types/servers"
 import firebase from "../../utils/firebase";
+import { GetFriends } from "../../store/actions";
 
 const formData: Server = {
   id: "",
@@ -34,6 +35,10 @@ export default class Home extends HTMLElement {
   async connectedCallback() {
     this.render();
     await firebase.AddUserDB(appState.userInfo)
+    if(appState.Friends.length === 0){
+      dispatch( await GetFriends())
+      this.render();
+    }
     
   }
 
