@@ -3,10 +3,12 @@ import { Server } from "./servers";
 import { Screens } from "./navigation";
 import { Post } from "./post";
 import { User } from "./user";
+import { Message } from "./message";
 
 export type AppState = {
   Post: Post[];
   Servers: Server[];
+  Messages: Message[];
   Friends: User[]
   screens: Screens;
   user: string;
@@ -29,6 +31,12 @@ export enum PostActions {
   "SAVE_POST" = "SAVE_POST",
   "GET_POST" = "GET_POST",
 }
+
+export enum MessageActions {
+  "SAVE_MESSAGE" = "SAVE_MESSAGE",
+  "GET_MESSAGE" = "GET_MESSAGE",
+}
+
 
 export enum NavigateActions {
   "NAVIGATE" = "NAVIGATE",
@@ -64,6 +72,16 @@ export interface GetPost {
   payload: Post[]
 }
 
+export interface SaveMessage {
+  action: MessageActions.SAVE_MESSAGE;
+  payload: Message
+}
+
+export interface GetMessages {
+  action: MessageActions.GET_MESSAGE;
+  payload: Message[]
+}
+
 export interface SetUser{
     action: UserActions.SET_USER;
     payload: string
@@ -74,4 +92,4 @@ export interface AddUser {
   payload: User
 }
 
-export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | AddUser;
+export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser;

@@ -15,6 +15,7 @@ import {
 import { Server } from "../types/servers";
 import { Post } from "../types/post";
 import { User } from "../types/user";
+import { Message } from "../types/message";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCwvZQAdJoW9EkcIsAK1K3nb8oLFhYP4oE",
@@ -214,6 +215,58 @@ const GetPostDB = async (serverId: string): Promise<Post[]> => {
   }
 };
 
+const SaveMessageDB = async (message: Message, serverId: string) => {
+  try {
+    const serverRef = doc(db, `users/${appState.userInfo.uid}/servers/${serverId}`);
+    const messCollection = collection(serverRef, "messages");
+
+    // Guardar el post en Firestore sin un ID
+    const docRef = await addDoc(messCollection, { ...message, createdAt: new Date() });
+
+    // Obtener el ID generado automáticamente
+    const messId = docRef.id;
+
+    // Actualizar el appState con el ID del post
+    const updatedMess = { ...message, id: messId };
+    appState.Messages.push(updatedMess);
+
+    // Actualizar el documento en Firestore con el ID del post
+    await setDoc(docRef, updatedMess);
+
+    return true;
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return false;
+  }
+};
+
+
+const GetMessagesDB = async (serverId: string): Promise<Message[]> => {
+  try {
+    const postCollection = collection(db,`users/${appState.userInfo.uid}/servers/${serverId}/posts`);
+    const q = query(postCollection);
+    const querySnapshot = await getDocs(q);
+    const messages: Message[] = [];
+
+    querySnapshot.forEach((doc) => {
+      const postData = doc.data();
+      const mess: Message = {
+        id: doc.id, // Obtener el ID del post desde Firestore
+        img: postData.img,
+        Username: postData.Username,
+        message: postData.message,
+        createdAt: postData.createdAt,
+      };
+      messages.push(mess);
+    });
+
+    return messages;
+  } catch (error) {
+    console.error("Error getting posts: ", error);
+    return [];
+  }
+};
+
 const getServersListener = (cb: (docs: Server[]) => void) => {
   const q = query(collection(db, "servers"), orderBy("createdAt")); 
   onSnapshot(q, (collection) => {
@@ -232,6 +285,8 @@ export default {
   GetServerDB,
   SavePostDB,
   GetPostDB,
+  SaveMessageDB,
+  GetMessagesDB,
   getServersListener,
   registerUser,
   loginUser,

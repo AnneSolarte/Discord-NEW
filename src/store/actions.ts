@@ -1,10 +1,11 @@
 import { Server } from "../types/servers";
-import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, AddUser, SelectServer } from "../types/store"
+import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, MessageActions, SelectServer } from "../types/store"
 import firebase  from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { Post } from "../types/post";
 import { User } from "../types/user";
 import { appState } from ".";
+import { Message } from "../types/message";
 
 
 export const setUserCredentials =  (user: string): SetUser=>{
@@ -52,6 +53,22 @@ export const getPosts = async (): Promise<Actions> => {
   return {
     action: PostActions.GET_POST,
     payload: posts,
+  };
+};
+
+export const SaveMessage = async (message: Message, serverId: string): Promise<Actions> => {
+  await firebase.SaveMessageDB(message, serverId);
+  return {
+    action: MessageActions.SAVE_MESSAGE,
+    payload: message,
+  };
+};
+
+export const GetMessages = async (): Promise<Actions> => {
+  const messages = await firebase.GetMessagesDB(appState.serverState.id);
+  return {
+    action: MessageActions.GET_MESSAGE,
+    payload: messages,
   };
 };
 
