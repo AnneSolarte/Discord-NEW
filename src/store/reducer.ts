@@ -14,6 +14,10 @@ export const reducer = (actions: Actions, appState: AppState) => {
             appState.Servers = payload
             return appState
 
+        case ServerActions.CHANGE_SELECTED_SERVER:
+            appState.serverState = payload;
+            return appState;
+
         case PostActions.SAVE_POST:
             appState.Post = [...appState.Post, payload]
             return appState

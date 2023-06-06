@@ -119,58 +119,86 @@ const AddUserDB = async (user: User) =>{
   }
 }
 
-const SaveServerDB = async (servers: Server) =>{
+const SaveServerDB = async (server: Server) => {
   try {
-    const main = collection(db, `users/${appState.userInfo.uid}/servers`) 
-    await addDoc(main,{...servers, createdAt: new Date()});
-    return true
+    const main = collection(db, `users/${appState.userInfo.uid}/servers`);
+    const docRef = await addDoc(main, { ...server, createdAt: new Date() });
+    const serverId = docRef.id;
+    
+    // Actualiza el campo id del objeto server con el serverId generado
+    server.id = serverId;
+    
+    
+    console.log("Server added with ID: ", serverId);
+    return true;
   } catch (e) {
     console.error("Error adding document: ", e);
-    return false
+    return false;
   }
-}
+};
 
-const GetServerDB = async(): Promise<Server[]> =>{
-  const resp: Server[] = [];
-
-  const q=query(collection(db,`users/${appState.userInfo.uid}/servers`), orderBy("createdAt"))
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
-    resp.push({
-      ...doc.data()
-    }as Server)
-  });
-  return resp
-}
-
-
-const SavePostDB = async (post: Post) =>{
+const GetServerDB = async (): Promise<Server[]> => {
   try {
-    const main = collection(db, `users/${appState.userInfo.uid}/${appState.Servers}/posts`) 
-    await addDoc(main,{...post, createdAt: new Date()});
-    console.log("Server agregado en FB")
-    return true
+    const main = collection(db, `users/${appState.userInfo.uid}/servers`);
+    const querySnapshot = await getDocs(main);
+
+    const servers: Server[] = [];
+
+    querySnapshot.forEach((doc) => {
+      const server = { id: doc.id, ...doc.data() } as Server;
+      servers.push(server);
+    });
+
+    return servers;
+  } catch (e) {
+    console.error("Error getting servers: ", e);
+    return [];
+  }
+};
+
+
+const SavePostDB = async (post: Post, serverId: string) => {
+  try {
+    const serverRef = doc(db, `users/${appState.userInfo.uid}/servers/${serverId}`);
+    const postCollection = collection(serverRef, "posts");
+    await addDoc(postCollection, { ...post, createdAt: new Date() });
+    return true;
   } catch (e) {
     console.error("Error adding document: ", e);
-    return false
+    return false;
   }
-}
+};
 
+const GetPostDB = async (): Promise<Post[]> => {
+  try {
+    const serverRef = collection(db, `users/${appState.userInfo.uid}/servers`);
+    const querySnapshot = await getDocs(serverRef);
+    
+    const posts: Post[] = [];
 
-const GetPostDB = async(): Promise<Post[]> =>{
-  const resp: Post[] = [];
+    querySnapshot.forEach(async (serverDoc) => {
+      const postCollectionRef = collection(serverDoc.ref, "posts");
+      const postsSnapshot = await getDocs(postCollectionRef);
+      
+      postsSnapshot.forEach((postDoc) => {
+        const postData = postDoc.data();
+        const post: Post = {
+          id: postDoc.id,
+          img: postData.img,
+          title: postData.title,
+          message: postData.message,
+          createdAt: postData.createdAt,
+        };
+        posts.push(post);
+      });
+    });
 
-  const q=query(collection(db,`users/${appState.userInfo.uid}/servers`), orderBy("createdAt"))
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
-    resp.push({
-      ...doc.data()
-    }as Post)
-  });
-  return resp
-}
+    return posts;
+  } catch (e) {
+    console.error("Error getting posts: ", e);
+    return [];
+  }
+};
 
 const getServersListener = (cb: (docs: Server[]) => void) => {
   const q = query(collection(db, "servers"), orderBy("createdAt")); 

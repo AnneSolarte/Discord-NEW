@@ -1,18 +1,9 @@
 
+import { appState } from "../../store";
 import ServerDivStyle from "./ServersDiv.css"
-export enum Server {
-    "name" = "name",
-}
 
 class ServerDiv extends HTMLElement {
-    name?: string;
 
-    static get observedAttributes() {
-        const attrs: Record<Server, null> = {
-            name: null,
-        };
-        return Object.keys(attrs);
-    }
 
     constructor() {
         super();
@@ -22,19 +13,6 @@ class ServerDiv extends HTMLElement {
     connectedCallback() {
         this.render();
     }
-    attributeChangedCallback(
-        propimg: Server,
-        _: string | undefined,
-        newValue: string | undefined
-        ) {
-            switch (propimg) {
-                default:
-                this[propimg] = newValue;
-                break;
-            }
-
-            this.render();
-        }
 
     render() {
             const css = this.ownerDocument.createElement("style");
@@ -46,7 +24,7 @@ class ServerDiv extends HTMLElement {
 
             const NameServer =  this.ownerDocument.createElement("p");
             NameServer.className = "textBlock1"
-            NameServer.textContent= String(this.name)
+            NameServer.textContent= appState.serverState.name
 
             const iconText =  this.ownerDocument.createElement("img");
             iconText.className = "imgLine"

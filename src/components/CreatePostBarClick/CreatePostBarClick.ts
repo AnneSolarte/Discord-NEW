@@ -1,7 +1,7 @@
 
 import CreatePostBarClickStyle from "./CreatePostBarClick.css"
 import { Post } from "../../types/post";
-import { dispatch } from "../../store";
+import { appState, dispatch } from "../../store";
 import { SavePost, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import firebase from "../../utils/firebase";
@@ -89,7 +89,7 @@ class CreatePostBarClick extends HTMLElement {
         Postbtn.className = "ButtonPost"
         Postbtn.addEventListener("click", async ()=>{
             console.log(postForm)
-            dispatch(await SavePost(postForm))
+            dispatch(await SavePost(postForm, appState.serverState.id))
         })
 
         formSection.appendChild(iconX)

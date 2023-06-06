@@ -30,10 +30,11 @@ onAuthStateChanged(auth, async (u: any) => {
 
 const emptyState: AppState = {
   Post: [],
-  Servers: [ {id: "",
-  name: "",
-  img: "",
-  createdAt: ""} ],
+  Servers: [ 
+    {id: "",
+    name: "",
+    img: "",
+    createdAt: ""} ],
   Friends: [],
   screens: Screens.DASHBOARD,
   user: "",
@@ -44,6 +45,10 @@ const emptyState: AppState = {
     password: "",
     img: "/img/user.png",
   },
+  serverState: {id: "",
+  name: "",
+  img: "",
+  createdAt: ""},
 };
 
 export let appState = Storage.get<AppState>({

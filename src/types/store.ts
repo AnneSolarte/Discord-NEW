@@ -11,6 +11,7 @@ export type AppState = {
   screens: Screens;
   user: string;
   userInfo: User
+  serverState: Server;
 };
  
 export enum UserActions {
@@ -22,6 +23,7 @@ export enum UserActions {
 export enum ServerActions {
   "SAVE_SERVER" = "SAVE_SERVER",
   "GET_SERVERS" = "GET_SERVERS",
+  "CHANGE_SELECTED_SERVER" = "CHANGE_SELECTED_SERVER"
 }
 export enum PostActions {
   "SAVE_POST" = "SAVE_POST",
@@ -40,6 +42,11 @@ export interface Navigate {
 export interface SaveServer {
   action: ServerActions.SAVE_SERVER;
   payload: Server
+}
+
+export interface SelectServer {
+  action: ServerActions.CHANGE_SELECTED_SERVER;
+  payload: Server;
 }
 
 export interface GetServers {
@@ -67,4 +74,4 @@ export interface AddUser {
   payload: User
 }
 
-export type Actions = SaveServer | GetServers | SetUser | Navigate | SavePost | GetPost | AddUser;
+export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | AddUser;

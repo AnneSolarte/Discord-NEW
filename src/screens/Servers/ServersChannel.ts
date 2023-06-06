@@ -8,11 +8,8 @@ import ChatDiv from "../../components/ChatDiv/ChatDiv";
 import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
 import TextCanalDiv, { Serve } from "../../components/TextCanalDiv/TextCanalDiv";
-import { Server } from "../../types/servers";
-import firebase from "../../utils/firebase";
 
 export default class ServersChannel extends HTMLElement {
-  canalList: any[] = [];
 
   constructor() {
     super();
@@ -62,12 +59,9 @@ export default class ServersChannel extends HTMLElement {
       dispatch(navigate(Screens.POST));
     });
 
-    appState.Servers.forEach((data) => {
-      const serverName = this.ownerDocument.createElement("server-div") as ServerDiv;
-        serverName.setAttribute(Serve.name, data.name);
-        this.canalList.push(serverName);
-        section2.appendChild(serverName)
-    });
+    const serverName = this.ownerDocument.createElement("server-div") as ServerDiv;
+    section2.appendChild(serverName)
+
 
     const canal = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
     section2.appendChild(canal)

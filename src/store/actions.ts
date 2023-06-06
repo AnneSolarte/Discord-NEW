@@ -1,5 +1,5 @@
 import { Server } from "../types/servers";
-import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, AddUser } from "../types/store"
+import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, AddUser, SelectServer } from "../types/store"
 import firebase  from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { Post } from "../types/post";
@@ -38,25 +38,32 @@ export const getServer = async(): Promise<Actions>=>{
     }
 }
 
-export const SavePost = async (post: Post): Promise<Actions>=>{
-  await firebase.SavePostDB(post);
-  return{
-      action: PostActions.SAVE_POST,
-      payload: post,
-  }
-}
+export const SavePost = async (post: Post, serverId: string): Promise<Actions> => {
+  await firebase.SavePostDB(post, serverId);
+  return {
+    action: PostActions.SAVE_POST,
+    payload: post,
+  };
+};
 
-export const getPosts = async(): Promise<Actions>=>{
-  console.log("Entrando en getPost() actions")
-    const Posts = await firebase.GetPostDB();
-    return{
-        action: PostActions.GET_POST,
-        payload: Posts,
-    }
-}
+export const getPosts = async (): Promise<Actions> => {
+  const posts = await firebase.GetPostDB();
+  return {
+    action: PostActions.GET_POST,
+    payload: posts,
+  };
+};
+
 export const navigate = (screen: Screens) => {
     return {
       action: NavigateActions.NAVIGATE,
       payload: screen,
     };
   };
+
+export const changeSelectedServer = (server: Server): SelectServer => {
+  return {
+    action: ServerActions.CHANGE_SELECTED_SERVER,
+    payload: server,
+  };
+};

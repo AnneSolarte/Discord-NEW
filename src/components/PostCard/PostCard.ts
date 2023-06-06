@@ -24,7 +24,7 @@ class PostCard extends HTMLElement {
         if(appState.Servers.length === 0) {
             dispatch( await getPosts())
             if(appState.Servers.length === 0){
-                dispatch(await SavePost(postForm))
+                dispatch(await SavePost(postForm, appState.serverState.id))
             }
             this.render();
         } else {
