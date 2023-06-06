@@ -1,16 +1,8 @@
 import PostCardStyle from "./PostCard.css";
 import { appState, addObserver } from "../../store";
 import { dispatch } from "../../store";
-import { SavePost, getPosts } from "../../store/actions";
-import { Post } from "../../types/post";
+import {  getPosts } from "../../store/actions";
 
-const postForm: Post = {
-  id: "",
-  img: "",
-  title: "Bienvenido a Discord",
-  message: "Inicia creando post",
-  createdAt: "",
-};
 
 class PostCard extends HTMLElement {
   constructor() {
