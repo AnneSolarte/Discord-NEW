@@ -30,14 +30,6 @@ export default class AddFriends extends HTMLElement {
         this.shadowRoot?.appendChild(css);   
     }
 
-
-    const section2 = this.ownerDocument.createElement("section")
-    section2.className = 'Section2'
-    const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
-    section2.appendChild(FriendsDiv)
-
-            
-
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
 
@@ -46,6 +38,34 @@ export default class AddFriends extends HTMLElement {
 
     this.shadowRoot?.appendChild(section1);
 
+    const section2 = this.ownerDocument.createElement("section")
+    section2.className = 'Section2'
+
+    const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
+    section2.appendChild(FriendsDiv)
+
+    const Friends = this.ownerDocument.createElement("section")
+    Friends.className = "FriendsSection"
+
+    appState.Friends.forEach((p) => {
+      const FriendsDiv = this.ownerDocument.createElement("section");
+      FriendsDiv.className = "FriendsDiv";
+
+      const uImg = this.ownerDocument.createElement("img");
+      uImg.className = "friendsImg";
+      uImg.src = p.img;
+
+      const userN = this.ownerDocument.createElement("p");
+      userN.className = "FriendsName";
+      userN.innerText = p.userName;
+
+      FriendsDiv.appendChild(uImg)
+      FriendsDiv.appendChild(userN)
+      Friends.appendChild(FriendsDiv)
+    });
+
+    section2.appendChild(Friends)
+    
     this.shadowRoot?.appendChild(section2);
 
     const section3 = this.ownerDocument.createElement("section")

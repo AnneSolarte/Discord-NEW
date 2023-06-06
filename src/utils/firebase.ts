@@ -298,8 +298,13 @@ async function getUsersDB() {
     const users: User[] = [];
     snapshot.forEach((doc) => {
       const user = doc.data() as User;
-      user.uid = doc.id; // Utiliza el ID del documento como ID del usuario
-      users.push(user);
+      const userId = doc.id;
+
+      // Excluir al usuario que se encuentra en appState.UserInfo
+      if (userId !== appState.userInfo.uid) {
+        user.uid = userId; // Utiliza el ID del documento como ID del usuario
+        users.push(user);
+      }
     });
     return users;
   } catch (error) {

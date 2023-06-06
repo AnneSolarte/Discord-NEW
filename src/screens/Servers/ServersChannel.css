@@ -2,8 +2,10 @@
     position: fixed;
     display: flex;
     flex-direction: column;
+    padding-top: 1%;
     width: 4.5%;
     height: 95%;
+    padding-top: 1%;
     background-color: rgb(88, 101, 242);
     border-radius: 1.5em;
     z-index: 10;

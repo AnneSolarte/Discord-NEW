@@ -5,13 +5,8 @@ import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { Friends, ServersSect, TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { GetUsers, SaveServer, getServer, setUserCredentials } from "../../store/actions";
-import { navigate } from "../../store/actions";
-import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
-import Servers from "../../components/Servers/Servers"
 import firebase from "../../utils/firebase";
-import storage from "../../utils/storage";
 
 const formData: Server = {
   id: "",
@@ -68,6 +63,27 @@ export default class Home extends HTMLElement {
     const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
     section2.appendChild(FriendsDiv)
 
+    const Friends = this.ownerDocument.createElement("section")
+    Friends.className = "FriendsSection"
+
+    appState.Friends.forEach((p) => {
+      const FriendsDiv = this.ownerDocument.createElement("section");
+      FriendsDiv.className = "FriendsDiv";
+
+      const uImg = this.ownerDocument.createElement("img");
+      uImg.className = "friendsImg";
+      uImg.src = p.img;
+
+      const userN = this.ownerDocument.createElement("p");
+      userN.className = "FriendsName";
+      userN.innerText = p.userName;
+
+      FriendsDiv.appendChild(uImg)
+      FriendsDiv.appendChild(userN)
+      Friends.appendChild(FriendsDiv)
+    });
+
+    section2.appendChild(Friends)
     this.shadowRoot?.appendChild(section2);
 
     const section3 = this.ownerDocument.createElement("section")

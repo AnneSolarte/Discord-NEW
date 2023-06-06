@@ -1,6 +1,7 @@
 .Section1{
     position: fixed;
     display: flex;
+    padding-top: 1%;
     flex-direction: column;
     width: 4.5%;
     height: 95%;
