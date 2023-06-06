@@ -4,6 +4,7 @@ import firebase  from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { Post } from "../types/post";
 import { User } from "../types/user";
+import { appState } from ".";
 
 
 export const setUserCredentials =  (user: string): SetUser=>{
@@ -47,7 +48,7 @@ export const SavePost = async (post: Post, serverId: string): Promise<Actions> =
 };
 
 export const getPosts = async (): Promise<Actions> => {
-  const posts = await firebase.GetPostDB();
+  const posts = await firebase.GetPostDB(appState.serverState.id);
   return {
     action: PostActions.GET_POST,
     payload: posts,

@@ -121,18 +121,24 @@ const AddUserDB = async (user: User) =>{
 
 const SaveServerDB = async (server: Server) => {
   try {
-    const main = collection(db, `users/${appState.userInfo.uid}/servers`);
-    const docRef = await addDoc(main, { ...server, createdAt: new Date() });
-    const serverId = docRef.id;
-    
-    // Actualiza el campo id del objeto server con el serverId generado
-    server.id = serverId;
-    
-    
-    console.log("Server added with ID: ", serverId);
+    const serverRef = collection(db, `users/${appState.userInfo.uid}/servers`);
+    const newServerRef = doc(serverRef);
+
+    // Generar el ID del servidor
+    const serverId = newServerRef.id;
+
+    // Obtener la fecha actual como una cadena de texto en formato ISO
+    const createdAt = new Date().toISOString();
+
+    // Guardar el servidor en la base de datos con el ID generado
+    await setDoc(newServerRef, { ...server, id: serverId, createdAt });
+
+    // Actualizar el appState con el ID del servidor
+    appState.Servers.push({ ...server, id: serverId, createdAt });
+
     return true;
-  } catch (e) {
-    console.error("Error adding document: ", e);
+  } catch (error) {
+    console.error("Error adding server: ", error);
     return false;
   }
 };
@@ -156,12 +162,24 @@ const GetServerDB = async (): Promise<Server[]> => {
   }
 };
 
-
 const SavePostDB = async (post: Post, serverId: string) => {
   try {
     const serverRef = doc(db, `users/${appState.userInfo.uid}/servers/${serverId}`);
     const postCollection = collection(serverRef, "posts");
-    await addDoc(postCollection, { ...post, createdAt: new Date() });
+
+    // Guardar el post en Firestore sin un ID
+    const docRef = await addDoc(postCollection, { ...post, createdAt: new Date() });
+
+    // Obtener el ID generado automáticamente
+    const postId = docRef.id;
+
+    // Actualizar el appState con el ID del post
+    const updatedPost = { ...post, id: postId };
+    appState.Post.push(updatedPost);
+
+    // Actualizar el documento en Firestore con el ID del post
+    await setDoc(docRef, updatedPost);
+
     return true;
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -169,36 +187,34 @@ const SavePostDB = async (post: Post, serverId: string) => {
   }
 };
 
-const GetPostDB = async (): Promise<Post[]> => {
+
+const GetPostDB = async (serverId: string): Promise<Post[]> => {
   try {
-    const serverRef = collection(db, `users/${appState.userInfo.uid}/servers`);
-    const querySnapshot = await getDocs(serverRef);
-    
+    const postCollection = collection(db, `users/${appState.userInfo.uid}/servers/${serverId}/posts`);
+    const q = query(postCollection);
+    const querySnapshot = await getDocs(q);
     const posts: Post[] = [];
 
-    querySnapshot.forEach(async (serverDoc) => {
-      const postCollectionRef = collection(serverDoc.ref, "posts");
-      const postsSnapshot = await getDocs(postCollectionRef);
-      
-      postsSnapshot.forEach((postDoc) => {
-        const postData = postDoc.data();
-        const post: Post = {
-          id: postDoc.id,
-          img: postData.img,
-          title: postData.title,
-          message: postData.message,
-          createdAt: postData.createdAt,
-        };
-        posts.push(post);
-      });
+    querySnapshot.forEach((doc) => {
+      const postData = doc.data();
+      const post: Post = {
+        id: doc.id,
+        img: postData.img,
+        title: postData.title,
+        message: postData.message,
+        createdAt: postData.createdAt,
+      };
+      posts.push(post);
     });
 
     return posts;
-  } catch (e) {
-    console.error("Error getting posts: ", e);
+  } catch (error) {
+    console.error("Error getting posts: ", error);
     return [];
   }
 };
+
+
 
 const getServersListener = (cb: (docs: Server[]) => void) => {
   const q = query(collection(db, "servers"), orderBy("createdAt")); 
