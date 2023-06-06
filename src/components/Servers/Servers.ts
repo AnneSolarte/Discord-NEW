@@ -39,11 +39,6 @@ class Servers extends HTMLElement {
     const servers = this.ownerDocument.createElement("section");
     servers.className = "Servers";
 
-    if (appState.Servers.length === 0) {
-      const noServersMessage = this.ownerDocument.createElement("p");
-      noServersMessage.innerText = "No hay servidores disponibles.";
-      servers.appendChild(noServersMessage);
-    } else {
       appState.Servers.forEach((p) => {
         const serverImg = this.ownerDocument.createElement("img");
         serverImg.src = p.img;
@@ -56,7 +51,7 @@ class Servers extends HTMLElement {
         });
         servers.appendChild(serverImg);
       });
-    }
+    
 
     this.shadowRoot?.appendChild(servers);
   }
