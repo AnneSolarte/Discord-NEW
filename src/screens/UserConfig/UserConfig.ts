@@ -2,7 +2,7 @@ import HomeStyle from "./UserConfig.css";
 
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { GetUsers, SaveServer, getServer, setUserCredentials } from "../../store/actions";
+import { Edit, GetUsers, SaveServer, getServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
@@ -10,20 +10,13 @@ import firebase from "../../utils/firebase";
 import { ConfigDiv, ProfileBar } from "../../components/export";
 import EditProfile from "../../components/EditProfile/EditProfile";
 
-const formData: Server = {
-  id: "",
-  name: "",
-  img: "",
-  createdAt: "",
-};
-
-const serverData: Server = {
-  id: "",
-  name: "Search",
-  img: "/img/Server02.png",
-  createdAt: "",
-};
-
+const formUser = { 
+    uid: "",
+    userName: "",
+    email: "",
+    password: "",
+    img: "",
+  };
 
 export default class UserConfig extends HTMLElement {
 
@@ -66,10 +59,6 @@ export default class UserConfig extends HTMLElement {
     }
   }
 
-  changeName(e: any) {
-    formData.name = e?.target?.value;
-  }
-
   async render() {
     if (this.shadowRoot) {
         this.shadowRoot.innerHTML = ``;
@@ -97,7 +86,57 @@ export default class UserConfig extends HTMLElement {
     const editP = this.ownerDocument.createElement("edit-profile") as EditProfile;
     section3.appendChild(editP)
     
+    const sectionEditProfile = this.ownerDocument.createElement("section");
+            sectionEditProfile.className = "sectionEditProfile"
 
+            const sectionEditProfileData = this.ownerDocument.createElement("section");
+            sectionEditProfileData.className = "sectionEditProfileData"
+
+            const ProfileImg =  this.ownerDocument.createElement("img");
+            ProfileImg.className = "EditProfileImg"
+            ProfileImg.src = appState.userInfo.img
+            sectionEditProfile.appendChild(ProfileImg)
+
+            const EditProfileImg =  this.ownerDocument.createElement("input");
+            EditProfileImg.type = "file"
+            EditProfileImg.addEventListener("change", async () =>{
+                const file = EditProfileImg.files?.[0];
+                if (file) await firebase.uploadFile(file);
+                console.log(file?.name);
+                if (file) {
+                  const img = await firebase.getFile(file.name);
+                  console.log("img", img);
+                  const src = String(img)
+                  formUser.img = src
+              }
+              });
+            sectionEditProfile.appendChild(EditProfileImg)
+
+            const EditProfileName = this.ownerDocument.createElement("input");
+            EditProfileName.placeholder = appState.userInfo.userName
+            EditProfileName.className = "EditProfileText"
+            EditProfileName.addEventListener("change", (e:any)=>
+            formUser.userName = e.target.value);
+            sectionEditProfileData.appendChild(EditProfileName)
+            
+
+            const uid = String(appState.userInfo.uid).slice(0, -23)
+
+            const EditProfileId = this.ownerDocument.createElement("p");
+            EditProfileId.textContent = "#" + uid
+            EditProfileId.className = "userId"
+            sectionEditProfileData.appendChild(EditProfileId)
+
+            const btnEdit = this.ownerDocument.createElement("button")
+            btnEdit.innerText = "Edit"
+            btnEdit.addEventListener("click", async()=>{
+                dispatch(await Edit(formUser))
+            })
+            sectionEditProfileData.appendChild(btnEdit)
+
+            sectionEditProfile.appendChild(sectionEditProfileData)
+            
+            section3.appendChild(sectionEditProfile);
 
     const logOut = this.ownerDocument.createElement("button");
     logOut.innerText = "Log Out";

@@ -67,11 +67,10 @@ export default class ServersChannel extends HTMLElement {
     const ChatSection = this.ownerDocument.createElement("section")
     ChatSection.className = 'ChatSection'
 
-    const serverBar = this.ownerDocument.createElement("server-bar") as ServerBar;
-    ChatSection.appendChild(serverBar)
 
-    const chatDiv = this.ownerDocument.createElement("chat-div") as ChatDiv;
-    ChatSection.appendChild(chatDiv);
+    const serverBar = this.ownerDocument.createElement("server-bar") as ServerBar;
+    serverBar.className = "serverBar"
+    ChatSection.appendChild(serverBar)
 
     const writeBar = this.ownerDocument.createElement("write-bar") as WriteBar;
     ChatSection.appendChild(writeBar)

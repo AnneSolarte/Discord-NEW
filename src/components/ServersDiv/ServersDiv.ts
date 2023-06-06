@@ -68,11 +68,11 @@ class ServersSection extends HTMLElement {
     const CreateChannelPop = this.ownerDocument.createElement("section")
     CreateChannelPop.className = 'CreateChannelPop'
 
-    const tittle = this.ownerDocument.createElement("h1")
+    const tittle = this.ownerDocument.createElement("h5")
     tittle.textContent = "Create Server"
     CreateChannelPop.appendChild(tittle)
 
-    const text = this.ownerDocument.createElement("p")
+    const text = this.ownerDocument.createElement("h6")
     text.textContent = "Choose a image and name"
     CreateChannelPop.appendChild(text)
 
@@ -116,7 +116,7 @@ class ServersSection extends HTMLElement {
     
     const CancelButton = this.ownerDocument.createElement("button");
     CancelButton.innerText = "Cancel";
-    CancelButton.className = "CancelButton"
+    CancelButton.className = "Button"
     CancelButton.addEventListener("click", () =>{
         CreateChannelPop.style.display = 'none';
     })
@@ -124,7 +124,7 @@ class ServersSection extends HTMLElement {
 
     const DoneButton = this.ownerDocument.createElement("button");
     DoneButton.innerText = "Done";
-    DoneButton.className = "DoneButton"
+    DoneButton.className = "Button"
     DoneButton.addEventListener("click", async () => {
       CreateChannelPop.style.display = 'none';
     })
