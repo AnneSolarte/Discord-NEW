@@ -21,9 +21,10 @@ class PostCard extends HTMLElement {
     }
 
     async connectedCallback() {
-        if(appState.Servers.length === 0) {
+        if(appState.Post.length === 0) {
+            console.log("Haciendo petición firebase")
             dispatch( await getPosts())
-            if(appState.Servers.length === 0){
+            if(appState.Post.length === 0){
                 dispatch(await SavePost(postForm, appState.serverState.id))
             }
             this.render();
