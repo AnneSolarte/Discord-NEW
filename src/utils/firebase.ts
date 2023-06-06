@@ -267,16 +267,30 @@ const GetMessagesDB = async (serverId: string): Promise<Message[]> => {
   }
 };
 
-const getServersListener = (cb: (docs: Server[]) => void) => {
-  const q = query(collection(db, "servers"), orderBy("createdAt")); 
-  onSnapshot(q, (collection) => {
-    const docs: Server[] = collection.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Server[];
-    cb(docs);
+const AddFriendDB = async (friend: User) =>{
+  try {
+    const main = collection(db, `users/${appState.userInfo.uid}/friends`)
+    await addDoc(main,{...friend, createdAt: new Date()});
+    return true
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    return false
+  }
+}
+
+const GetFriendsDB = async(): Promise<User[]> =>{
+  const resp: User[] = [];
+
+  const q=query(collection(db,`users/${appState.userInfo.uid}/friends`), orderBy("createdAt"))
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+    resp.push({
+      ...doc.data()
+    }as User)
   });
-};
+  return resp
+}
 
 export {auth}
 export {db}
@@ -287,7 +301,8 @@ export default {
   GetPostDB,
   SaveMessageDB,
   GetMessagesDB,
-  getServersListener,
+  AddFriendDB,
+  GetFriendsDB,
   registerUser,
   loginUser,
   onAuthStateChanged,

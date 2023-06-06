@@ -41,6 +41,11 @@ export enum MessageActions {
 export enum NavigateActions {
   "NAVIGATE" = "NAVIGATE",
 }
+export enum FriendsActions {
+  "ADD_FRIEND" = "ADD_FRIEND",
+  "GET_FRIENDS" = "GET_FRIENDS",
+}
+
 
 export interface Navigate {
   action: NavigateActions.NAVIGATE;
@@ -92,4 +97,14 @@ export interface AddUser {
   payload: User
 }
 
-export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser;
+export interface AddFriendAct {
+  action: FriendsActions.ADD_FRIEND,
+  payload: User,
+}
+
+export interface GetFriendsAct {
+  action: FriendsActions.GET_FRIENDS,
+  payload: User[],
+}
+
+export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser | AddFriendAct |GetFriendsAct ;

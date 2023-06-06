@@ -1,5 +1,5 @@
 import { Server } from "../types/servers";
-import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, MessageActions, SelectServer } from "../types/store"
+import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, MessageActions, SelectServer, AddFriendAct, GetFriendsAct, FriendsActions } from "../types/store"
 import firebase  from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { Post } from "../types/post";
@@ -85,3 +85,24 @@ export const changeSelectedServer = (server: Server): SelectServer => {
     payload: server,
   };
 };
+
+export const AddFriend = async (friend:User): Promise<AddFriendAct> =>{
+
+  console.log(friend)
+  await firebase.AddFriendDB(friend)
+
+  return{
+      action: FriendsActions.ADD_FRIEND,
+      payload: friend,
+  }
+}
+
+export const GetFriends = async (): Promise<GetFriendsAct> =>{
+
+  const friends = await firebase.GetFriendsDB()
+
+  return{
+      action: FriendsActions.GET_FRIENDS,
+      payload: friends,
+  }
+}

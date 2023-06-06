@@ -1,4 +1,4 @@
-import { ServerActions, NavigateActions, UserActions, PostActions, MessageActions } from "../types/store";
+import { ServerActions, NavigateActions, UserActions, PostActions, MessageActions, FriendsActions } from "../types/store";
 import { AppState } from "../types/store";
 import { Actions } from "../types/store";
 
@@ -44,6 +44,14 @@ export const reducer = (actions: Actions, appState: AppState) => {
 
         case UserActions.ADD_USER:
             appState.userInfo = payload
+            return appState
+
+        case FriendsActions.ADD_FRIEND:
+            appState.Friends = [...appState.Friends, payload]
+            return appState
+            
+        case FriendsActions.GET_FRIENDS:
+            appState.Friends = payload
             return appState
 
         default:
