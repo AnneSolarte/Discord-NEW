@@ -1,7 +1,7 @@
 import PostChannelStyle from "./PostChannel.css";
 import PostCard from "../../components/PostCard/PostCard";
 import User from "../../components/User/user";
-import { TextCanalDiv } from "../../components/export";
+import { TextCanalDiv, Servers } from "../../components/export";
 import PostBar from "../../components/PostBar/PostBar";
 import CreatePostBar from "../../components/CreatePostBar/CreatePostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
@@ -9,9 +9,7 @@ import { addObserver, appState, dispatch } from "../../store/index";
 import { Server } from "../../types/servers";
 import firebase from "../../utils/firebase";
 import { Screens } from "../../types/navigation";
-import {Servers} from "../../components/export";
 import { SaveServer, navigate } from "../../store/actions";
-
 
 const formData: Server = {
   id: "",
@@ -21,7 +19,6 @@ const formData: Server = {
 };
 
 export default class PostChannel extends HTMLElement {
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -37,76 +34,79 @@ export default class PostChannel extends HTMLElement {
   }
 
   render() {
-    
     if (this.shadowRoot) {
-        this.shadowRoot.innerHTML = ``;
-      
-        const css = this.ownerDocument.createElement("style");
-        css.innerHTML = PostChannelStyle;
-        this.shadowRoot?.appendChild(css);
+      this.shadowRoot.innerHTML = ``;
 
+      const css = this.ownerDocument.createElement("style");
+      css.innerHTML = PostChannelStyle;
+      this.shadowRoot?.appendChild(css);
     }
 
-    const capa = this.ownerDocument.createElement("section")
-    capa.className = 'capa'
+    const capa = this.ownerDocument.createElement("section");
+    capa.className = "capa";
     this.shadowRoot?.appendChild(capa);
 
-    const section1 = this.ownerDocument.createElement("section")
-    section1.className = 'Section1'
+    const section1 = this.ownerDocument.createElement("section");
+    section1.className = "Section1";
 
-    const iconHome = this.ownerDocument.createElement("img")
-    iconHome.className = "Icon"
-    iconHome.src= "/img/Server0.png"
-    section1.appendChild(iconHome)
+    const iconHome = this.ownerDocument.createElement("img");
+    iconHome.className = "Icon";
+    iconHome.src = "/img/Server0.png";
+    section1.appendChild(iconHome);
 
-    const iconAdd = this.ownerDocument.createElement("img")
-    iconAdd.className = "Icon"
-    iconAdd.src = "/img/Server01.png"
-    iconAdd.addEventListener("click", () =>{
-      CreateChannelPop.style.display = 'flex';
-      capa.style.display = "flex"
-    })
-    section1.appendChild(iconAdd)
+    const iconAdd = this.ownerDocument.createElement("img");
+    iconAdd.className = "Icon";
+    iconAdd.src = "/img/Server01.png";
+    iconAdd.addEventListener("click", () => {
+      CreateChannelPop.style.display = "flex";
+      capa.style.display = "flex";
+    });
+    section1.appendChild(iconAdd);
 
     const servers = this.ownerDocument.createElement("my-servers") as Servers;
-    section1.appendChild(servers)
-    
-    const iconSearch = this.ownerDocument.createElement("img")
-    iconSearch.className = "Icon"
-    iconSearch.src= "/img/Server02.png"
-    iconSearch.addEventListener("click", () =>{
-      dispatch(navigate(Screens.POST))
-    })
-    section1.appendChild(iconSearch)
-    
-    const ServersCards = this.ownerDocument.createElement("div")
-    ServersCards.className = 'ServerSection'
-    
+    section1.appendChild(servers);
+
+    const iconSearch = this.ownerDocument.createElement("img");
+    iconSearch.className = "Icon";
+    iconSearch.src = "/img/Server02.png";
+    iconSearch.addEventListener("click", () => {
+      dispatch(navigate(Screens.POST));
+    });
+    section1.appendChild(iconSearch);
+
+    const ServersCards = this.ownerDocument.createElement("div");
+    ServersCards.className = "ServerSection";
+
     this.shadowRoot?.appendChild(section1);
 
-    const section2 = this.ownerDocument.createElement("section")
-    section2.className = 'Section2'
-    
+    const section2 = this.ownerDocument.createElement("section");
+    section2.className = "Section2";
 
-    const serverDiv = this.ownerDocument.createElement("server-div") as ServerDiv;
-    section2.appendChild(serverDiv)
+    const serverDiv = this.ownerDocument.createElement(
+      "server-div"
+    ) as ServerDiv;
+    section2.appendChild(serverDiv);
 
     const canal = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
-    section2.appendChild(canal)
+    section2.appendChild(canal);
 
     this.shadowRoot?.appendChild(section2);
 
-    const section3 = this.ownerDocument.createElement("section")
-    section3.className = 'PostSection'
+    const section3 = this.ownerDocument.createElement("section");
+    section3.className = "PostSection";
 
     const postBar = this.ownerDocument.createElement("post-bar") as PostBar;
-    section3.appendChild(postBar)
+    section3.appendChild(postBar);
 
-    const createPostBar = this.ownerDocument.createElement("create-post") as CreatePostBar;
-    section3.appendChild(createPostBar)
+    const createPostBar = this.ownerDocument.createElement(
+      "create-post"
+    ) as CreatePostBar;
+    section3.appendChild(createPostBar);
 
-    const PostCards = this.ownerDocument.createElement("post-card") as PostCard;
-    section3.appendChild(PostCards)
+    const PostCards = this.ownerDocument.createElement(
+      "post-card"
+    ) as PostCard;
+    section3.appendChild(PostCards);
 
     //CreateChannelPopUp
     const CreateChannelPop = this.ownerDocument.createElement("section")

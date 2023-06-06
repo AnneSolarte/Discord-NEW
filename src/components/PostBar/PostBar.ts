@@ -1,4 +1,5 @@
 
+import { appState } from "../../store";
 import PostBarStyle from "./PostBar.css"
 
 class PostBar extends HTMLElement {
@@ -19,7 +20,7 @@ class PostBar extends HTMLElement {
                 <div class="PostBar">
                     <div class="block1">
                         <img class="Icon2"src="/img/numeral_violet.png"
-                        <p class="text">Tinder</p>
+                        <p class="text">${appState.serverState.name} </p>
                     </div>
                     <div class="block2">
                         <img class="Icon"src="/img/user_icon.png">
