@@ -120,6 +120,16 @@ const AddUserDB = async (user: User) =>{
   }
 }
 
+const EditUserDB = async (user: any) =>{
+  try {
+    await setDoc (doc(db, "users", user.uid), user)
+    return true
+  } catch (e) {
+    console.error("Error editing document: ", e);
+    return false
+  }
+}
+
 const SaveServerDB = async (server: Server) => {
   try {
     const serverRef = collection(db, `users/${appState.userInfo.uid}/servers`);
@@ -329,5 +339,6 @@ export default {
   uploadFile,
   getFile,
   AddUserDB,
-  getUsersDB
+  getUsersDB,
+  EditUserDB
 };

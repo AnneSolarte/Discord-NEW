@@ -58,6 +58,11 @@ class AppContainer extends HTMLElement {
             const addFrriends = this.ownerDocument.createElement("add-friends");
             this.shadowRoot?.appendChild(addFrriends);
             break;
+            
+        case Screens.USERCONFIG:
+            const userConfig = this.ownerDocument.createElement("user-config");
+            this.shadowRoot?.appendChild(userConfig);
+            break;
     
           default:
             break;

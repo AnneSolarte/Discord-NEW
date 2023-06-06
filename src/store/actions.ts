@@ -1,5 +1,5 @@
 import { Server } from "../types/servers";
-import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, MessageActions, SelectServer, AddFriendAct, GetFriendsAct, FriendsActions } from "../types/store"
+import { Actions, NavigateActions, ServerActions, UserActions, PostActions, SetUser, MessageActions, SelectServer, AddFriendAct, GetFriendsAct, FriendsActions, EditUser } from "../types/store"
 import firebase  from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { Post } from "../types/post";
@@ -19,6 +19,14 @@ export const addUser = async (user: User): Promise<Actions> =>{
   await firebase.AddUserDB(user)
   return{
       action: UserActions.ADD_USER,
+      payload: user,
+  }
+}
+export const Edit = async (user:User): Promise<EditUser> =>{
+  await firebase.EditUserDB(user)
+
+  return{
+      action: UserActions.EDIT,
       payload: user,
   }
 }

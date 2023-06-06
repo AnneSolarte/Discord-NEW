@@ -1,0 +1,34 @@
+
+.Section2{
+    position: absolute;
+    width: 20%;
+    height: 95%;
+    background-color: rgb(17, 21, 24);
+    z-index: 1;
+    border-radius: 1.5em;
+
+}
+
+.Section3{
+    position: relative;
+    width: 78%;
+    height: 94%;
+    top: 0;
+    margin-right: 0%;
+    left: 20%;
+    color: aliceblue;
+
+}
+
+.ButtonLogOut{
+    width: 6%;
+    display: flex;
+    align-self: center;
+    background-color: rgb(10, 176, 176);
+    color: aliceblue;
+    align-items: center;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5%;
+    margin: 2%;
+}

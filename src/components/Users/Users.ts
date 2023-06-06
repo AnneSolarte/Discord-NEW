@@ -14,13 +14,10 @@ class Users extends HTMLElement {
       }
 
     render() {
-        if (this.shadowRoot) {
-            this.shadowRoot.innerHTML = ``;
-          
+
             const css = this.ownerDocument.createElement("style");
             css.innerHTML = Userstyle;
-            this.shadowRoot?.appendChild(css); 
-        }
+            this.shadowRoot?.appendChild(css);
             const container = this.ownerDocument.createElement("section");
             container.className = "container";
 
@@ -46,5 +43,5 @@ class Users extends HTMLElement {
         }
 }
 
-customElements.define("user-storage", Users);
+customElements.define("users-list", Users);
 export default Users;

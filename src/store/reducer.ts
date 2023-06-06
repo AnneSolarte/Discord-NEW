@@ -46,6 +46,10 @@ export const reducer = (actions: Actions, appState: AppState) => {
             appState.userInfo = payload
             return appState
 
+        case UserActions.EDIT:
+            appState.userInfo = payload
+            return appState
+
         case UserActions.GET_USERS:
             appState.Users = payload
             return appState

@@ -1,4 +1,6 @@
-import { appState } from "../../store";
+import { appState, dispatch } from "../../store";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/navigation";
 import UserStyle from "./user.css"
 
 class User extends HTMLElement {
@@ -44,6 +46,11 @@ class User extends HTMLElement {
             const iconConfig =  this.ownerDocument.createElement("img");
             iconConfig.className = "configImg"
             iconConfig.src= "/img/config.png"
+            iconConfig.addEventListener("click", async () =>{
+                dispatch(navigate(Screens.USERCONFIG))
+                
+              })
+
             sectionUser.appendChild(iconConfig)
 
             this.shadowRoot?.appendChild(sectionUser);

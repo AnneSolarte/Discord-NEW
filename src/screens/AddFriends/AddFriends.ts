@@ -5,13 +5,11 @@ import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { Friends, TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { SaveServer, getServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
 import Servers from "../../components/Servers/Servers"
 import firebase from "../../utils/firebase";
-import storage from "../../utils/storage";
 import Users from "../../components/Users/Users";
 
 const formData: Server = {
@@ -106,7 +104,7 @@ export default class AddFriends extends HTMLElement {
     section3.appendChild(friendsOnDiv)
 
 
-    const usersList = this.ownerDocument.createElement("users-storage") as Users;
+    const usersList = this.ownerDocument.createElement("users-list") as Users;
     section3.appendChild(usersList)
 
     //CreateChannelPopUp

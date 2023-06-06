@@ -1,7 +1,7 @@
 import PostCreateChannelStyle from "./PostCreateChannel.css";
 import User from "../../components/User/user";
 import PostCard from "../../components/PostCard/PostCard";
-import {TextCanalDiv} from "../../components/export";
+import {ServersSect, TextCanalDiv} from "../../components/export";
 import PostBar from "../../components/PostBar/PostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
 import { addObserver, appState, dispatch } from "../../store/index";
@@ -34,13 +34,9 @@ export default class PostCreateChannel extends HTMLElement {
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
 
-    const capa = this.ownerDocument.createElement("section")
-    capa.className = 'capa'
-    this.shadowRoot?.appendChild(capa);
-    
-    const ServersCards = this.ownerDocument.createElement("div")
-    ServersCards.className = 'ServerSection'
-    
+    const ServersDiv = this.ownerDocument.createElement("servers-sect") as ServersSect;
+    section1.appendChild(ServersDiv)
+
     this.shadowRoot?.appendChild(section1);
 
     const section2 = this.ownerDocument.createElement("section")
@@ -68,7 +64,6 @@ export default class PostCreateChannel extends HTMLElement {
 
     this.shadowRoot?.appendChild(section3);
 
-    
     const section4 = this.ownerDocument.createElement("section")
     section4.className = 'Section4'
     const user = this.ownerDocument.createElement("my-user") as User;

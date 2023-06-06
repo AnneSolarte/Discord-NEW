@@ -29,4 +29,7 @@ export {default as ButtonSign} from './ButtonSign/ButtonSign'
 export {default as TextCanalDiv} from './TextCanalDiv/TextCanalDiv'
 export {default as CheckBoxText} from './CheckboxText/CheckboxText'
 export {default as MessageCard} from './MessageCard/MessageCard'
+export {default as ConfigDiv} from "./ConfigDiv/ConfigDiv"
+export {default as ProfileBar} from "./ProfileBar/ProfileBar"
+export {default as ServersSect} from './ServersDiv/ServersDiv'
 

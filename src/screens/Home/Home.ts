@@ -3,7 +3,7 @@ import HomeStyle from "./Home.css";
 import User from "../../components/User/user"
 import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
-import { Friends, TextCanalDiv } from "../../components/export";
+import { Friends, ServersSect, TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
 import { GetUsers, SaveServer, getServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
@@ -42,32 +42,6 @@ export default class Home extends HTMLElement {
     
   }
 
-  logOutUser(){
-    if(appState.user !== null || ''){
-      localStorage.clear()
-      dispatch(setUserCredentials(''));
-      appState.user = ""
-      appState.Post = []
-      appState.Friends = []
-      appState.Messages = []
-      appState.serverState = {id: "",
-      name: "",
-      img: "",
-      createdAt: ""}
-      appState.Servers = []
-      appState.userInfo = {
-        uid: "",
-        userName: "",
-        email: "",
-        password: "",
-        img: "/img/user.png",
-      },
-      sessionStorage.clear();
-      dispatch(navigate(Screens.LOGIN));
-      location.reload();
-    }
-  }
-
   changeName(e: any) {
     formData.name = e?.target?.value;
   }
@@ -81,42 +55,13 @@ export default class Home extends HTMLElement {
         this.shadowRoot?.appendChild(css);   
     }
 
-    const capa = this.ownerDocument.createElement("section")
-    capa.className = 'capa'
-    this.shadowRoot?.appendChild(capa);
-
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
 
-    const iconHome = this.ownerDocument.createElement("img")
-    iconHome.className = "Icon"
-    iconHome.src= "/img/Server0.png"
-    iconHome.addEventListener("click", () =>{
-      dispatch(navigate(Screens.HOME))
-    })
-    section1.appendChild(iconHome)
+    const ServersDiv = this.ownerDocument.createElement("servers-sect") as ServersSect;
+    section1.appendChild(ServersDiv)
 
-    const iconAdd = this.ownerDocument.createElement("img")
-    iconAdd.className = "Icon"
-    iconAdd.src = "/img/Server01.png"
-    iconAdd.addEventListener("click", () =>{
-      CreateChannelPop.style.display = 'flex';
-      capa.style.display = "flex"
-    })
-    section1.appendChild(iconAdd)
-
-    const servers = this.ownerDocument.createElement("my-servers") as Servers;
-    section1.appendChild(servers)
-    
-    const iconSearch = this.ownerDocument.createElement("img")
-    iconSearch.className = "Icon"
-    iconSearch.src= "/img/Server02.png"
-    iconSearch.addEventListener("click", async () =>{
-      dispatch(await GetUsers());
-      dispatch(navigate(Screens.AddFRIENDS))
-      
-    })
-    section1.appendChild(iconSearch)
+    this.shadowRoot?.appendChild(section1);
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
@@ -130,88 +75,6 @@ export default class Home extends HTMLElement {
     const friendsOnDiv = this.ownerDocument.createElement("friends-ondiv") as FriendsOnDiv;
     section3.appendChild(friendsOnDiv)
 
-    const logOut = this.ownerDocument.createElement("button");
-    logOut.innerText = "Log Out";
-    logOut.className = "ButtonLogOut"
-    logOut.addEventListener("click", this.logOutUser)
-    section3.appendChild(logOut);
-
-    //CreateChannelPopUp
-    const CreateChannelPop = this.ownerDocument.createElement("section")
-    CreateChannelPop.className = 'CreateChannelPop'
-
-    const tittle = this.ownerDocument.createElement("h1")
-    tittle.textContent = "Create Server"
-    CreateChannelPop.appendChild(tittle)
-
-    const text = this.ownerDocument.createElement("p")
-    text.textContent = "Choose a image and name"
-    CreateChannelPop.appendChild(text)
-
-    const channels = this.ownerDocument.createElement("section")
-    channels.className = 'channels'
-
-    const channelText = this.ownerDocument.createElement("section")
-    channelText.className = 'channelText'
-  
-    const TextCanalDiv = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
-    channelText.appendChild(TextCanalDiv);
-
-    const inputImg = this.ownerDocument.createElement("input")
-    inputImg.type = "file"
-    inputImg.placeholder = "Choose image"
-    inputImg.addEventListener("change", async () =>{
-      const file = inputImg.files?.[0];
-      if (file) await firebase.uploadFile(file);
-      console.log(file?.name);
-      if (file) {
-        const img = await firebase.getFile(file.name);
-        console.log("img", img);
-        const src = String(img)
-        formData.img = src
-    }
-    });
-
-
-    CreateChannelPop.appendChild(inputImg)
-
-
-    this.shadowRoot?.appendChild(section1);
-    CreateChannelPop.appendChild(channels)
-
-    const channelName = this.ownerDocument.createElement("input")
-    channelName.type = "text"
-    channelName.className = "ChannelNameInput"
-    channelName.placeholder = "Channel Name"
-    channelName.addEventListener("change", this.changeName);
-    CreateChannelPop.appendChild(channelName);
-
-    const buttons = this.ownerDocument.createElement("section")
-    buttons.className = 'buttons'
-    
-    const CancelButton = this.ownerDocument.createElement("button");
-    CancelButton.innerText = "Cancel";
-    CancelButton.className = "CancelButton"
-    CancelButton.addEventListener("click", () =>{
-        CreateChannelPop.style.display = 'none';
-        capa.style.display = "none"
-    })
-    buttons.appendChild(CancelButton);
-
-    const DoneButton = this.ownerDocument.createElement("button");
-    DoneButton.innerText = "Done";
-    DoneButton.className = "DoneButton"
-    DoneButton.addEventListener("click", async () => {
-      CreateChannelPop.style.display = 'none';
-      capa.style.display = "none"
-    })
-    buttons.appendChild(DoneButton);
-    
-    CreateChannelPop.appendChild(buttons)
-
-    
-
-    this.shadowRoot?.appendChild(CreateChannelPop);
     this.shadowRoot?.appendChild(section3);
     
 

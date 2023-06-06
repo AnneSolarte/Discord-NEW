@@ -20,7 +20,8 @@ export type AppState = {
 export enum UserActions {
   "SET_USER" = "SET_USER",
   "ADD_USER" = "ADD_USER",
-  "GET_USERS" = "GET_USERS"
+  "GET_USERS" = "GET_USERS",
+  "EDIT" = "EDIT",
 }
 
 
@@ -98,6 +99,12 @@ export interface AddUser {
   action: UserActions.ADD_USER,
   payload: User
 }
+
+export interface EditUser {
+  action: UserActions.EDIT,
+  payload: User
+}
+
 export interface GetUsers{
   action: UserActions.GET_USERS,
   payload: User[]
@@ -113,4 +120,4 @@ export interface GetFriendsAct {
   payload: User[],
 }
 
-export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser | AddFriendAct |GetFriendsAct | GetUsers ;
+export type Actions = SaveServer | EditUser | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser | AddFriendAct |GetFriendsAct | GetUsers ;

@@ -1,0 +1,160 @@
+.ServersSection{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 4.5%;
+    height: 95%;
+    background-color: rgb(88, 101, 242);
+    border-radius: 1.5em;
+    z-index: 10;
+    padding-top: 2%;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+}
+
+.ServerSection{
+    position: absolute;
+    left: 11%;
+    top: 5%;
+    z-index: 10;
+    align-items: center;
+}
+
+.Section2{
+    position: absolute;
+    width: 20%;
+    height: 95%;
+    background-color: rgb(17, 21, 24);
+    z-index: 1;
+    border-radius: 1.5em;
+
+}
+
+
+.FriendSection{
+    position: absolute;
+    left: 7%;
+    top: 30%;
+    z-index: 10;
+}
+
+.FriendOnSection{
+    position: absolute;
+    top: 25%;
+    left: 23%;
+    z-index: 10;
+}
+
+.Section3{
+    position: relative;
+    width: 78%;
+    height: 94%;
+    top: 0;
+    margin-right: 0%;
+    left: 20%;
+    color: aliceblue;
+
+}
+
+.Section4{
+    top: 87.2%;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: aliceblue;
+    z-index: 1;
+    border-radius: 1.5em;
+    background-color: rgb(46, 50, 56);
+}
+
+
+.Icon{
+    width: 80%;
+    height: 7.8%;
+    margin-top: 10%;
+    border-radius: 50%;
+}
+
+.CreateChannelPop{
+    position: absolute;
+    display: none;
+    top: 30%;
+    left: 35%;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    border-radius: 1.5em;
+    width: 20%;
+    height: 40%;
+    padding: 2.2%;
+    z-index: 25;
+}
+
+
+.ChannelNameInput{
+    color: aliceblue;
+    border: none;
+    background-color: rgb(30, 33, 40);
+    padding: 4%;
+    border-radius: 0.5em;
+    width: 90%;
+    margin-bottom: 5%;
+
+}
+
+.DoneButton{
+    display: flex;
+    width: 20%;
+    background-color: rgb(46, 188, 197);
+    color: aliceblue;
+    border: 0;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.8%;
+    padding-bottom: 0.8%;
+    border-radius: 0.5em;
+    font-size:larger;
+}
+
+.CancelButton{
+    border: none;
+    color: aliceblue;
+    background-color: rgba(240, 248, 255, 0);
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.channels{
+    display: flex;
+    color: aliceblue;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin: 0%;
+}
+
+.channelText{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10%;
+}
+.capa{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 0.6;
+    background-color: black;
+    z-index: 20;
+}
+.ServerSect{
+    position: absolute;
+    left: 11%;
+    top: 5%;
+    z-index: 10;
+    align-items: center;
+}
+

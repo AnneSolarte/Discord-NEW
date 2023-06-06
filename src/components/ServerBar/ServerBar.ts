@@ -2,19 +2,8 @@
 import { appState } from "../../store";
 import ServerBarStyle from "./ServerBar.css"
 
-export enum Server {
-    "name" = "name",
-}
-    
+
 class ServerBar extends HTMLElement {
-        name?: string;
-    
-        static get observedAttributes() {
-            const attrs: Record<Server, null> = {
-                name: null,
-            };
-            return Object.keys(attrs);
-        }
     
         constructor() {
             super();
@@ -24,20 +13,7 @@ class ServerBar extends HTMLElement {
         connectedCallback() {
             this.render();
         }
-        attributeChangedCallback(
-            propimg: Server,
-            _: string | undefined,
-            newValue: string | undefined
-            ) {
-                switch (propimg) {
-                    default:
-                    this[propimg] = newValue;
-                    break;
-                }
-    
-                this.render();
-            }
-    
+        
     render() {
 
             if (this.shadowRoot) {
