@@ -53,6 +53,11 @@ class AppContainer extends HTMLElement {
             const postCreate = this.ownerDocument.createElement("postcreate-channel");
             this.shadowRoot?.appendChild(postCreate);
             break;
+        
+        case Screens.AddFRIENDS:
+            const addFrriends = this.ownerDocument.createElement("add-friends");
+            this.shadowRoot?.appendChild(addFrriends);
+            break;
     
           default:
             break;

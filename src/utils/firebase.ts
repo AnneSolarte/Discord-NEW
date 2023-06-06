@@ -279,6 +279,25 @@ const AddFriendDB = async (friend: User) =>{
   }
 }
 
+
+async function getUsersDB() {
+  const usersRef = collection(db, "users");
+
+  try {
+    const snapshot = await getDocs(usersRef);
+    const users: User[] = [];
+    snapshot.forEach((doc) => {
+      const user = doc.data() as User;
+      user.uid = doc.id; // Utiliza el ID del documento como ID del usuario
+      users.push(user);
+    });
+    return users;
+  } catch (error) {
+    console.error("Error getting users from Firebase:", error);
+    return [];
+  }
+}
+
 const GetFriendsDB = async(): Promise<User[]> =>{
   const resp: User[] = [];
 
@@ -309,5 +328,6 @@ export default {
   onAuthStateChanged,
   uploadFile,
   getFile,
-  AddUserDB
+  AddUserDB,
+  getUsersDB
 };

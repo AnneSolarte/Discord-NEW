@@ -7,6 +7,7 @@ import { Message } from "./message";
 
 export type AppState = {
   Post: Post[];
+  Users: User[];
   Servers: Server[];
   Messages: Message[];
   Friends: User[]
@@ -19,6 +20,7 @@ export type AppState = {
 export enum UserActions {
   "SET_USER" = "SET_USER",
   "ADD_USER" = "ADD_USER",
+  "GET_USERS" = "GET_USERS"
 }
 
 
@@ -96,6 +98,10 @@ export interface AddUser {
   action: UserActions.ADD_USER,
   payload: User
 }
+export interface GetUsers{
+  action: UserActions.GET_USERS,
+  payload: User[]
+}
 
 export interface AddFriendAct {
   action: FriendsActions.ADD_FRIEND,
@@ -107,4 +113,4 @@ export interface GetFriendsAct {
   payload: User[],
 }
 
-export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser | AddFriendAct |GetFriendsAct ;
+export type Actions = SaveServer | GetServers | SelectServer | SetUser | Navigate | SavePost | GetPost | SaveMessage | GetMessages | AddUser | AddFriendAct |GetFriendsAct | GetUsers ;

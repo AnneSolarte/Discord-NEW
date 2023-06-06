@@ -5,7 +5,7 @@ import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
 import { Friends, TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { SaveServer, getServer, setUserCredentials } from "../../store/actions";
+import { GetUsers, SaveServer, getServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import {Server} from "../../types/servers"
@@ -111,7 +111,10 @@ export default class Home extends HTMLElement {
     const iconSearch = this.ownerDocument.createElement("img")
     iconSearch.className = "Icon"
     iconSearch.src= "/img/Server02.png"
-    iconSearch.addEventListener("click", () =>{
+    iconSearch.addEventListener("click", async () =>{
+      dispatch(await GetUsers());
+      dispatch(navigate(Screens.AddFRIENDS))
+      
     })
     section1.appendChild(iconSearch)
 
@@ -119,9 +122,6 @@ export default class Home extends HTMLElement {
     section2.className = 'Section2'
     const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
     section2.appendChild(FriendsDiv)
-
-    const friendsList = this.ownerDocument.createElement("my-friends") as Friends;
-    section2.appendChild(friendsList)
 
     this.shadowRoot?.appendChild(section2);
 

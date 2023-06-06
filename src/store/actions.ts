@@ -23,6 +23,14 @@ export const addUser = async (user: User): Promise<Actions> =>{
   }
 }
 
+export const GetUsers = async (): Promise<Actions> => {
+  const users = await firebase.getUsersDB();
+  return {
+    action: UserActions.GET_USERS,
+    payload: users,
+  };
+};
+
 export const SaveServer = async (server: Server): Promise<Actions>=>{
   await firebase.SaveServerDB(server);
   return{

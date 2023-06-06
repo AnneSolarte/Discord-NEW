@@ -29,6 +29,7 @@ const emptyState: AppState = {
   Servers: [],
   Messages: [],
   Friends: [],
+  Users: [],
   screens: Screens.DASHBOARD,
   user: "",
   userInfo: {

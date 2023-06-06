@@ -1,15 +1,18 @@
-import PostChannelStyle from "./PostChannel.css";
-import PostCard from "../../components/PostCard/PostCard";
-import User from "../../components/User/user";
-import { TextCanalDiv, Servers } from "../../components/export";
-import PostBar from "../../components/PostBar/PostBar";
-import CreatePostBar from "../../components/CreatePostBar/CreatePostBar";
-import ServerDiv from "../../components/ServerDiv/ServersDiv";
+import AddFriendsStyle from "./AddFriends.css";
+
+import User from "../../components/User/user"
+import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
+import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
+import { Friends, TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { Server } from "../../types/servers";
-import firebase from "../../utils/firebase";
+import { SaveServer, getServer, setUserCredentials } from "../../store/actions";
+import { navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
-import { SaveServer, navigate } from "../../store/actions";
+import {Server} from "../../types/servers"
+import Servers from "../../components/Servers/Servers"
+import firebase from "../../utils/firebase";
+import storage from "../../utils/storage";
+import Users from "../../components/Users/Users";
 
 const formData: Server = {
   id: "",
@@ -18,7 +21,16 @@ const formData: Server = {
   createdAt: "",
 };
 
-export default class PostChannel extends HTMLElement {
+const serverData: Server = {
+  id: "",
+  name: "Search",
+  img: "/img/Server02.png",
+  createdAt: "",
+};
+
+
+export default class AddFriends extends HTMLElement {
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -27,89 +39,75 @@ export default class PostChannel extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    
   }
 
   changeName(e: any) {
     formData.name = e?.target?.value;
   }
 
-  render() {
+  async render() {
     if (this.shadowRoot) {
-      this.shadowRoot.innerHTML = ``;
-
-      const css = this.ownerDocument.createElement("style");
-      css.innerHTML = PostChannelStyle;
-      this.shadowRoot?.appendChild(css);
+        this.shadowRoot.innerHTML = ``;
+      
+        const css = this.ownerDocument.createElement("style");
+        css.innerHTML = AddFriendsStyle;
+        this.shadowRoot?.appendChild(css);   
     }
 
-    const capa = this.ownerDocument.createElement("section");
-    capa.className = "capa";
+    const capa = this.ownerDocument.createElement("section")
+    capa.className = 'capa'
     this.shadowRoot?.appendChild(capa);
 
-    const section1 = this.ownerDocument.createElement("section");
-    section1.className = "Section1";
+    const section1 = this.ownerDocument.createElement("section")
+    section1.className = 'Section1'
 
-    const iconHome = this.ownerDocument.createElement("img");
-    iconHome.className = "Icon";
-    iconHome.src = "/img/Server0.png";
+    const iconHome = this.ownerDocument.createElement("img")
+    iconHome.className = "Icon"
+    iconHome.src= "/img/Server0.png"
     iconHome.addEventListener("click", () =>{
       dispatch(navigate(Screens.HOME))
     })
-    section1.appendChild(iconHome);
+    section1.appendChild(iconHome)
 
-    const iconAdd = this.ownerDocument.createElement("img");
-    iconAdd.className = "Icon";
-    iconAdd.src = "/img/Server01.png";
-    iconAdd.addEventListener("click", () => {
-      CreateChannelPop.style.display = "flex";
-      capa.style.display = "flex";
-    });
-    section1.appendChild(iconAdd);
+    const iconAdd = this.ownerDocument.createElement("img")
+    iconAdd.className = "Icon"
+    iconAdd.src = "/img/Server01.png"
+    iconAdd.addEventListener("click", () =>{
+      CreateChannelPop.style.display = 'flex';
+      capa.style.display = "flex"
+    })
+    section1.appendChild(iconAdd)
 
     const servers = this.ownerDocument.createElement("my-servers") as Servers;
-    section1.appendChild(servers);
-
-    const iconSearch = this.ownerDocument.createElement("img");
-    iconSearch.className = "Icon";
-    iconSearch.src = "/img/Server02.png";
-    iconSearch.addEventListener("click", () => {
+    section1.appendChild(servers)
+    
+    const iconSearch = this.ownerDocument.createElement("img")
+    iconSearch.className = "Icon"
+    iconSearch.src= "/img/Server02.png"
+    iconSearch.addEventListener("click", () =>{
       dispatch(navigate(Screens.AddFRIENDS))
-    });
-    section1.appendChild(iconSearch);
+    })
+    section1.appendChild(iconSearch)
 
-    const ServersCards = this.ownerDocument.createElement("div");
-    ServersCards.className = "ServerSection";
+    const section2 = this.ownerDocument.createElement("section")
+    section2.className = 'Section2'
+    const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
+    section2.appendChild(FriendsDiv)
 
-    this.shadowRoot?.appendChild(section1);
 
-    const section2 = this.ownerDocument.createElement("section");
-    section2.className = "Section2";
-
-    const serverDiv = this.ownerDocument.createElement(
-      "server-div"
-    ) as ServerDiv;
-    section2.appendChild(serverDiv);
-
-    const canal = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
-    section2.appendChild(canal);
 
     this.shadowRoot?.appendChild(section2);
 
-    const section3 = this.ownerDocument.createElement("section");
-    section3.className = "PostSection";
+    const section3 = this.ownerDocument.createElement("section")
+    section3.className = 'Section3'
+    
+    const friendsOnDiv = this.ownerDocument.createElement("friends-ondiv") as FriendsOnDiv;
+    section3.appendChild(friendsOnDiv)
 
-    const postBar = this.ownerDocument.createElement("post-bar") as PostBar;
-    section3.appendChild(postBar);
 
-    const createPostBar = this.ownerDocument.createElement(
-      "create-post"
-    ) as CreatePostBar;
-    section3.appendChild(createPostBar);
-
-    const PostCards = this.ownerDocument.createElement(
-      "post-card"
-    ) as PostCard;
-    section3.appendChild(PostCards);
+    const usersList = this.ownerDocument.createElement("users-storage") as Users;
+    section3.appendChild(usersList)
 
     //CreateChannelPopUp
     const CreateChannelPop = this.ownerDocument.createElement("section")
@@ -177,7 +175,6 @@ export default class PostChannel extends HTMLElement {
     DoneButton.innerText = "Done";
     DoneButton.className = "DoneButton"
     DoneButton.addEventListener("click", async () => {
-      dispatch(await SaveServer(formData))
       CreateChannelPop.style.display = 'none';
       capa.style.display = "none"
     })
@@ -185,17 +182,18 @@ export default class PostChannel extends HTMLElement {
     
     CreateChannelPop.appendChild(buttons)
 
-    this.shadowRoot?.appendChild(CreateChannelPop);
+    
 
+    this.shadowRoot?.appendChild(CreateChannelPop);
     this.shadowRoot?.appendChild(section3);
+    
 
     const section4 = this.ownerDocument.createElement("section")
     section4.className = 'Section4'
     const user = this.ownerDocument.createElement("my-user") as User;
     section4.appendChild(user)
     this.shadowRoot?.appendChild(section4);
-  
   }
 }
 
-customElements.define("post-channel", PostChannel);
+customElements.define("add-friends", AddFriends);
