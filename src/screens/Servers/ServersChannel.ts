@@ -7,7 +7,7 @@ import ServerDiv from "../../components/ServerDiv/ServersDiv";
 import ChatDiv from "../../components/ChatDiv/ChatDiv";
 import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
-import TextCanalDiv, { Serve } from "../../components/TextCanalDiv/TextCanalDiv";
+import { TextCanalDiv } from "../../components/export";
 
 export default class ServersChannel extends HTMLElement {
 
@@ -55,13 +55,9 @@ export default class ServersChannel extends HTMLElement {
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
-    section2.addEventListener("click", () => {
-      dispatch(navigate(Screens.POST));
-    });
 
     const serverName = this.ownerDocument.createElement("server-div") as ServerDiv;
     section2.appendChild(serverName)
-
 
     const canal = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
     section2.appendChild(canal)

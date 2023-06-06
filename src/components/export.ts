@@ -27,6 +27,5 @@ export {default as CheckBoxLogin} from './CheckBoxLogin/CheckBoxLogin'
 export {default as ButtonLog} from './ButtonLog/ButtonLog'
 export {default as ButtonSign} from './ButtonSign/ButtonSign'
 export {default as TextCanalDiv} from './TextCanalDiv/TextCanalDiv'
-export {default as ForumCanalDiv} from './ForumCanalDiv/ForumCanalDiv'
 export {default as CheckBoxText} from './CheckboxText/CheckboxText'
 

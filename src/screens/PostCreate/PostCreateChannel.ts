@@ -1,7 +1,7 @@
 import PostCreateChannelStyle from "./PostCreateChannel.css";
 import User from "../../components/User/user";
 import PostCard from "../../components/PostCard/PostCard";
-import WriteBar from "../../components/WriteBar/WriteBar";
+import {TextCanalDiv} from "../../components/export";
 import PostBar from "../../components/PostBar/PostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
 import { addObserver, appState, dispatch } from "../../store/index";
@@ -45,11 +45,13 @@ export default class PostCreateChannel extends HTMLElement {
 
     const section2 = this.ownerDocument.createElement("section")
     section2.className = 'Section2'
-    section2.addEventListener("click", () => {
-      
-    });
+   
     const serverDiv = this.ownerDocument.createElement("server-div") as ServerDiv;
     section2.appendChild(serverDiv)
+
+    const canal = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
+    section2.appendChild(canal)
+
     this.shadowRoot?.appendChild(section2);
 
     const section3 = this.ownerDocument.createElement("section")

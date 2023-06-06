@@ -1,7 +1,7 @@
 import PostChannelStyle from "./PostChannel.css";
 import PostCard from "../../components/PostCard/PostCard";
 import User from "../../components/User/user";
-import WriteBar from "../../components/WriteBar/WriteBar";
+import { TextCanalDiv } from "../../components/export";
 import PostBar from "../../components/PostBar/PostBar";
 import CreatePostBar from "../../components/CreatePostBar/CreatePostBar";
 import ServerDiv from "../../components/ServerDiv/ServersDiv";
@@ -33,7 +33,7 @@ export default class PostChannel extends HTMLElement {
 
     const section1 = this.ownerDocument.createElement("section")
     section1.className = 'Section1'
-
+    
     const capa = this.ownerDocument.createElement("section")
     capa.className = 'capa'
     this.shadowRoot?.appendChild(capa);
@@ -49,6 +49,10 @@ export default class PostChannel extends HTMLElement {
 
     const serverDiv = this.ownerDocument.createElement("server-div") as ServerDiv;
     section2.appendChild(serverDiv)
+
+    const canal = this.ownerDocument.createElement("text-canal") as TextCanalDiv;
+    section2.appendChild(canal)
+
     this.shadowRoot?.appendChild(section2);
 
     const section3 = this.ownerDocument.createElement("section")
