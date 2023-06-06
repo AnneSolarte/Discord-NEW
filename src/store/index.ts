@@ -30,11 +30,7 @@ onAuthStateChanged(auth, async (u: any) => {
 
 const emptyState: AppState = {
   Post: [],
-  Servers: [ 
-    {id: "",
-    name: "",
-    img: "",
-    createdAt: ""} ],
+  Servers: [],
   Friends: [],
   screens: Screens.DASHBOARD,
   user: "",

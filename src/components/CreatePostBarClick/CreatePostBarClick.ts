@@ -54,7 +54,7 @@ class CreatePostBarClick extends HTMLElement {
         tittle.className = "InputPost"
         tittle.type = "text"
         tittle.addEventListener("change", (e:any)=>{
-            postForm.title = e.target.value
+            postForm.title = e?.target?.value
         })
 
         const Message = this.ownerDocument.createElement("input")
@@ -62,7 +62,7 @@ class CreatePostBarClick extends HTMLElement {
         Message.className = "InputPost"
         Message.type = "text"
         Message.addEventListener("change", (e:any)=>{
-            postForm.message = e.target.value
+            postForm.message = e?.target?.value
         })
 
         const Image = this.ownerDocument.createElement("input")

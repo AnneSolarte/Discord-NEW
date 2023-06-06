@@ -1,9 +1,18 @@
+
 import { addObserver, appState, dispatch } from "../../store/index";
 import { SaveServer, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import { Server } from "../../types/servers";
 
 import ServerStyle from "./Servers.css";
+import firebase from "../../utils/firebase";
+
+const serverData: Server = {
+  id: "",
+  name: "Search",
+  img: "/img/Server02.png",
+  createdAt: "",
+};
 
 class Servers extends HTMLElement {
   constructor() {
@@ -13,10 +22,12 @@ class Servers extends HTMLElement {
   }
 
   async connectedCallback() {
-    if (!appState.Servers) {
+    if (appState.Servers.length === 0) {
       dispatch(await getServer());
+      if (appState.Servers.length === 0) {
+        dispatch(await SaveServer(serverData));
+      }
     }
-
     this.render();
   }
 
@@ -28,11 +39,10 @@ class Servers extends HTMLElement {
     const servers = this.ownerDocument.createElement("section");
     servers.className = "Servers";
 
-    if (!appState.Servers) {
-      // Mostrar un mensaje de carga o estado de espera
-      const loadingMessage = this.ownerDocument.createElement("p");
-      loadingMessage.innerText = "Cargando servidores...";
-      servers.appendChild(loadingMessage);
+    if (appState.Servers.length === 0) {
+      const noServersMessage = this.ownerDocument.createElement("p");
+      noServersMessage.innerText = "No hay servidores disponibles.";
+      servers.appendChild(noServersMessage);
     } else {
       appState.Servers.forEach((p) => {
         const serverImg = this.ownerDocument.createElement("img");
@@ -54,8 +64,6 @@ class Servers extends HTMLElement {
 
 customElements.define("my-servers", Servers);
 export default Servers;
-
-
 
 
 
