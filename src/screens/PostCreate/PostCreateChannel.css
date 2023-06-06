@@ -76,4 +76,14 @@
 
 }
 
+.capa{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 0.6;
+    background-color: black;
+    z-index: 20;
+}
+
 

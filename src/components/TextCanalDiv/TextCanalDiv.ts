@@ -23,7 +23,7 @@ class TextCanalDiv extends HTMLElement {
             TextCanalDiv.className = "TextCanalDiv"
             TextCanalDiv.addEventListener("click", () =>{
                 TextCanalDiv.classList.remove('backgroundNone');
-                ForumCanalDiv.classList.remove('backgroundNone');
+                ForumCanalDiv.classList.remove('backgroundFlex');
                 dispatch(navigate(Screens.SERVERS))
             });
 
