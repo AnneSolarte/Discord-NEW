@@ -243,27 +243,27 @@ const SaveMessageDB = async (message: Message, serverId: string) => {
 
 const GetMessagesDB = async (serverId: string): Promise<Message[]> => {
   try {
-    const postCollection = collection(db,`users/${appState.userInfo.uid}/servers/${serverId}/messages`);
-    const q = query(postCollection);
+    const messCollection = collection(db,`users/${appState.userInfo.uid}/servers/${serverId}/messages`);
+    const q = query(messCollection);
     const querySnapshot = await getDocs(q);
     const messages: Message[] = [];
 
     querySnapshot.forEach((doc) => {
-      const postData = doc.data();
+      const MessData = doc.data();
       const mess: Message = {
         id: doc.id, // Obtener el ID del post desde Firestore
-        img: postData.img,
-        Username: postData.Username,
-        userImg: postData.userImg,
-        message: postData.message,
-        createdAt: postData.createdAt,
+        img: MessData.img,
+        Username: MessData.Username,
+        userImg: MessData.userImg,
+        message: MessData.message,
+        createdAt: MessData.createdAt,
       };
       messages.push(mess);
     });
 
     return messages;
   } catch (error) {
-    console.error("Error getting posts: ", error);
+    console.error("Error getting messages: ", error);
     return [];
   }
 };

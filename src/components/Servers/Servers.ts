@@ -1,18 +1,12 @@
 
 import { addObserver, appState, dispatch } from "../../store/index";
-import { SaveServer, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
+import { GetMessages, SaveServer, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import { Server } from "../../types/servers";
 
 import ServerStyle from "./Servers.css";
 import firebase from "../../utils/firebase";
 
-const serverData: Server = {
-  id: "",
-  name: "Search",
-  img: "/img/Server02.png",
-  createdAt: "",
-};
 
 class Servers extends HTMLElement {
   constructor() {
@@ -41,6 +35,7 @@ class Servers extends HTMLElement {
           const serverid = p;
           dispatch(changeSelectedServer(serverid));
           dispatch(await getPosts());
+          dispatch(await GetMessages());
           dispatch(navigate(Screens.SERVERS));
         });
         servers.appendChild(serverImg);

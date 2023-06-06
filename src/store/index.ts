@@ -6,10 +6,6 @@ import { auth } from "../utils/firebase";
 import { Screens } from "../types/navigation";
 import { navigate } from "./actions";
 import { setUserCredentials } from "./actions";
-import { SaveServer } from "./actions";
-import { Server } from "../types/servers";
-
-
 
 onAuthStateChanged(auth, async (u: any) => {
   console.log('Entra');
@@ -31,6 +27,7 @@ onAuthStateChanged(auth, async (u: any) => {
 const emptyState: AppState = {
   Post: [],
   Servers: [],
+  Messages: [],
   Friends: [],
   screens: Screens.DASHBOARD,
   user: "",

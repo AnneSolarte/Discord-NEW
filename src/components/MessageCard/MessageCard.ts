@@ -12,11 +12,6 @@ class MessageCard extends HTMLElement {
   }
 
   async connectedCallback() {
-    if (!appState.Messages) {
-      console.log("Haciendo petición MENSAJES");
-      dispatch(await GetMessages());
-    }
-
     this.render();
   }
 
@@ -28,13 +23,8 @@ class MessageCard extends HTMLElement {
     css.innerHTML = MessageCardStyle;
     this.shadowRoot?.appendChild(css);
 
-    if (!appState.Messages) {
-      // Mostrar un mensaje de carga o estado de espera
-      const loadingMessage = this.ownerDocument.createElement("p");
-      loadingMessage.innerText = "Cargando mensajes...";
-      container.appendChild(loadingMessage);
-    } else {
-      appState.Messages.forEach((p) => {
+
+    appState.Messages.forEach((p) => {
         const MessageCard = this.ownerDocument.createElement("section");
         MessageCard.className = "MessageCard";
 
@@ -78,12 +68,11 @@ class MessageCard extends HTMLElement {
 
         container.appendChild(MessageCard);
       });
+      this.shadowRoot?.appendChild(container);
     }
 
-    this.shadowRoot?.appendChild(container);
-
     
-  }
+
 }
 
 customElements.define("message-card", MessageCard);

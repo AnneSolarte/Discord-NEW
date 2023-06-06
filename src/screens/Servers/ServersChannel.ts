@@ -1,5 +1,5 @@
 import ServersChannelStyle from "./ServersChannel.css";
-import { navigate, SaveServer } from "../../store/actions";
+import { GetMessages, navigate, SaveServer } from "../../store/actions";
 import User from "../../components/User/user";
 import WriteBar from "../../components/WriteBar/WriteBar";
 import ServerBar from "../../components/ServerBar/ServerBar";
@@ -26,7 +26,12 @@ export default class ServersChannel extends HTMLElement {
     addObserver(this);
   }
 
-  connectedCallback() {
+  async connectedCallback() {
+    if (!appState.Messages) {
+      console.log("Haciendo petición MENSAJES");
+      dispatch(await GetMessages());
+    }
+
     this.render();
   }
 
