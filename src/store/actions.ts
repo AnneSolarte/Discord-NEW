@@ -87,8 +87,6 @@ export const changeSelectedServer = (server: Server): SelectServer => {
 };
 
 export const AddFriend = async (friend:User): Promise<AddFriendAct> =>{
-
-  console.log(friend)
   await firebase.AddFriendDB(friend)
 
   return{
@@ -98,7 +96,6 @@ export const AddFriend = async (friend:User): Promise<AddFriendAct> =>{
 }
 
 export const GetFriends = async (): Promise<GetFriendsAct> =>{
-
   const friends = await firebase.GetFriendsDB()
 
   return{

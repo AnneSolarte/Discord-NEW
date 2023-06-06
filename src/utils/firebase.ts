@@ -243,7 +243,7 @@ const SaveMessageDB = async (message: Message, serverId: string) => {
 
 const GetMessagesDB = async (serverId: string): Promise<Message[]> => {
   try {
-    const postCollection = collection(db,`users/${appState.userInfo.uid}/servers/${serverId}/posts`);
+    const postCollection = collection(db,`users/${appState.userInfo.uid}/servers/${serverId}/messages`);
     const q = query(postCollection);
     const querySnapshot = await getDocs(q);
     const messages: Message[] = [];
@@ -254,6 +254,7 @@ const GetMessagesDB = async (serverId: string): Promise<Message[]> => {
         id: doc.id, // Obtener el ID del post desde Firestore
         img: postData.img,
         Username: postData.Username,
+        userImg: postData.userImg,
         message: postData.message,
         createdAt: postData.createdAt,
       };

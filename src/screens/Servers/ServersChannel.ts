@@ -7,7 +7,7 @@ import ServerDiv from "../../components/ServerDiv/ServersDiv";
 import ChatDiv from "../../components/ChatDiv/ChatDiv";
 import { Screens } from "../../types/navigation";
 import { addObserver, appState, dispatch } from "../../store/index";
-import { TextCanalDiv } from "../../components/export";
+import { MessageCard, TextCanalDiv } from "../../components/export";
 import {Servers} from "../../components/export";
 import { Server } from "../../types/servers";
 import firebase from "../../utils/firebase";
@@ -54,6 +54,9 @@ export default class ServersChannel extends HTMLElement {
     const iconHome = this.ownerDocument.createElement("img")
     iconHome.className = "Icon"
     iconHome.src= "/img/Server0.png"
+    iconHome.addEventListener("click", () =>{
+      dispatch(navigate(Screens.HOME))
+    })
     section1.appendChild(iconHome)
 
     const iconAdd = this.ownerDocument.createElement("img")
@@ -72,7 +75,7 @@ export default class ServersChannel extends HTMLElement {
     iconSearch.className = "Icon"
     iconSearch.src= "/img/Server02.png"
     iconSearch.addEventListener("click", () =>{
-      dispatch(navigate(Screens.POST))
+
     })
     section1.appendChild(iconSearch)
 
@@ -89,17 +92,20 @@ export default class ServersChannel extends HTMLElement {
 
     this.shadowRoot?.appendChild(section2);
 
-    const section3 = this.ownerDocument.createElement("section")
-    section3.className = 'ChatSection'
+    const ChatSection = this.ownerDocument.createElement("section")
+    ChatSection.className = 'ChatSection'
 
     const serverBar = this.ownerDocument.createElement("server-bar") as ServerBar;
-    section3.appendChild(serverBar)
+    ChatSection.appendChild(serverBar)
 
     const chatDiv = this.ownerDocument.createElement("chat-div") as ChatDiv;
-    section3.appendChild(chatDiv);
+    ChatSection.appendChild(chatDiv);
 
     const writeBar = this.ownerDocument.createElement("write-bar") as WriteBar;
-    section3.appendChild(writeBar)
+    ChatSection.appendChild(writeBar)
+
+    const Messages = this.ownerDocument.createElement("message-card") as MessageCard;
+    ChatSection.appendChild(Messages)
 
     //CreateChannelPopUp
     const CreateChannelPop = this.ownerDocument.createElement("section")
@@ -176,7 +182,7 @@ export default class ServersChannel extends HTMLElement {
     CreateChannelPop.appendChild(buttons)
 
     this.shadowRoot?.appendChild(CreateChannelPop);
-    this.shadowRoot?.appendChild(section3);
+    this.shadowRoot?.appendChild(ChatSection);
 
     const membersSection = this.ownerDocument.createElement("section")
     membersSection.className = 'membersSection'

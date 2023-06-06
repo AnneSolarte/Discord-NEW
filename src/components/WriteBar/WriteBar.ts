@@ -3,12 +3,13 @@ import WriteBarStyle from "./WriteBar.css"
 import { Message } from "../../types/message";
 import firebase from "../../utils/firebase";
 import { appState, dispatch } from "../../store";
-import { SavePost, navigate } from "../../store/actions";
+import { SaveMessage, SavePost, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 
 const messForm: Message = {
     id: "",
     img: "",
+    userImg: appState.userInfo.img,
     Username: appState.userInfo.userName,
     message: "",
     createdAt: ""
@@ -57,8 +58,8 @@ class WriteBar extends HTMLElement {
             inputText.className = "inputText";
             inputText.addEventListener("change", async (e:any)=>{
                 messForm.message = e?.target?.value
-                inputText.addEventListener("keyup", function(event) {
-                    if (event.code === 'Enter') {
+                inputText.addEventListener("keyup", async (e:any)=> {
+                    if (e.code === 'Enter') {
                         console.log(messForm)
                         dispatch(await SaveMessage(messForm, appState.serverState.id))
                     }

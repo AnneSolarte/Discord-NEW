@@ -1,64 +1,45 @@
 
+import { appState, dispatch } from "../../store";
+import { GetFriends } from "../../store/actions";
 import FriendStyle from "./FriendStyle.css"
 
-export enum FriendsAtt {
-    "img" = "img",
-    "name" = "name",
-    "mood" = "mood"
-}
 
 class Friends extends HTMLElement {
-    img?: string;
-    name?: string;
-    mood?: string;
-
-    static get observedAttributes() {
-        const attrs: Record<FriendsAtt, null> = {
-            img: null,
-            name: null,
-            mood: null
-        };
-        return Object.keys(attrs);
-    }
-
     constructor() {
         super();
         this.attachShadow({ mode: "open" });
     }
 
-    connectedCallback() {
-        this.render();
+    async connectedCallback() {
+        if(appState.Friends.length ===0){
+            dispatch(await GetFriends())
+            this.render();
+        }else{
+            this.render()
+        }
     }
 
-    attributeChangedCallback(
-        propimg: FriendsAtt,
-        _: string | undefined,
-        newValue: string | undefined
-        ) {
-            switch (propimg) {
-                default:
-                this[propimg] = newValue;
-                break;
-            }
-
-            this.render();
-        }
-
-        render() {
- 
-            if (this.shadowRoot) {
-                this.shadowRoot.innerHTML = `
-                <div class="FriendsDiv">
-                    <img class="friendsImg" src="${this.img}${this.mood}.png">
-                    <p class="FriendsName">${this.name}</p>
-                </div>
-                `;
-            }
+    render() {
 
             const css = this.ownerDocument.createElement("style");
             css.innerHTML = FriendStyle;
             this.shadowRoot?.appendChild(css);
 
+            appState.Friends.forEach((p) => {
+                const FriendsDiv = this.ownerDocument.createElement("section");
+                FriendsDiv.className = "FriendsDiv";
+
+                const uImg = this.ownerDocument.createElement("img");
+                uImg.className = "friendsImg";
+                uImg.src = p.img;
+
+                const userN = this.ownerDocument.createElement("p");
+                userN.className = "FriendsName";
+                userN.innerText = p.userName;
+
+                FriendsDiv.appendChild(uImg)
+                FriendsDiv.appendChild(userN)
+              });
             
         }
 }

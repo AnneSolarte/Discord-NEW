@@ -52,6 +52,9 @@ export default class PostChannel extends HTMLElement {
     const iconHome = this.ownerDocument.createElement("img");
     iconHome.className = "Icon";
     iconHome.src = "/img/Server0.png";
+    iconHome.addEventListener("click", () =>{
+      dispatch(navigate(Screens.HOME))
+    })
     section1.appendChild(iconHome);
 
     const iconAdd = this.ownerDocument.createElement("img");
@@ -70,7 +73,6 @@ export default class PostChannel extends HTMLElement {
     iconSearch.className = "Icon";
     iconSearch.src = "/img/Server02.png";
     iconSearch.addEventListener("click", () => {
-      dispatch(navigate(Screens.POST));
     });
     section1.appendChild(iconSearch);
 

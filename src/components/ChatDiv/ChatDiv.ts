@@ -11,9 +11,12 @@ class ChatDiv extends HTMLElement {
         this.attachShadow({ mode: "open" });
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        if (!appState.Messages) {
+          console.log("Haciendo petición firebase");
+        }
         this.render();
-    }
+      }
 
     
     render() {

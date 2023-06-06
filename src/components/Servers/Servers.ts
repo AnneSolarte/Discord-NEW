@@ -21,14 +21,8 @@ class Servers extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-    if (appState.Servers.length === 0) {
-      dispatch(await getServer());
-      if (appState.Servers.length === 0) {
-        dispatch(await SaveServer(serverData));
-      }
-    }
-    this.render();
+  connectedCallback() {
+      this.render();
   }
 
   render() {

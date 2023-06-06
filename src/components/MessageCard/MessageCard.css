@@ -1,0 +1,47 @@
+.MessageCard{
+    display: flex;
+    flex-direction:column;
+    margin: 4%;
+}
+
+
+.Namesection{
+    display: flex;
+    flex-direction: row;
+}
+
+.textsection{
+    display: flex;
+    flex-direction:column;
+    margin-left: 4%;
+}
+
+.Upsection{
+    display: flex;
+    flex-direction: row;
+}
+.userName{
+    margin: 0%;
+    font-size:medium;
+}
+.message{
+    margin: 0%;
+    color: rgb(191, 191, 191);
+}
+.time{
+    margin: 0%;
+    margin-left: 2%;
+    font-size: small;
+    color: rgb(191, 191, 191);
+}
+
+.img{
+    width: 50%;
+    margin-top: 2%;
+    border-radius: 0.4em;
+}
+
+.userImg{
+    width: 50px;
+    height: 50px;
+}

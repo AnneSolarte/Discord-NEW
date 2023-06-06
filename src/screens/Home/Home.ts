@@ -3,7 +3,7 @@ import HomeStyle from "./Home.css";
 import User from "../../components/User/user"
 import FriendsDiv from "../../components/FriendsDiv/FriendsDiv";
 import FriendsOnDiv from "../../components/FriendsOnDiv/FriendsOnDiv";
-import { TextCanalDiv } from "../../components/export";
+import { Friends, TextCanalDiv } from "../../components/export";
 import { addObserver, appState, dispatch } from "../../store/index";
 import { SaveServer, getServer, setUserCredentials } from "../../store/actions";
 import { navigate } from "../../store/actions";
@@ -13,14 +13,20 @@ import Servers from "../../components/Servers/Servers"
 import firebase from "../../utils/firebase";
 import storage from "../../utils/storage";
 
-
-
 const formData: Server = {
   id: "",
   name: "",
   img: "",
   createdAt: "",
 };
+
+const serverData: Server = {
+  id: "",
+  name: "Search",
+  img: "/img/Server02.png",
+  createdAt: "",
+};
+
 
 export default class Home extends HTMLElement {
 
@@ -33,6 +39,9 @@ export default class Home extends HTMLElement {
   async connectedCallback() {
     this.render();
     await firebase.AddUserDB(appState.userInfo)
+    if (appState.Servers.length === 0) {
+      dispatch(await getServer());
+    }
   }
 
   logOutUser(){
@@ -41,6 +50,8 @@ export default class Home extends HTMLElement {
       dispatch(setUserCredentials(''));
       appState.user = ""
       appState.Post = []
+      appState.Friends = []
+      appState.Messages = []
       appState.serverState = {id: "",
       name: "",
       img: "",
@@ -82,6 +93,9 @@ export default class Home extends HTMLElement {
     const iconHome = this.ownerDocument.createElement("img")
     iconHome.className = "Icon"
     iconHome.src= "/img/Server0.png"
+    iconHome.addEventListener("click", () =>{
+      dispatch(navigate(Screens.HOME))
+    })
     section1.appendChild(iconHome)
 
     const iconAdd = this.ownerDocument.createElement("img")
@@ -100,7 +114,6 @@ export default class Home extends HTMLElement {
     iconSearch.className = "Icon"
     iconSearch.src= "/img/Server02.png"
     iconSearch.addEventListener("click", () =>{
-      dispatch(navigate(Screens.POST))
     })
     section1.appendChild(iconSearch)
 
@@ -108,6 +121,10 @@ export default class Home extends HTMLElement {
     section2.className = 'Section2'
     const FriendsDiv = this.ownerDocument.createElement("friends-div") as FriendsDiv;
     section2.appendChild(FriendsDiv)
+
+    const friendsList = this.ownerDocument.createElement("my-friends") as Friends;
+    section2.appendChild(friendsList)
+
     this.shadowRoot?.appendChild(section2);
 
     const section3 = this.ownerDocument.createElement("section")
