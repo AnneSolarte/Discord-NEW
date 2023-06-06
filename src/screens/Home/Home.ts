@@ -41,6 +41,10 @@ export default class Home extends HTMLElement {
       dispatch(setUserCredentials(''));
       appState.user = ""
       appState.Post = []
+      appState.serverState = {id: "",
+      name: "",
+      img: "",
+      createdAt: ""}
       appState.Servers = []
       appState.userInfo = {
         uid: "",

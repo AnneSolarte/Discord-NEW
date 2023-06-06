@@ -214,8 +214,6 @@ const GetPostDB = async (serverId: string): Promise<Post[]> => {
   }
 };
 
-
-
 const getServersListener = (cb: (docs: Server[]) => void) => {
   const q = query(collection(db, "servers"), orderBy("createdAt")); 
   onSnapshot(q, (collection) => {

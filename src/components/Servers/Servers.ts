@@ -1,5 +1,5 @@
 import { addObserver, appState, dispatch } from "../../store/index";
-import { SaveServer, changeSelectedServer, getServer, navigate } from "../../store/actions";
+import { SaveServer, changeSelectedServer, getPosts, getServer, navigate } from "../../store/actions";
 import { Screens } from "../../types/navigation";
 import { Server } from "../../types/servers";
 
@@ -49,9 +49,10 @@ class Servers extends HTMLElement {
             const serverImg = this.ownerDocument.createElement("img");
             serverImg.src = p.img
             serverImg.className = "Icon"
-            serverImg.addEventListener("click", (e:any)=>{
+            serverImg.addEventListener("click", async(e:any)=>{
                 const serverid = p
                 dispatch(changeSelectedServer(serverid))
+                dispatch( await getPosts())
                 dispatch(navigate(Screens.SERVERS))
             })
             servers.appendChild(serverImg) 
